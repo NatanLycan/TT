@@ -29,4 +29,12 @@ Util para golfistas, cazadores y marineros.
 * Telemetro: Smart Measure 
  Mide la distancia y la altura de un objeto con su dispositivo.
 
- Al analizar y probar todas estas aplicaciones podemos darnos cuenta de la variedad de métodos con las que podemos realizar nuestro objetivo
+ Al analizar y probar todas estas aplicaciones podemos darnos cuenta de la variedad de métodos con las que podemos realizar nuestro objetivo.
+
+Notamos que las aplicaciones existentes tienen fuertes argumentos y metodos de obtencion de las medidas bien ideados con la intencion de sacar provecho de los componentes de los dispositivos tanto como les fue posible.
+
+- Diferencias con la competencia
+
+El objetivo de nuestra aplicacion puede distar un poco de las de la "Competencia" y sobre esa misma idea nuestros metodos para la obtencion de las medidas sera distinto. De acuerdo con la investigacion preliminar los metodos que sugerimos son los siguinetes:
+
+* Obtencion de medidas por medio de un objeto de referencia: Para este metodo se registrara un objeto (una tarjeta ya sea de una sucursal bancaria o del STC metro) del cual se sabran las medidas 
