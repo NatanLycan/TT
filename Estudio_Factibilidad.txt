@@ -1,0 +1,32 @@
+Estudio de factibildad
+
+1. Estudio de factibilidad Tecnica
+
+Este estudio nos permitira conocer las tecnologias que soportaran el desarrollo de la aplicacion "Fit a Thing"
+asi como aquellas dificultades que puedan surgir durante dicho proceso con el objetivo de establecer un rango 
+de exito para las etapas mas significativas.
+
+
+- Informacion General de la aplicacion
+
+Se desarrollara una aplicacion para dispositivos moviles (Smartphones) en la plataforma Android que permita con el 
+uso de algunos de sus componentes la obtencion de dimensiones de objetos del mundo real en el plano 2D y en su caso
+en el plano 3D. Dicha app usara el proceso que mejor se adapte de aquellos que el equipo considero durante el proceso 
+de investigacion.
+
+- Valoracion de la Competencia
+
+* Medir y Alinear - 3D Plomada
+  Esta aplicacion muestra un marco virtual encima de la imagen de la camara. Este marco permanece vertical independentemente
+de la diposicion de su dispositivo, la longitud y el ancho del cuadro se muestran en tiempo real.
+  (Mide espacios para muebles del hogar, para saber si esta centrado un marco en la pared)
+  Para diseñador de interiores y arquitectos.
+ 
+* Telemetro: Smart Distance
+ Mida la distancia al objetivo utilizando la perspectiva de la camara
+Util para golfistas, cazadores y marineros.
+
+* Telemetro: Smart Measure 
+ Mide la distancia y la altura de un objeto con su dispositivo.
+
+ Al analizar y probar todas estas aplicaciones podemos darnos cuenta de la variedad de métodos con las que podemos realizar nuestro objetivo
