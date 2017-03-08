@@ -54,10 +54,18 @@ Software:
 
     -Windows 10
     -Android Studio
+    -Java 
+    -XML
+    
     
 Hardware
 
     -PC o Laptop
     -Dispositivo Android 5.1+
+    
+- Sera util el proyecto
+
+Este proyecto inicio con la idea de facilitar la medida de objetos del mundo real. Este utilidad es ampliamente utilizada por gran parte de los oficios y trabajos en la actualidad. Ultimamente se presento un augue en el desarrollo de este tipo de aplicaciones lo que implica que se ha notado el potencial de los dispositivos para realizar esta tarea ademas de la necesidad de los usuarios de disponer de este tipo de herramientas en sus smarthones android.
+
     
 
