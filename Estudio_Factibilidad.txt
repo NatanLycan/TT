@@ -42,3 +42,22 @@ El objetivo de nuestra aplicacion puede distar un poco de las de la "Competencia
 * Multiples imagenes: Se tomaran fotografias desde distintos angulos y posterior a la calibracion del dispositivo usando los sensores del dispositivo calcular las medidas meidas del objeto en varias dimensiones.
 
 * Algoritmos de deteccion de ..... (NORMA, PODRIAS EXPLICAR EL ALGORITMO QUE SUGERIAS)
+
+
+- Recursos
+
+Una de las ventajas de programar en el sistema operativo android es que existe gran cantidad de documentacion que puede ser util para el desarrollo del poryecto, ademas es al ser en su mayoria software libre permitira la inclusion de herramientas para su construccion como lo es Android Studio y una gran variedad de API´s diponibles para su utilización. Sobre la misma idea, ademas cada elemento del equipo cuenta con un dispositivo Android lo que permitira que todos tengamos la posibilidad de probar y programar en el momento que se requiera.
+
+Se enlistaran los recursos que requieren para el desarrollo del proyecto (Conforme se valla requiriendo se agregaran los recursos que previamente no se hallan contemplado)
+
+Software:
+
+    -Windows 10
+    -Android Studio
+    
+Hardware
+
+    -PC o Laptop
+    -Dispositivo Android 5.1+
+    
+
