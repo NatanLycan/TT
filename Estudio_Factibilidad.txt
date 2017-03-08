@@ -37,4 +37,8 @@ Notamos que las aplicaciones existentes tienen fuertes argumentos y metodos de o
 
 El objetivo de nuestra aplicacion puede distar un poco de las de la "Competencia" y sobre esa misma idea nuestros metodos para la obtencion de las medidas sera distinto. De acuerdo con la investigacion preliminar los metodos que sugerimos son los siguinetes:
 
-* Obtencion de medidas por medio de un objeto de referencia: Para este metodo se registrara un objeto (una tarjeta ya sea de una sucursal bancaria o del STC metro) del cual se sabran las medidas 
+* Obtencion de medidas por medio de un objeto de referencia: Para este metodo se registrara un objeto (una tarjeta ya sea de una sucursal bancaria o del STC metro) del cual se sabran las medidas y posteriormente escalar esa medida hasta encontrar la medida del objeto que se pretende obtener las dimensiones.
+
+* Multiples imagenes: Se tomaran fotografias desde distintos angulos y posterior a la calibracion del dispositivo usando los sensores del dispositivo calcular las medidas meidas del objeto en varias dimensiones.
+
+* Algoritmos de deteccion de ..... (NORMA, PODRIAS EXPLICAR EL ALGORITMO QUE SUGERIAS)
