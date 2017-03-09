@@ -1,3 +1,6 @@
 {
-    "brackets-latex.mainFile": "0.Reporte-TT/Main.tex"
+    "brackets-latex.mainFile": "0.Reporte-TT/Main.tex",
+    "brackets-latex.texBinDirectory": "C:\\Program Files\\MiKTeX 2.9\\miktex\\bin\\x64",
+    "brackets-latex.outputDirectory": "out",
+    "brackets-latex.compiler": "pdflatex"
 }
