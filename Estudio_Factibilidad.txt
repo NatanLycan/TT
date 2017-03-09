@@ -1,20 +1,19 @@
 Estudio de factibildad
 
-1. Estudio de factibilidad Tecnica
 
 Este estudio nos permitira conocer las tecnologias que soportaran el desarrollo de la aplicacion "Fit a Thing"
 asi como aquellas dificultades que puedan surgir durante dicho proceso con el objetivo de establecer un rango 
 de exito para las etapas mas significativas.
 
 
-- Informacion General de la aplicacion
+<!--  Informacion General de la aplicacion  -->
 
 Se desarrollara una aplicacion para dispositivos moviles (Smartphones) en la plataforma Android que permita con el 
 uso de algunos de sus componentes la obtencion de dimensiones de objetos del mundo real en el plano 2D y en su caso
 en el plano 3D. Dicha app usara el proceso que mejor se adapte de aquellos que el equipo considero durante el proceso 
 de investigacion.
 
-- Valoracion de la Competencia
+<!-- Valoracion de la Competencia  -->
 
 * Medir y Alinear - 3D Plomada
   Esta aplicacion muestra un marco virtual encima de la imagen de la camara. Este marco permanece vertical independentemente
@@ -33,27 +32,31 @@ Util para golfistas, cazadores y marineros.
 
 Notamos que las aplicaciones existentes tienen fuertes argumentos y metodos de obtencion de las medidas bien ideados con la intencion de sacar provecho de los componentes de los dispositivos tanto como les fue posible.
 
-- Diferencias con la competencia
+<!-- Diferencias con la competencia  -->
 
-El objetivo de nuestra aplicacion puede distar un poco de las de la "Competencia" y sobre esa misma idea nuestros metodos para la obtencion de las medidas sera distinto. De acuerdo con la investigacion preliminar los metodos que sugerimos son los siguinetes:
+El objetivo de nuestra aplicacion puede distar un poco de las de la "Competencia" y sobre esa misma idea nuestros métodos para la obtención de las medidas sera distinto. De acuerdo con la investigación preliminar los métodos que sugerimos son los siguientes:
 
-* Obtencion de medidas por medio de un objeto de referencia: Para este metodo se registrara un objeto (una tarjeta ya sea de una sucursal bancaria o del STC metro) del cual se sabran las medidas y posteriormente escalar esa medida hasta encontrar la medida del objeto que se pretende obtener las dimensiones.
+* Obtención de medidas por medio de un objeto de referencia: Para este método se registrara un objeto (una tarjeta ya sea de una sucursal bancaria o del STC metro) del cual se sabrán las medidas y posteriormente escalar ese valor hastá encontrar la medida del objeto que se pretende obtener las dimensiones.
 
-* Multiples imagenes: Se tomaran fotografias desde distintos angulos y posterior a la calibracion del dispositivo usando los sensores del dispositivo calcular las medidas meidas del objeto en varias dimensiones.
+* Multiples imagenes: Se tomaran fotografias desde distintos angulos y posterior a la calibracion del dispositivo usando los sensores del dispositivo calcular las medidas del objeto en varias dimensiones.
 
 * Algoritmos de deteccion de ..... (NORMA, PODRIAS EXPLICAR EL ALGORITMO QUE SUGERIAS)
 
 
-- Recursos
+<!-- Recursos  -->
 
-Una de las ventajas de programar en el sistema operativo android es que existe gran cantidad de documentacion que puede ser util para el desarrollo del poryecto, ademas es al ser en su mayoria software libre permitira la inclusion de herramientas para su construccion como lo es Android Studio y una gran variedad de API´s diponibles para su utilización. Sobre la misma idea, ademas cada elemento del equipo cuenta con un dispositivo Android lo que permitira que todos tengamos la posibilidad de probar y programar en el momento que se requiera.
+Una de las ventajas de programar en el sistema operativo android es que existe gran cantidad de documentacion que puede ser útil para el desarrollo del proyecto, además al ser en su mayoria software libre permitirá la inclusión de herramientas para su construcción como lo es Android Studio y una gran variedad de API´s diponibles para su utilización. Sobre la misma idea  además cada elemento del equipo cuenta con un dispositivo Android lo que permitira que todos tengamos la posibilidad de probar y programar en el momento que se requiera.
 
 Se enlistaran los recursos que requieren para el desarrollo del proyecto (Conforme se valla requiriendo se agregaran los recursos que previamente no se hallan contemplado)
 
 Software:
 
+    *Programas o Sistemas
     -Windows 10
+    -Android 5.1+
     -Android Studio
+    
+    *Tecnologias
     -Java 
     -XML
     
@@ -61,11 +64,14 @@ Software:
 Hardware
 
     -PC o Laptop
-    -Dispositivo Android 5.1+
+    -Smartphone
     
-- Sera util el proyecto
+    
+<!-- ¿Sera util el proyecto?  -->
 
-Este proyecto inicio con la idea de facilitar la medida de objetos del mundo real. Este utilidad es ampliamente utilizada por gran parte de los oficios y trabajos en la actualidad. Ultimamente se presento un augue en el desarrollo de este tipo de aplicaciones lo que implica que se ha notado el potencial de los dispositivos para realizar esta tarea ademas de la necesidad de los usuarios de disponer de este tipo de herramientas en sus smarthones android.
+Este proyecto inicio con la idea de facilitar la medida de objetos del mundo real. Este utilidad es ampliamente utilizada por gran parte de los oficios y trabajos en la actualidad. Ultimamente se presento un augue en el desarrollo de este tipo de aplicaciones lo que implica que se ha notado el potencial de los dispositivos para realizar esta tarea además de la necesidad de los usuarios de disponer de este tipo de herramientas en sus smarthones android.
+
+De acuerdo a la información antes mencionada estamos seguros que sera de gran utilidad una vez se distribuya el producto.
 
     
 
