@@ -1,4 +1,4 @@
-\documentclass[12pt,letter]{article}
+\documentclass[12pt,letter]{book}
 \usepackage[utf8]{inputenc}
 \usepackage[left=3cm,right=2cm,top=2cm,bottom=2cm]{geometry}
 \usepackage[T1]{fontenc}
@@ -25,6 +25,8 @@
 \begin{document}
 
 \pagenumbering{gobble}
+
+%% Portada
 \begin{picture}(0,0)
 		\put(-30,-600){\includegraphics[scale=1.2]{IMG/Portada}}
 	\end{picture}
@@ -46,6 +48,34 @@
     	 \hspace{10cm}\textit{Junio 2017}
     \end{tabular}    
 \end{center}
+%%\thispagestyle{empty}
+
+%% Indice
+{\hypersetup{linkcolor=blue}
+\tableofcontents
+%%\thispagestyle{empty}
 \newpage
 \pagenumbering{arabic}
+
+%%% CAPITULO 1 SITUACION PROBLEMATICA
+\chapter{SITUACIÓN PROBLEMÁTICA}
+\input{Planteamiento}
+\input{Justificacion}
+\input{Objetivos}
+
+%%% CAPITULO 2 MARCO TEORICO REFERENCIAL
+\chapter{MARCO TEÓRICO REFERENCIAL}
+\input{Planteamiento}
+\input{Justificacion}
+\input{Objetivos}
+
+%%% CAPITULO 3 RESULTADOS
+\chapter{RESULTADOS}
+\input{ReporteTecnico}
+
+%%% CAPITULO 4 CONCLUSIONES
+\chapter{MARCO TEÓRICO REFERENCIAL}
+\input{Planteamiento}
+\input{Justificacion}
+\input{Objetivos}
 \end{document}
