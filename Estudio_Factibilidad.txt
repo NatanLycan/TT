@@ -53,7 +53,7 @@ Software:
 
     *Programas o Sistemas
     -Windows 10
-    -Android 5.1+
+    -Android 5.0+
     -Android Studio
     
     *Tecnologias
