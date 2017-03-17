@@ -27,6 +27,9 @@ Util para golfistas, cazadores y marineros.
 
 * Telemetro: Smart Measure 
  Mide la distancia y la altura de un objeto con su dispositivo.
+ 
+* Happy Measure: Augmented Reality for Mobile Virtual Furnishing
+Facilitara la medición, el modelado 3D, y la visualizacion de muebles y otros objetos usando un smartphone o un dispositivo mobil con camara.
 
  Al analizar y probar todas estas aplicaciones podemos darnos cuenta de la variedad de métodos con las que podemos realizar nuestro objetivo.
 
@@ -39,6 +42,8 @@ El objetivo de nuestra aplicacion puede distar un poco de las de la "Competencia
 * Obtención de medidas por medio de un objeto de referencia: Para este método se registrara un objeto (una tarjeta ya sea de una sucursal bancaria o del STC metro) del cual se sabrán las medidas y posteriormente escalar ese valor hastá encontrar la medida del objeto que se pretende obtener las dimensiones.
 
 * Multiples imagenes: Se tomaran fotografias desde distintos angulos y posterior a la calibracion del dispositivo usando los sensores del dispositivo calcular las medidas del objeto en varias dimensiones.
+
+* Reference object: One must have a reference object in the scene of known size so as to make geometric inference of other objects in the world. This reference object is usually a 2D marker (M. Fiala, 2005; H. Kato & Billinghurst, 1999).
 
 * Algoritmos de deteccion de ..... (NORMA, PODRIAS EXPLICAR EL ALGORITMO QUE SUGERIAS)
 
