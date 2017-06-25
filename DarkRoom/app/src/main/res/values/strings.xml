@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">DarkRoom</string>
+    <string name="action_OpenGallary">Open Gallary</string>
 </resources>
