@@ -1,6 +1,7 @@
 package com.example.nathaniel.darkroom;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -15,6 +16,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.opencv.android.OpenCVLoader;
 import org.opencv.android.Utils;
@@ -26,6 +28,8 @@ import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 
 import java.io.IOException;
+
+import static org.opencv.imgcodecs.Imgcodecs.CV_LOAD_IMAGE_COLOR;
 
 public class IODarkRoom extends Activity {
 
@@ -77,17 +81,15 @@ public class IODarkRoom extends Activity {
             Intent intent = new Intent();
             intent.setType("image/*");
             intent.setAction(Intent.ACTION_GET_CONTENT);
-            startActivityForResult(Intent.createChooser(intent,"Select Picture"),
-                    SELECT_PICTURE);
+            startActivityForResult(Intent.createChooser(intent,"Select Picture"),SELECT_PICTURE);
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
     //--->
-    Mat sampledImage=new Mat();
-    //--->
     public void onActivityResult(int requestCode, int resultCode, Intent data)
     {
+        Mat sampledImage= new Mat();
         if (resultCode == RESULT_OK) {
             if (requestCode == SELECT_PICTURE) {
                 Uri selectedImageUri = data.getData();
@@ -120,9 +122,15 @@ public class IODarkRoom extends Activity {
     //--->
     private void loadImage(String path)
     {
-        Mat originalImage = Imgcodecs.imread(path);
+        Mat sampledImage = new Mat();
+        Log.d(TAG, "loadImage: Antes de acceder a la imagen, directorio:"+ path);
+        Mat originalImage  = Imgcodecs.imread(path,3);
+        int canales = originalImage.channels();
+        if(originalImage == null) Log.d(TAG, "loadImage: Error al abrir la imagen");
+        else Log.d(TAG, "loadImage: Imagen cargada con exito - canales :"+ canales);
         Mat rgbImage=new Mat();
-        Imgproc.cvtColor(originalImage, rgbImage, Imgproc.COLOR_BGR2RGB);
+        Imgproc.cvtColor(originalImage, rgbImage,  Imgproc.COLOR_BGR2RGB);
+        Log.d(TAG, "loadImage: Antes de morir");
         //rgbImage= originalImage;
         Display display = getWindowManager().getDefaultDisplay();
 //This is "android graphics Point" class
@@ -135,8 +143,7 @@ public class IODarkRoom extends Activity {
         Imgproc.resize(rgbImage, sampledImage, new Size(),downSampleRatio,downSampleRatio,Imgproc.INTER_AREA);
         try {
             ExifInterface exif = new ExifInterface(selectedImagePath);
-            int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION,
-                    1);
+            int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION,1);
             switch (orientation)
             {
                 case ExifInterface.ORIENTATION_ROTATE_90:
