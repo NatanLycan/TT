@@ -1,0 +1,2 @@
+include ':openCVLibrary24132'
+include ':openCVSamplecolorblobdetection'
