@@ -30,6 +30,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Parcelable;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -42,6 +43,9 @@ import android.widget.ImageView;
 
 
 public class ColorBlobDetectionActivity extends Activity implements OnTouchListener, CvCameraViewListener2 {
+
+    public final static String extra_IMG = "lol1";
+
     private static final String  TAG              = "OCVSample::Activity";
 
     private boolean              mIsColorSelected = false;
@@ -214,48 +218,11 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         return new Scalar(pointMatRgba.get(0, 0));
     }
 
-    //-------------------
-    /*
-    private void takeScreenshot() {
-        mOpenCvCameraView.disableView();
-        Date now = new Date();
-        android.text.format.DateFormat.format("yyyy-MM-dd_hh:mm:ss", now);
-
-        try {
-            // image naming and path  to include sd card  appending name you choose for file
-            String mPath = Environment.getExternalStorageDirectory().toString() + "/" + now + ".jpg";
-
-            // create bitmap screen capture
-            //View v1 = getWindow().getDecorView().getRootView();
-            View v1 = findViewById(R.id.color_blob_detection_activity_surface_view).getRootView();
-            v1.setDrawingCacheEnabled(true);
-            Bitmap bitmap = Bitmap.createBitmap(v1.getDrawingCache());
-            v1.setDrawingCacheEnabled(false);
-
-            File imageFile = new File(mPath);
-
-            FileOutputStream outputStream = new FileOutputStream(imageFile);
-            int quality = 100;
-            bitmap.compress(Bitmap.CompressFormat.JPEG, quality, outputStream);
-            outputStream.flush();
-            outputStream.close();
-
-            openScreenshot(imageFile);
-        } catch (Throwable e) {
-            // Several error may come out with file handling or OOM
-            e.printStackTrace();
-        }
-    }
-    private void openScreenshot(File imageFile) {
-        Intent intent = new Intent();
-        intent.setAction(Intent.ACTION_VIEW);
-        Uri uri = Uri.fromFile(imageFile);
-        intent.setDataAndType(uri, "image/*");
+    public void Act(View view) {
+        Intent intent =new Intent(this,P.class);
+        intent.putExtra(extra_IMG, (Parcelable) mRgba);
         startActivity(intent);
     }
-    */
-
-    //-------------------
 
     /*
     Button but = (Button) findViewById(R.id.button4);

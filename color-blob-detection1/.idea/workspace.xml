@@ -37,51 +37,40 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ColorBlobDetectionActivity.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ColorBlobDetectionActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/openCVSamplecolorblobdetection/src/main/java/org/opencv/samples/colorblobdetect/ColorBlobDetectionActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1533">
-              <caret line="199" column="0" lean-forward="false" selection-start-line="199" selection-start-column="0" selection-end-line="199" selection-end-column="0" />
+            <state relative-caret-position="218">
+              <caret line="222" column="55" lean-forward="false" selection-start-line="222" selection-start-column="55" selection-end-line="222" selection-end-column="55" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2635#2636#0" expanded="true" />
-                <element signature="e#2700#2701#0" expanded="true" />
+                <element signature="e#4265#4266#0" expanded="true" />
+                <element signature="e#4296#4297#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ColorBlobDetector.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/openCVSamplecolorblobdetection/src/main/java/org/opencv/samples/colorblobdetect/ColorBlobDetector.java">
+      <file leaf-file-name="activity_p.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/openCVSamplecolorblobdetection/src/main/res/layout/activity_p.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1207">
-              <caret line="99" column="39" lean-forward="false" selection-start-line="99" selection-start-column="39" selection-end-line="99" selection-end-column="39" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AlertDialog.java" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-22/android/app/AlertDialog.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-770">
-              <caret line="377" column="15" lean-forward="false" selection-start-line="377" selection-start-column="15" selection-end-line="377" selection-end-column="15" />
+            <state relative-caret-position="255">
+              <caret line="15" column="8" lean-forward="false" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="8" />
               <folding>
-                <element signature="e#13961#13962#0" expanded="true" />
-                <element signature="e#14030#14031#0" expanded="true" />
+                <element signature="e#533#549#0" expanded="true" />
               </folding>
             </state>
           </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AndroidManifest.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/openCVSamplecolorblobdetection/src/main/AndroidManifest.xml">
-          <provider editor-type-id="android-manifest">
+          <provider editor-type-id="android-designer2">
             <state />
           </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="strings.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/openCVSamplecolorblobdetection/src/main/res/values/strings.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="544">
-              <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+            <state relative-caret-position="51">
+              <caret line="3" column="24" lean-forward="false" selection-start-line="3" selection-start-column="18" selection-end-line="3" selection-end-column="24" />
               <folding />
             </state>
           </provider>
@@ -90,13 +79,33 @@
       <file leaf-file-name="color_blob_detection_surface_view.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/openCVSamplecolorblobdetection/src/main/res/layout/color_blob_detection_surface_view.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="15" column="25" lean-forward="false" selection-start-line="15" selection-start-column="25" selection-end-line="15" selection-end-column="25" />
+            <state relative-caret-position="289">
+              <caret line="17" column="8" lean-forward="false" selection-start-line="17" selection-start-column="8" selection-end-line="17" selection-end-column="8" />
               <folding />
             </state>
           </provider>
           <provider editor-type-id="android-designer2">
             <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="P.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/openCVSamplecolorblobdetection/src/main/java/org/opencv/samples/colorblobdetect/P.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ColorBlobDetector.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/openCVSamplecolorblobdetection/src/main/java/org/opencv/samples/colorblobdetect/ColorBlobDetector.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="351">
+              <caret line="99" column="39" lean-forward="false" selection-start-line="99" selection-start-column="39" selection-end-line="99" selection-end-column="39" />
+              <folding />
+            </state>
           </provider>
         </entry>
       </file>
@@ -2703,9 +2712,12 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/openCVSamplecolorblobdetection/build.gradle" />
-        <option value="$PROJECT_DIR$/openCVSamplecolorblobdetection/src/main/res/layout/color_blob_detection_surface_view.xml" />
         <option value="$PROJECT_DIR$/openCVSamplecolorblobdetection/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/openCVLibrary24132/src/main/java/org/opencv/android/CameraBridgeViewBase.java" />
+        <option value="$PROJECT_DIR$/openCVSamplecolorblobdetection/src/main/res/layout/color_blob_detection_surface_view.xml" />
+        <option value="$PROJECT_DIR$/openCVSamplecolorblobdetection/src/main/java/org/opencv/samples/colorblobdetect/P.java" />
+        <option value="$PROJECT_DIR$/openCVSamplecolorblobdetection/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/openCVSamplecolorblobdetection/src/main/res/layout/activity_p.xml" />
         <option value="$PROJECT_DIR$/openCVSamplecolorblobdetection/src/main/java/org/opencv/samples/colorblobdetect/ColorBlobDetectionActivity.java" />
       </list>
     </option>
@@ -2731,8 +2743,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="Scratches" />
       <pane id="ProjectPane" />
       <pane id="AndroidView">
@@ -2756,6 +2768,46 @@
               <option name="myItemId" value="openCVSamplecolorblobdetection" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="values" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidResFolderTypeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="color-blob-detection1" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="openCVSamplecolorblobdetection" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="layout" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidResFolderTypeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="color-blob-detection1" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="openCVSamplecolorblobdetection" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidResFolderNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -2775,6 +2827,20 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="color-blob-detection1" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="openCVSamplecolorblobdetection" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="manifests" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.android.AndroidManifestsGroupNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -2783,6 +2849,11 @@
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="settings.editor.selected.configurable" value="android.sdk-updates" />
     <property name="device.picker.selection" value="ZY2237JP32" />
+  </component>
+  <component name="RecentsManager">
+    <key name="android.template.packageName">
+      <recent name="org.opencv.samples.colorblobdetect" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -2941,6 +3012,27 @@
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
+      <method />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
       <method />
     </configuration>
     <configuration default="true" type="JarApplication" factoryName="JAR Application">
@@ -3119,39 +3211,40 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="784" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3258786" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290735" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290735" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290735" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3258786" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="true" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -3168,8 +3261,84 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2635#2636#0" expanded="true" />
-            <element signature="e#2700#2701#0" expanded="true" />
+            <element signature="e#4265#4266#0" expanded="true" />
+            <element signature="e#4296#4297#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/openCVSamplecolorblobdetection/src/main/java/org/opencv/samples/colorblobdetect/ColorBlobDetector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1683">
+          <caret line="99" column="39" lean-forward="false" selection-start-line="99" selection-start-column="39" selection-end-line="99" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-22/android/app/AlertDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6409">
+          <caret line="377" column="15" lean-forward="false" selection-start-line="377" selection-start-column="15" selection-end-line="377" selection-end-column="15" />
+          <folding>
+            <element signature="e#0#42338#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#3812#3813#0" expanded="false" />
+            <element signature="e#3879#3880#0" expanded="false" />
+            <element signature="e#4387#4388#0" expanded="false" />
+            <element signature="e#4429#4430#0" expanded="false" />
+            <element signature="e#6690#6691#0" expanded="false" />
+            <element signature="e#6742#6743#0" expanded="false" />
+            <element signature="e#6903#6904#0" expanded="false" />
+            <element signature="e#6946#6947#0" expanded="false" />
+            <element signature="e#7194#7195#0" expanded="false" />
+            <element signature="e#7248#7249#0" expanded="false" />
+            <element signature="e#7304#7305#0" expanded="false" />
+            <element signature="e#7346#7347#0" expanded="false" />
+            <element signature="e#7447#7448#0" expanded="false" />
+            <element signature="e#7483#7484#0" expanded="false" />
+            <element signature="e#8386#8387#0" expanded="false" />
+            <element signature="e#8445#8446#0" expanded="false" />
+            <element signature="e#9934#9935#0" expanded="false" />
+            <element signature="e#9987#9988#0" expanded="false" />
+            <element signature="e#10505#10506#0" expanded="false" />
+            <element signature="e#10557#10558#0" expanded="false" />
+            <element signature="e#12476#12477#0" expanded="false" />
+            <element signature="e#12513#12514#0" expanded="false" />
+            <element signature="e#12559#12560#0" expanded="false" />
+            <element signature="e#12595#12596#0" expanded="false" />
+            <element signature="e#15396#15397#0" expanded="false" />
+            <element signature="e#15437#15438#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/openCVSamplecolorblobdetection/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/openCVSamplecolorblobdetection/src/main/res/layout/color_blob_detection_surface_view.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="25" lean-forward="false" selection-start-line="15" selection-start-column="25" selection-end-line="15" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/openCVSamplecolorblobdetection/src/main/java/org/opencv/samples/colorblobdetect/ColorBlobDetectionActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4265#4266#0" expanded="true" />
+            <element signature="e#4296#4297#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -3270,8 +3439,8 @@
           <caret line="213" column="18" lean-forward="true" selection-start-line="213" selection-start-column="18" selection-end-line="213" selection-end-column="18" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2635#2636#0" expanded="true" />
-            <element signature="e#2700#2701#0" expanded="true" />
+            <element signature="e#4265#4266#0" expanded="true" />
+            <element signature="e#4296#4297#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -3321,51 +3490,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/openCVSamplecolorblobdetection/src/main/AndroidManifest.xml">
-      <provider editor-type-id="android-manifest">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/openCVLibrary24132/src/main/java/org/opencv/android/CameraBridgeViewBase.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="122">
           <caret line="314" column="34" lean-forward="false" selection-start-line="314" selection-start-column="17" selection-end-line="314" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/openCVSamplecolorblobdetection/src/main/res/layout/color_blob_detection_surface_view.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="25" lean-forward="false" selection-start-line="15" selection-start-column="25" selection-end-line="15" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-22/android/app/AlertDialog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-770">
-          <caret line="377" column="15" lean-forward="false" selection-start-line="377" selection-start-column="15" selection-end-line="377" selection-end-column="15" />
-          <folding>
-            <element signature="e#13961#13962#0" expanded="true" />
-            <element signature="e#14030#14031#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/openCVSamplecolorblobdetection/src/main/java/org/opencv/samples/colorblobdetect/ColorBlobDetector.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1207">
-          <caret line="99" column="39" lean-forward="false" selection-start-line="99" selection-start-column="39" selection-end-line="99" selection-end-column="39" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3377,15 +3505,111 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-22/android/app/AlertDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="377" column="15" lean-forward="false" selection-start-line="377" selection-start-column="15" selection-end-line="377" selection-end-column="15" />
+          <folding>
+            <element signature="e#0#42338#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#3812#3813#0" expanded="false" />
+            <element signature="e#3879#3880#0" expanded="false" />
+            <element signature="e#4387#4388#0" expanded="false" />
+            <element signature="e#4429#4430#0" expanded="false" />
+            <element signature="e#6690#6691#0" expanded="false" />
+            <element signature="e#6742#6743#0" expanded="false" />
+            <element signature="e#6903#6904#0" expanded="false" />
+            <element signature="e#6946#6947#0" expanded="false" />
+            <element signature="e#7194#7195#0" expanded="false" />
+            <element signature="e#7248#7249#0" expanded="false" />
+            <element signature="e#7304#7305#0" expanded="false" />
+            <element signature="e#7346#7347#0" expanded="false" />
+            <element signature="e#7447#7448#0" expanded="false" />
+            <element signature="e#7483#7484#0" expanded="false" />
+            <element signature="e#8386#8387#0" expanded="false" />
+            <element signature="e#8445#8446#0" expanded="false" />
+            <element signature="e#9934#9935#0" expanded="false" />
+            <element signature="e#9987#9988#0" expanded="false" />
+            <element signature="e#10505#10506#0" expanded="false" />
+            <element signature="e#10557#10558#0" expanded="false" />
+            <element signature="e#12476#12477#0" expanded="false" />
+            <element signature="e#12513#12514#0" expanded="false" />
+            <element signature="e#12559#12560#0" expanded="false" />
+            <element signature="e#12595#12596#0" expanded="false" />
+            <element signature="e#15396#15397#0" expanded="false" />
+            <element signature="e#15437#15438#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/openCVSamplecolorblobdetection/src/main/java/org/opencv/samples/colorblobdetect/ColorBlobDetector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="351">
+          <caret line="99" column="39" lean-forward="false" selection-start-line="99" selection-start-column="39" selection-end-line="99" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/openCVSamplecolorblobdetection/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="867">
+          <caret line="51" column="31" lean-forward="false" selection-start-line="51" selection-start-column="31" selection-end-line="51" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-manifest">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/openCVSamplecolorblobdetection/src/main/res/layout/color_blob_detection_surface_view.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="8" lean-forward="false" selection-start-line="17" selection-start-column="8" selection-end-line="17" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/openCVSamplecolorblobdetection/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="24" lean-forward="false" selection-start-line="3" selection-start-column="18" selection-end-line="3" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/openCVSamplecolorblobdetection/src/main/res/layout/activity_p.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="8" lean-forward="false" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="8" />
+          <folding>
+            <element signature="e#533#549#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/openCVSamplecolorblobdetection/src/main/java/org/opencv/samples/colorblobdetect/ColorBlobDetectionActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1533">
-          <caret line="199" column="0" lean-forward="false" selection-start-line="199" selection-start-column="0" selection-end-line="199" selection-end-column="0" />
+        <state relative-caret-position="218">
+          <caret line="222" column="55" lean-forward="false" selection-start-line="222" selection-start-column="55" selection-end-line="222" selection-end-column="55" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2635#2636#0" expanded="true" />
-            <element signature="e#2700#2701#0" expanded="true" />
+            <element signature="e#4265#4266#0" expanded="true" />
+            <element signature="e#4296#4297#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/openCVSamplecolorblobdetection/src/main/java/org/opencv/samples/colorblobdetect/P.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="9" column="13" lean-forward="false" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>
