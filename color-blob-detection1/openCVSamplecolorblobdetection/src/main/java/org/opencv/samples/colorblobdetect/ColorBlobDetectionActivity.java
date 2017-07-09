@@ -3,6 +3,7 @@ package org.opencv.samples.colorblobdetect;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -10,7 +11,9 @@ import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.CameraBridgeViewBase.CvCameraViewFrame;
 import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
+import org.opencv.android.Utils;
 import org.opencv.core.Core;
+import org.opencv.core.CvException;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfPoint;
@@ -44,7 +47,7 @@ import android.widget.ImageView;
 
 public class ColorBlobDetectionActivity extends Activity implements OnTouchListener, CvCameraViewListener2 {
 
-    public final static String extra_IMG = "lol1";
+    public final static String EXTRA_FLOTANTE = "nombre";
 
     private static final String  TAG              = "OCVSample::Activity";
 
@@ -220,7 +223,59 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
 
     public void Act(View view) {
         Intent intent =new Intent(this,P.class);
-        intent.putExtra(extra_IMG, (Parcelable) mRgba);
+        // PP NLJS Creo flotante
+        float flotante = 234;
+        intent.putExtra(EXTRA_FLOTANTE, flotante);
+
+        //-------
+
+
+        Bitmap bmp = null;
+        try {
+            bmp = Bitmap.createBitmap(mRgba.cols(), mRgba.rows(), Bitmap.Config.ARGB_8888);
+            Utils.matToBitmap(mRgba, bmp);
+        } catch (CvException e) {
+            Log.d(TAG, e.getMessage());
+        }
+
+        mRgba.release();
+
+
+        FileOutputStream out = null;
+
+        String filename = "Blob_intento.png";
+
+
+        File sd = new File(Environment.getExternalStorageDirectory() + "/frames");
+        boolean success = true;
+        if (!sd.exists()) {
+            success = sd.mkdir();
+        }
+        if (success) {
+            File dest = new File(sd, filename);
+
+            try {
+                out = new FileOutputStream(dest);
+                bmp.compress(Bitmap.CompressFormat.PNG, 100, out); // bmp is your Bitmap instance
+                // PNG is a lossless format, the compression factor (100) is ignored
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                Log.d(TAG, e.getMessage());
+            } finally {
+                try {
+                    if (out != null) {
+                        out.close();
+                        Log.d(TAG, "OK!!");
+                    }
+                } catch (IOException e) {
+                    Log.d(TAG, e.getMessage() + "Error");
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        //-------
         startActivity(intent);
     }
 

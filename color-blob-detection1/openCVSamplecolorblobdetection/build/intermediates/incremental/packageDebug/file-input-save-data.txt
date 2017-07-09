@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Sun Jul 09 14:04:25 CDT 2017
+#Sun Jul 09 14:30:02 CDT 2017
 122.file=C\:\\Users\\Nathaniel\\Desktop\\color-blob-detection1\\openCVSamplecolorblobdetection\\build\\intermediates\\res\\debug\\resources-debug.ap_\\res\\anim\\abc_slide_out_top.xml
 60.set=ANDROID_RESOURCE
 52.set=ANDROID_RESOURCE
