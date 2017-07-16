@@ -47,7 +47,10 @@ import android.widget.ImageView;
 
 public class ColorBlobDetectionActivity extends Activity implements OnTouchListener, CvCameraViewListener2 {
 
-    public final static String EXTRA_FLOTANTE = "nombre";
+    // PP NLJS 16/07/2017 Creo EXTRA para enviar el rgb de la foto del objeto principal
+    public final static String EXTRA_RED = "rojo";
+    public final static String EXTRA_GREEN = "verde";
+    public final static String EXTRA_BLUE = "azul";
 
     private static final String  TAG              = "OCVSample::Activity";
 
@@ -182,7 +185,8 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         touchedRegionRgba.release();
         touchedRegionHsv.release();
 
-
+        // PP NCH 16/07/2017 llamada a la funcion cuando usuario da click en algun punto del mOpenCVcameraView
+        //en este punto ya se obtuvieron los colores RGBA correspondientes
         SaveImage();
 
         return false; // don't need subsequent touch events
@@ -224,9 +228,21 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
 
     public void Act(View view) {
         Intent intent =new Intent(this,P.class);
-        // PP NLJS Creo flotante
-        float flotante = 234;
-        intent.putExtra(EXTRA_FLOTANTE, flotante);
+
+        // PP NLJS 16/07/2017 Creo cadena que almacena el rgb de la foto con el objeto principal.
+        double red = mBlobColorRgba.val[0];
+        double green = mBlobColorRgba.val[1];
+        double blue = mBlobColorRgba.val[2];
+        Log.d(TAG, "Act Extra rojo: "+ red );
+        Log.d(TAG, "Act Extra verde: "+ green );
+        Log.d(TAG, "Act Extra azul: "+ blue );
+
+        // PP NLJS 16/07/2017 Enviamos extras al intent
+        intent.putExtra(EXTRA_RED,red);
+        intent.putExtra(EXTRA_GREEN,green);
+        intent.putExtra(EXTRA_BLUE,blue);
+
+        // PP NLJS 16/07/2017 Inicializo la actividad
         startActivity(intent);
     }
 
@@ -271,10 +287,14 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
                     if (out != null) {
                         out.close();
                         Log.d(TAG, "OK!!");
-                        //String lol = mBlobColorRgba.val[0] + ", " + mBlobColorRgba.val[1] +", " + mBlobColorRgba.val[2] + ", " + mBlobColorRgba.val[3]
+
+                        // PP NCH 00/00/0000 Comentario
+
                         //Act(mOpenCvCameraView);
-                        if (mOpenCvCameraView != null)
+                        if (mOpenCvCameraView != null){
                             mOpenCvCameraView.disableView();
+                            Act(mOpenCvCameraView);
+                        }
 
                     }
                 } catch (IOException e) {

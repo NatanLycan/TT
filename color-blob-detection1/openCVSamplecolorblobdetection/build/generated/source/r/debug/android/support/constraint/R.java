@@ -56,13 +56,13 @@ public final class R {
     public static final class id {
         public static final int all = 0x7f070012;
         public static final int basic = 0x7f070016;
-        public static final int chains = 0x7f07001b;
+        public static final int chains = 0x7f07001c;
         public static final int none = 0x7f07003d;
         public static final int packed = 0x7f07003f;
         public static final int parent = 0x7f070040;
         public static final int spread = 0x7f070057;
         public static final int spread_inside = 0x7f070058;
-        public static final int wrap = 0x7f07006a;
+        public static final int wrap = 0x7f07006b;
     }
     public static final class styleable {
         public static final int[] ConstraintLayout_Layout = { 0x010100c4, 0x0101011f, 0x01010120, 0x0101013f, 0x01010140, 0x7f020047, 0x7f02006c, 0x7f02006d, 0x7f02006e, 0x7f02006f, 0x7f020070, 0x7f020071, 0x7f020072, 0x7f020073, 0x7f020074, 0x7f020075, 0x7f020076, 0x7f020077, 0x7f020078, 0x7f020079, 0x7f02007a, 0x7f02007b, 0x7f02007c, 0x7f02007d, 0x7f02007e, 0x7f02007f, 0x7f020080, 0x7f020081, 0x7f020082, 0x7f020083, 0x7f020084, 0x7f020085, 0x7f020086, 0x7f020087, 0x7f020088, 0x7f020089, 0x7f02008a, 0x7f02008b, 0x7f02008c, 0x7f02008d, 0x7f02008e, 0x7f02008f, 0x7f020090, 0x7f020091, 0x7f020092, 0x7f020093, 0x7f020094, 0x7f020095, 0x7f020096 };

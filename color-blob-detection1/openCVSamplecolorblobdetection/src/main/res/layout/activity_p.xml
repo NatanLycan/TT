@@ -12,15 +12,44 @@
         android:layout_width="83dp"
         android:layout_height="45dp"
         android:text="@string/prueba"
-        tools:layout_editor_absoluteX="49dp"
-        tools:layout_editor_absoluteY="39dp"
-           />
+        tools:ignore="MissingConstraints"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="8dp" />
 
     <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="292dp"
-        android:layout_height="263dp"
-        android:src="@drawable/abc_ab_share_pack_mtrl_alpha"
-        tools:layout_editor_absoluteX="49dp"
-        tools:layout_editor_absoluteY="106dp" />
+        android:id="@+id/test_image"
+        android:layout_width="384dp"
+        android:layout_height="345dp"
+        android:src="@color/background_floating_material_light"
+        tools:layout_editor_absoluteX="16dp"
+        tools:ignore="MissingConstraints"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <Button
+        android:id="@+id/botonAbrirImagen"
+        android:onClick="actionBotonAbrirImagen"
+        android:text="Abrir"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="16dp"
+        tools:ignore="MissingConstraints"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/test_image" />
+
+    <Button
+        android:id="@+id/botonConfirmar"
+        android:onClick="actionBotonConfirmar"
+        android:text="Confirmar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/test_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="8dp" />
+
+
 </android.support.constraint.ConstraintLayout>
