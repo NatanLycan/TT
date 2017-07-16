@@ -183,6 +183,8 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         touchedRegionHsv.release();
 
 
+        SaveImage();
+
         return false; // don't need subsequent touch events
     }
 
@@ -203,8 +205,6 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
 
             Mat spectrumLabel = mRgba.submat(4, 4 + mSpectrum.rows(), 70, 70 + mSpectrum.cols());
             mSpectrum.copyTo(spectrumLabel);
-            Log.d(TAG, "onCameraFrame(miscolorselected): Done 2");
-
 
         }else{
             mRgba = inputFrame.rgba();
@@ -221,16 +221,20 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         return new Scalar(pointMatRgba.get(0, 0));
     }
 
+
     public void Act(View view) {
         Intent intent =new Intent(this,P.class);
         // PP NLJS Creo flotante
         float flotante = 234;
         intent.putExtra(EXTRA_FLOTANTE, flotante);
+        startActivity(intent);
+    }
 
-        //-------
+    int num=0;
 
-
+    public void SaveImage(){
         Bitmap bmp = null;
+        num++;
         try {
             bmp = Bitmap.createBitmap(mRgba.cols(), mRgba.rows(), Bitmap.Config.ARGB_8888);
             Utils.matToBitmap(mRgba, bmp);
@@ -243,10 +247,10 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
 
         FileOutputStream out = null;
 
-        String filename = "Blob_intento.png";
+        String filename = "Blob_intento_"+num+".png";
 
 
-        File sd = new File(Environment.getExternalStorageDirectory() + "/frames");
+        File sd = new File(Environment.getExternalStorageDirectory() + "/proportion");
         boolean success = true;
         if (!sd.exists()) {
             success = sd.mkdir();
@@ -267,6 +271,11 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
                     if (out != null) {
                         out.close();
                         Log.d(TAG, "OK!!");
+                        //String lol = mBlobColorRgba.val[0] + ", " + mBlobColorRgba.val[1] +", " + mBlobColorRgba.val[2] + ", " + mBlobColorRgba.val[3]
+                        //Act(mOpenCvCameraView);
+                        if (mOpenCvCameraView != null)
+                            mOpenCvCameraView.disableView();
+
                     }
                 } catch (IOException e) {
                     Log.d(TAG, e.getMessage() + "Error");
@@ -275,8 +284,6 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
             }
         }
 
-        //-------
-        startActivity(intent);
     }
 
     /*
