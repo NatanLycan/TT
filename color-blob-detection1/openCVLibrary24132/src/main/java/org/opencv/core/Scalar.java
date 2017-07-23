@@ -1,5 +1,7 @@
 package org.opencv.core;
 
+import java.io.Serializable;
+
 /**
  * <p>Template class for a 4-element vector derived from Vec.</p>
  *
@@ -56,7 +58,9 @@ package org.opencv.core;
  *
  * @see <a href="http://docs.opencv.org/modules/core/doc/basic_structures.html#scalar">org.opencv.core.Scalar_</a>
  */
-public class Scalar {
+
+// PP NLJS 22/07/2017 La clase debe implementar SERIALIZABLE para poder enviar tipos Scalar entre Actividades.
+public class Scalar implements Serializable{
 
     public double val[];
 

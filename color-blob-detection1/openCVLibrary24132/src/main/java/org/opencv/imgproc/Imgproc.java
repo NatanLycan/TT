@@ -4,6 +4,8 @@
 //
 package org.opencv.imgproc;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 import org.opencv.core.Mat;
@@ -4595,8 +4597,13 @@ public class Imgproc {
  */
     public static void cvtColor(Mat src, Mat dst, int code)
     {
-
+        String TAG = "Color error";
+        Log.d(TAG, "source: " + src.nativeObj);
+        Log.d(TAG, "Dest: "+ dst.nativeObj);
+        Log.d(TAG, "code: "+ code);
         cvtColor_1(src.nativeObj, dst.nativeObj, code);
+
+
 
         return;
     }
