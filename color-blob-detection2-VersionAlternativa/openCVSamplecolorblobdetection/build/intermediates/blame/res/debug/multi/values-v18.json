@@ -1,0 +1,26 @@
+[
+    {
+        "outputFile": "C:\\Users\\Nathaniel\\Desktop\\color-blob-detection1\\openCVSamplecolorblobdetection\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v18\\values-v18.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 48,
+                    "endOffset": 99
+                },
+                "from": {
+                    "file": "C:\\Users\\Nathaniel\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-22.2.1.aar\\18606abc327b55b63d6085e0fc82315f\\res\\values-v18\\values-v18.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 291,
+                        "endColumn": 48,
+                        "endOffset": 335
+                    }
+                }
+            }
+        ]
+    }
+]

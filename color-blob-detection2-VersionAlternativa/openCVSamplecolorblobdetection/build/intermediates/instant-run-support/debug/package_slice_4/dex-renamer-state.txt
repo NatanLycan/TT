@@ -1,0 +1,4 @@
+#Sun Jul 30 13:16:47 CDT 2017
+base.0=C\:\\Users\\Nathaniel\\Desktop\\color-blob-detection1\\openCVSamplecolorblobdetection\\build\\intermediates\\transforms\\dexMerger\\debug\\28
+renamed.0=classes.dex
+file.0=C\:\\Users\\Nathaniel\\Desktop\\color-blob-detection1\\openCVSamplecolorblobdetection\\build\\intermediates\\transforms\\dexMerger\\debug\\28\\classes.dex
