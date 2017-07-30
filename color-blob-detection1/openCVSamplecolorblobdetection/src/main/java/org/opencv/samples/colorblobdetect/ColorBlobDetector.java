@@ -1,5 +1,7 @@
 package org.opencv.samples.colorblobdetect;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -21,6 +23,7 @@ public class ColorBlobDetector {
     private Scalar mColorRadius = new Scalar(25,50,50,0);
     private Mat mSpectrum = new Mat();
     private List<MatOfPoint> mContours = new ArrayList<MatOfPoint>();
+    String TAG = "Color blob detector";
 
     // Cache
     Mat mPyrDownMat = new Mat();
@@ -33,12 +36,16 @@ public class ColorBlobDetector {
         mColorRadius = radius;
     }
 
+
     public void setHsvColor(Scalar hsvColor) {
         double minH = (hsvColor.val[0] >= mColorRadius.val[0]) ? hsvColor.val[0]-mColorRadius.val[0] : 0;
         double maxH = (hsvColor.val[0]+mColorRadius.val[0] <= 255) ? hsvColor.val[0]+mColorRadius.val[0] : 255;
 
         mLowerBound.val[0] = minH;
         mUpperBound.val[0] = maxH;
+
+
+        
 
         mLowerBound.val[1] = hsvColor.val[1] - mColorRadius.val[1];
         mUpperBound.val[1] = hsvColor.val[1] + mColorRadius.val[1];
@@ -49,6 +56,7 @@ public class ColorBlobDetector {
         mLowerBound.val[3] = 0;
         mUpperBound.val[3] = 255;
 
+
         Mat spectrumHsv = new Mat(1, (int)(maxH-minH), CvType.CV_8UC3);
 
         for (int j = 0; j < maxH-minH; j++) {
@@ -57,6 +65,8 @@ public class ColorBlobDetector {
         }
 
         Imgproc.cvtColor(spectrumHsv, mSpectrum, Imgproc.COLOR_HSV2RGB_FULL, 4);
+
+
     }
 
     public Mat getSpectrum() {
@@ -70,11 +80,14 @@ public class ColorBlobDetector {
     public void process(Mat rgbaImage) {
         Imgproc.pyrDown(rgbaImage, mPyrDownMat);
         Imgproc.pyrDown(mPyrDownMat, mPyrDownMat);
-
+        Log.d(TAG, "setHsvColor: Still alive Z0");
         Imgproc.cvtColor(mPyrDownMat, mHsvMat, Imgproc.COLOR_RGB2HSV_FULL);
 
+        Log.d(TAG, "setHsvColor: Still alive Z1");
         Core.inRange(mHsvMat, mLowerBound, mUpperBound, mMask);
+        Log.d(TAG, "setHsvColor: Still alive Z2");
         Imgproc.dilate(mMask, mDilatedMask, new Mat());
+        Log.d(TAG, "setHsvColor: Still alive Z3");
 
         List<MatOfPoint> contours = new ArrayList<MatOfPoint>();
 

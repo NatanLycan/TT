@@ -44,14 +44,17 @@ import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.ImageView;
 
+/**
+ * Compilado utilizando Android Studio Canary 3.0.0-alpha7
+ */
 
 public class ColorBlobDetectionActivity extends Activity implements OnTouchListener, CvCameraViewListener2 {
 
     // PP NLJS 16/07/2017 Creo EXTRA para enviar el rgb de la foto del objeto principal
-    public final static String EXTRA_RED = "rojo";
+    /*public final static String EXTRA_RED = "rojo";
     public final static String EXTRA_GREEN = "verde";
     public final static String EXTRA_BLUE = "azul";
-
+    */
     private static final String  TAG              = "OCVSample::Activity";
 
     private boolean              mIsColorSelected = false;
@@ -186,7 +189,7 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         touchedRegionHsv.release();
 
         // PP NCH 16/07/2017 llamada a la funcion cuando usuario da click en algun punto del mOpenCVcameraView
-        //en este punto ya se obtuvieron los colores RGBA correspondientes
+        //en este punto ya se obtuvieron los colores RGBA correspondientes, pero no se genero la imagen con contornos
         SaveImage();
 
         return false; // don't need subsequent touch events
@@ -194,7 +197,13 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
 
 
     public Mat onCameraFrame(CvCameraViewFrame inputFrame) {
-
+        /**
+         * PP NCH  23/07/2017
+         * La funcion se modifico para que al haber seleccionado el color con onTouch()
+         * no actualize el frame que se muestra en el OpenCvCameraView
+         * Despues de seleccionar el color la imagen se mantiene igual, posteriormente se imprimen los contornos
+         * seleccionados  y como no cambia la imagen no se agregan mas contornos
+         */
 
         if (mIsColorSelected) {
             Log.d(TAG, "onCameraFrame(miscolorselected): Done 1");
@@ -227,33 +236,39 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
 
 
     public void Act(View view) {
+
+        /**
+         * PP NCH 23/07/2017
+         * Genera un intend para abrir la actividad P
+         */
+
         Intent intent =new Intent(this,P.class);
 
-        // PP NLJS 16/07/2017 Creo cadena que almacena el rgb de la foto con el objeto principal.
-        double red = mBlobColorRgba.val[0];
-        double green = mBlobColorRgba.val[1];
-        double blue = mBlobColorRgba.val[2];
-        Log.d(TAG, "Act Extra rojo: "+ red );
-        Log.d(TAG, "Act Extra verde: "+ green );
-        Log.d(TAG, "Act Extra azul: "+ blue );
-
-        // PP NLJS 16/07/2017 Enviamos extras al intent
-        intent.putExtra(EXTRA_RED,red);
-        intent.putExtra(EXTRA_GREEN,green);
-        intent.putExtra(EXTRA_BLUE,blue);
+        // PP NLJS 22/07/2017 Envio extra Scalar con los valores hsv
+        intent.putExtra("PP_EXTRA_SCALAR",mBlobColorHsv);
 
         // PP NLJS 16/07/2017 Inicializo la actividad
         startActivity(intent);
     }
 
-    int num=0;
+    int pp_num=0;//PP NCH 23/07/2017 Identifica contador para Imagen Objeto de referencia y objeto a medir
 
     public void SaveImage(){
-        Bitmap bmp = null;
-        num++;
+        /**
+         * PP NCH 23/07/2017
+         * Convierte el objeto Mat mRgba en un bitmap para asi poder guardarlo en un archivo PNG
+         * en el directorio /proportion
+         * y un numero que identifica que imagen es
+         *
+         *  1 - Imagen Original
+         *  2 - Imagen Objeto a medir
+         *  3 - Imagen Objeto de referencia
+         */
+        Bitmap pp_bmp = null;//pp NCH 23/07/2017 Temporal para poder guardar Mat mRgba en un archivo
+        pp_num++;
         try {
-            bmp = Bitmap.createBitmap(mRgba.cols(), mRgba.rows(), Bitmap.Config.ARGB_8888);
-            Utils.matToBitmap(mRgba, bmp);
+            pp_bmp = Bitmap.createBitmap(mRgba.cols(), mRgba.rows(), Bitmap.Config.ARGB_8888);
+            Utils.matToBitmap(mRgba, pp_bmp);
         } catch (CvException e) {
             Log.d(TAG, e.getMessage());
         }
@@ -263,7 +278,7 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
 
         FileOutputStream out = null;
 
-        String filename = "Blob_intento_"+num+".png";
+        String filename = "Blob_intento_"+pp_num+".png";
 
 
         File sd = new File(Environment.getExternalStorageDirectory() + "/proportion");
@@ -276,7 +291,7 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
 
             try {
                 out = new FileOutputStream(dest);
-                bmp.compress(Bitmap.CompressFormat.PNG, 100, out); // bmp is your Bitmap instance
+                pp_bmp.compress(Bitmap.CompressFormat.PNG, 100, out); // pp_bmp is your Bitmap instance
                 // PNG is a lossless format, the compression factor (100) is ignored
 
             } catch (Exception e) {
@@ -289,11 +304,13 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
                         Log.d(TAG, "OK!!");
 
                         // PP NCH 00/00/0000 Comentario
+                        if(pp_num==1) {
+                            //Act(mOpenCvCameraView);
+                            if (mOpenCvCameraView != null) {
 
-                        //Act(mOpenCvCameraView);
-                        if (mOpenCvCameraView != null){
-                            mOpenCvCameraView.disableView();
-                            Act(mOpenCvCameraView);
+                                mOpenCvCameraView.disableView();
+                                Act(mOpenCvCameraView);
+                            }
                         }
 
                     }
@@ -305,17 +322,4 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         }
 
     }
-
-    /*
-    Button but = (Button) findViewById(R.id.button4);
-    but.setOnClickListener(new OnClickListener() {
-        public void onClick (View v){
-            View v1 = findViewById(R.id.color_blob_detection_activity_surface_view).getRootView();
-            v1.setDrawingCacheEnabled(true);
-            Bitmap bm = v1.getDrawingCache();
-            BitmapDrawable bitmapDrawable = new BitmapDrawable(bm);
-            ImageView image = (ImageView) findViewById(R.id.screenshots);
-            image.setBackgroundDrawable(bitmapDrawable);
-        }
-    }*/
 }

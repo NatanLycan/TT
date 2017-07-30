@@ -4,10 +4,10 @@ ADDED from C:\Users\Nathaniel\Desktop\color-blob-detection1\openCVSamplecolorblo
 INJECTED from C:\Users\Nathaniel\Desktop\color-blob-detection1\openCVSamplecolorblobdetection\src\main\AndroidManifest.xml:2:1-55:12
 INJECTED from C:\Users\Nathaniel\Desktop\color-blob-detection1\openCVSamplecolorblobdetection\src\main\AndroidManifest.xml:2:1-55:12
 INJECTED from C:\Users\Nathaniel\Desktop\color-blob-detection1\openCVSamplecolorblobdetection\src\main\AndroidManifest.xml:2:1-55:12
-MERGED from [:openCVLibrary24132] C:\Users\Nathaniel\Desktop\color-blob-detection1\openCVLibrary24132\build\intermediates\bundles\debug\AndroidManifest.xml:2:1-11:12
-MERGED from [com.android.support:appcompat-v7:22.2.1] C:\Users\Nathaniel\.gradle\caches\transforms-1\files-1.1\appcompat-v7-22.2.1.aar\5bc3e48dc4d140ac819c94fb7e95c45f\AndroidManifest.xml:17:1-24:12
-MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\Nathaniel\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\63f6314286a65bdd59d8083fc0fd4d68\AndroidManifest.xml:2:1-11:12
-MERGED from [com.android.support:support-v4:22.2.1] C:\Users\Nathaniel\.gradle\caches\transforms-1\files-1.1\support-v4-22.2.1.aar\36cd3d0e105d97fcfeb6b28a9ad56224\AndroidManifest.xml:17:1-24:12
+MERGED from [:openCVLibrary24132] C:\Users\Nathaniel\Desktop\color-blob-detection1\openCVLibrary24132\build\intermediates\manifests\full\debug\AndroidManifest.xml:2:1-11:12
+MERGED from [com.android.support:appcompat-v7:22.2.1] C:\Users\Nathaniel\.gradle\caches\transforms-1\files-1.1\appcompat-v7-22.2.1.aar\18606abc327b55b63d6085e0fc82315f\AndroidManifest.xml:17:1-24:12
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\Nathaniel\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\96addc4ab3a5c0eb08c12abd653716c1\AndroidManifest.xml:2:1-11:12
+MERGED from [com.android.support:support-v4:22.2.1] C:\Users\Nathaniel\.gradle\caches\transforms-1\files-1.1\support-v4-22.2.1.aar\8ae77d8b392e28e7bcab38a61662ce65\AndroidManifest.xml:17:1-24:12
 INJECTED from C:\Users\Nathaniel\Desktop\color-blob-detection1\openCVSamplecolorblobdetection\src\main\AndroidManifest.xml:2:1-55:12
 INJECTED from C:\Users\Nathaniel\Desktop\color-blob-detection1\openCVSamplecolorblobdetection\src\main\AndroidManifest.xml:2:1-55:12
 INJECTED from C:\Users\Nathaniel\Desktop\color-blob-detection1\openCVSamplecolorblobdetection\src\main\AndroidManifest.xml:2:1-55:12
@@ -29,14 +29,14 @@ uses-sdk
 ADDED from C:\Users\Nathaniel\Desktop\color-blob-detection1\openCVSamplecolorblobdetection\src\main\AndroidManifest.xml:7:5-9:41
 INJECTED from C:\Users\Nathaniel\Desktop\color-blob-detection1\openCVSamplecolorblobdetection\src\main\AndroidManifest.xml:7:5-9:41
 INJECTED from C:\Users\Nathaniel\Desktop\color-blob-detection1\openCVSamplecolorblobdetection\src\main\AndroidManifest.xml:7:5-9:41
-MERGED from [:openCVLibrary24132] C:\Users\Nathaniel\Desktop\color-blob-detection1\openCVLibrary24132\build\intermediates\bundles\debug\AndroidManifest.xml:7:5-9:40
-MERGED from [:openCVLibrary24132] C:\Users\Nathaniel\Desktop\color-blob-detection1\openCVLibrary24132\build\intermediates\bundles\debug\AndroidManifest.xml:7:5-9:40
-MERGED from [com.android.support:appcompat-v7:22.2.1] C:\Users\Nathaniel\.gradle\caches\transforms-1\files-1.1\appcompat-v7-22.2.1.aar\5bc3e48dc4d140ac819c94fb7e95c45f\AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:appcompat-v7:22.2.1] C:\Users\Nathaniel\.gradle\caches\transforms-1\files-1.1\appcompat-v7-22.2.1.aar\5bc3e48dc4d140ac819c94fb7e95c45f\AndroidManifest.xml:20:5-43
-MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\Nathaniel\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\63f6314286a65bdd59d8083fc0fd4d68\AndroidManifest.xml:5:5-7:41
-MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\Nathaniel\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\63f6314286a65bdd59d8083fc0fd4d68\AndroidManifest.xml:5:5-7:41
-MERGED from [com.android.support:support-v4:22.2.1] C:\Users\Nathaniel\.gradle\caches\transforms-1\files-1.1\support-v4-22.2.1.aar\36cd3d0e105d97fcfeb6b28a9ad56224\AndroidManifest.xml:20:5-43
-MERGED from [com.android.support:support-v4:22.2.1] C:\Users\Nathaniel\.gradle\caches\transforms-1\files-1.1\support-v4-22.2.1.aar\36cd3d0e105d97fcfeb6b28a9ad56224\AndroidManifest.xml:20:5-43
+MERGED from [:openCVLibrary24132] C:\Users\Nathaniel\Desktop\color-blob-detection1\openCVLibrary24132\build\intermediates\manifests\full\debug\AndroidManifest.xml:7:5-9:40
+MERGED from [:openCVLibrary24132] C:\Users\Nathaniel\Desktop\color-blob-detection1\openCVLibrary24132\build\intermediates\manifests\full\debug\AndroidManifest.xml:7:5-9:40
+MERGED from [com.android.support:appcompat-v7:22.2.1] C:\Users\Nathaniel\.gradle\caches\transforms-1\files-1.1\appcompat-v7-22.2.1.aar\18606abc327b55b63d6085e0fc82315f\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:appcompat-v7:22.2.1] C:\Users\Nathaniel\.gradle\caches\transforms-1\files-1.1\appcompat-v7-22.2.1.aar\18606abc327b55b63d6085e0fc82315f\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\Nathaniel\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\96addc4ab3a5c0eb08c12abd653716c1\AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\Nathaniel\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\96addc4ab3a5c0eb08c12abd653716c1\AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support:support-v4:22.2.1] C:\Users\Nathaniel\.gradle\caches\transforms-1\files-1.1\support-v4-22.2.1.aar\8ae77d8b392e28e7bcab38a61662ce65\AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-v4:22.2.1] C:\Users\Nathaniel\.gradle\caches\transforms-1\files-1.1\support-v4-22.2.1.aar\8ae77d8b392e28e7bcab38a61662ce65\AndroidManifest.xml:20:5-43
 INJECTED from C:\Users\Nathaniel\Desktop\color-blob-detection1\openCVSamplecolorblobdetection\src\main\AndroidManifest.xml:7:5-9:41
 INJECTED from C:\Users\Nathaniel\Desktop\color-blob-detection1\openCVSamplecolorblobdetection\src\main\AndroidManifest.xml:7:5-9:41
 	android:targetSdkVersion
@@ -101,12 +101,12 @@ ADDED from C:\Users\Nathaniel\Desktop\color-blob-detection1\openCVSamplecolorblo
 		ADDED from C:\Users\Nathaniel\Desktop\color-blob-detection1\openCVSamplecolorblobdetection\src\main\AndroidManifest.xml:35:22-77
 application
 ADDED from C:\Users\Nathaniel\Desktop\color-blob-detection1\openCVSamplecolorblobdetection\src\main\AndroidManifest.xml:37:5-53:19
-MERGED from [com.android.support:appcompat-v7:22.2.1] C:\Users\Nathaniel\.gradle\caches\transforms-1\files-1.1\appcompat-v7-22.2.1.aar\5bc3e48dc4d140ac819c94fb7e95c45f\AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:appcompat-v7:22.2.1] C:\Users\Nathaniel\.gradle\caches\transforms-1\files-1.1\appcompat-v7-22.2.1.aar\5bc3e48dc4d140ac819c94fb7e95c45f\AndroidManifest.xml:22:5-20
-MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\Nathaniel\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\63f6314286a65bdd59d8083fc0fd4d68\AndroidManifest.xml:9:5-20
-MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\Nathaniel\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\63f6314286a65bdd59d8083fc0fd4d68\AndroidManifest.xml:9:5-20
-MERGED from [com.android.support:support-v4:22.2.1] C:\Users\Nathaniel\.gradle\caches\transforms-1\files-1.1\support-v4-22.2.1.aar\36cd3d0e105d97fcfeb6b28a9ad56224\AndroidManifest.xml:22:5-20
-MERGED from [com.android.support:support-v4:22.2.1] C:\Users\Nathaniel\.gradle\caches\transforms-1\files-1.1\support-v4-22.2.1.aar\36cd3d0e105d97fcfeb6b28a9ad56224\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:appcompat-v7:22.2.1] C:\Users\Nathaniel\.gradle\caches\transforms-1\files-1.1\appcompat-v7-22.2.1.aar\18606abc327b55b63d6085e0fc82315f\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:appcompat-v7:22.2.1] C:\Users\Nathaniel\.gradle\caches\transforms-1\files-1.1\appcompat-v7-22.2.1.aar\18606abc327b55b63d6085e0fc82315f\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\Nathaniel\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\96addc4ab3a5c0eb08c12abd653716c1\AndroidManifest.xml:9:5-20
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\Nathaniel\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\96addc4ab3a5c0eb08c12abd653716c1\AndroidManifest.xml:9:5-20
+MERGED from [com.android.support:support-v4:22.2.1] C:\Users\Nathaniel\.gradle\caches\transforms-1\files-1.1\support-v4-22.2.1.aar\8ae77d8b392e28e7bcab38a61662ce65\AndroidManifest.xml:22:5-20
+MERGED from [com.android.support:support-v4:22.2.1] C:\Users\Nathaniel\.gradle\caches\transforms-1\files-1.1\support-v4-22.2.1.aar\8ae77d8b392e28e7bcab38a61662ce65\AndroidManifest.xml:22:5-20
 	android:label
 		ADDED from C:\Users\Nathaniel\Desktop\color-blob-detection1\openCVSamplecolorblobdetection\src\main\AndroidManifest.xml:39:9-41
 	android:icon

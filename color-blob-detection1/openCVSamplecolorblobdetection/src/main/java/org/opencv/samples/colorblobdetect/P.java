@@ -19,8 +19,14 @@ import android.graphics.Matrix;
 import android.net.Uri;
 import android.provider.MediaStore;
 import java.io.File;
+import java.util.List;
 
+import org.opencv.android.Utils;
+import org.opencv.core.CvType;
 import org.opencv.core.Mat;
+import org.opencv.core.MatOfPoint;
+import org.opencv.core.Scalar;
+import org.opencv.imgproc.Imgproc;
 
 public class P extends Activity {
     private static final String  TAG = "P::Activity";
@@ -29,6 +35,11 @@ public class P extends Activity {
     Button botonAbrir;
     Button botonConfirmar;
     ImageView imageView;
+    Mat pp_mat1;
+    private Scalar CONTOUR_COLOR;
+    private ColorBlobDetector    mDetector;
+    private Scalar               mBlobColorRgba;
+    private Scalar               pp_mBlobColorHsv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,22 +49,39 @@ public class P extends Activity {
         // PP NLJS 15/07/2017 Obtengo la información del intend que lo mando a llamar
         Intent intent = getIntent();
 
+        mBlobColorRgba = new Scalar(255);
+        mDetector = new ColorBlobDetector();
+
+
+        // PP NLJS 15/07/2017 Obtengo la información del intend que lo mando a llamar
+        pp_mBlobColorHsv = (Scalar)getIntent().getExtras().getSerializable("PP_EXTRA_SCALAR");
+        Log.d(TAG, "Extra HSV0: " + pp_mBlobColorHsv.val[0]);
+        Log.d(TAG, "Extra HSV1: " + pp_mBlobColorHsv.val[1]);
+        Log.d(TAG, "Extra HSV2: " + pp_mBlobColorHsv.val[2]);
+
+
         // PP NLJS 15/07/2017 Obtengo los valores RGB
-        double red = intent.getDoubleExtra(ColorBlobDetectionActivity.EXTRA_RED,0.0);
-        double green = intent.getDoubleExtra(ColorBlobDetectionActivity.EXTRA_GREEN,0.0);
-        double blue = intent.getDoubleExtra(ColorBlobDetectionActivity.EXTRA_BLUE,0.0);
+        /*mBlobColorRgba.val[0] = intent.getDoubleExtra(ColorBlobDetectionActivity.EXTRA_RED,0.0);
+        mBlobColorRgba.val[1] = intent.getDoubleExtra(ColorBlobDetectionActivity.EXTRA_GREEN,0.0);
+        mBlobColorRgba.val[2] = intent.getDoubleExtra(ColorBlobDetectionActivity.EXTRA_BLUE,0.0);
+        */
 
         // PP NLJS 15/07/2017 Imprimo valores RGB, solo como prueba en consola
-        Log.d(TAG, "Extra rojo: " + red);
-        Log.d(TAG, "Extra verde: " + green);
-        Log.d(TAG, "Extra azul: " + blue);
+        /*Log.d(TAG, "Extra rojo: " + mBlobColorRgba.val[0]);
+        Log.d(TAG, "Extra verde: " + mBlobColorRgba.val[1]);
+        Log.d(TAG, "Extra azul: " + mBlobColorRgba.val[2]);
 
+
+        mBlobColorRgba.val[3]= (double) 255;
+        */
 
         imageView = (ImageView) findViewById(R.id.test_image);
         botonAbrir = (Button) findViewById(R.id.botonAbrirImagen);
         botonConfirmar = (Button) findViewById(R.id.botonConfirmar);
 
         botonConfirmar.setEnabled(false);
+
+        CONTOUR_COLOR = new Scalar(255,0,0,255);
 
     }
 
@@ -67,6 +95,7 @@ public class P extends Activity {
             if ( imagen != null ){
                 imageView.setImageBitmap(imagen);
                 botonConfirmar.setEnabled(true);
+                //postproceso();
             }else{
                 Log.i("Hola", "La imagen no existe");
             }
@@ -111,6 +140,8 @@ public class P extends Activity {
         if(imgFile.exists()){
             //Convertir a bitmap desde direccion de la imagen
             Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+            pp_mat1 = new Mat (myBitmap.getHeight(), myBitmap.getWidth(), CvType.CV_8UC1);
+            postproceso();
             //Rotar Imagen
             Matrix matrix = new Matrix();
             matrix.postRotate(90);
@@ -118,6 +149,44 @@ public class P extends Activity {
             return imagenRotada;
         }
         return null;
+
+    }
+
+    public void postproceso(){
+
+        /**
+         * TODO: Arreglar el error que crashea la app
+         */
+
+        mDetector.setHsvColor(pp_mBlobColorHsv);
+        Log.d(TAG, "postproceso: Still working 1");
+        mDetector.process(pp_mat1);
+        Log.d(TAG, "postproceso: Still working 2");
+        List<MatOfPoint> contours = mDetector.getContours();
+        Log.e(TAG, "Contours count: " + contours.size());
+
+        Imgproc.drawContours(pp_mat1, contours, -1, CONTOUR_COLOR);
+
+        Mat colorLabel = pp_mat1.submat(4, 68, 4, 68);
+        colorLabel.setTo(mBlobColorRgba);
+
+
+        Bitmap img = Bitmap.createBitmap(pp_mat1.cols(), pp_mat1.rows(),Bitmap.Config.ARGB_8888);
+        Utils.matToBitmap(pp_mat1, img);
+        ImageView vf = (ImageView) findViewById(R.id.view_final);
+        if( vf != null )
+            vf.setImageBitmap(img);
+
+        /*
+        mBlobColorHsv= converScalarRgba2Hsv(mBlobColorRgba);
+
+        mDetector.setHsvColor(mBlobColorHsv);
+
+        Imgproc.resize(mDetector.getSpectrum(), mSpectrum, SPECTRUM_SIZE);
+
+        Mat spectrumLabel = pp_mat1.submat(4, 4 + mSpectrum.rows(), 70, 70 + mSpectrum.cols());
+        mSpectrum.copyTo(spectrumLabel);*/
+
 
     }
 

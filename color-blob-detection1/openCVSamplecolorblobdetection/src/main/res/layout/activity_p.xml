@@ -51,5 +51,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="8dp" />
 
+    <ImageView
+        android:id="@+id/view_final"
+        android:layout_width="197dp"
+        android:layout_height="197dp"
+        android:src="@drawable/abc_ab_share_pack_mtrl_alpha"
+        app:layout_constraintTop_toBottomOf="@+id/botonAbrirImagen"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="196dp" />
+
 
 </android.support.constraint.ConstraintLayout>
