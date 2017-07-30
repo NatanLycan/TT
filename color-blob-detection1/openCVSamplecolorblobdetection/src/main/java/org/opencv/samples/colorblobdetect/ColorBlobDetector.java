@@ -13,6 +13,8 @@ import org.opencv.core.MatOfPoint;
 import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
 
+import static java.lang.System.exit;
+
 public class ColorBlobDetector {
     // Lower and Upper bounds for range checking in HSV color space
     private Scalar mLowerBound = new Scalar(0);
@@ -81,6 +83,8 @@ public class ColorBlobDetector {
         Imgproc.pyrDown(rgbaImage, mPyrDownMat);
         Imgproc.pyrDown(mPyrDownMat, mPyrDownMat);
         Log.d(TAG, "setHsvColor: Still alive Z0");
+        if(mPyrDownMat.empty()) {Log.d(TAG, "process: Z0 Entrada vacia"); exit(0);}else
+            Log.d(TAG, "process: Todo bien Z0");
         Imgproc.cvtColor(mPyrDownMat, mHsvMat, Imgproc.COLOR_RGB2HSV_FULL);
 
         Log.d(TAG, "setHsvColor: Still alive Z1");

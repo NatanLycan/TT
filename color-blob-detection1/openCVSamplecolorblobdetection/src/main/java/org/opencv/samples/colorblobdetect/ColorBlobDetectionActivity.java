@@ -44,6 +44,8 @@ import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import static java.lang.System.exit;
+
 /**
  * Compilado utilizando Android Studio Canary 3.0.0-alpha7
  */
@@ -190,7 +192,15 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
 
         // PP NCH 16/07/2017 llamada a la funcion cuando usuario da click en algun punto del mOpenCVcameraView
         //en este punto ya se obtuvieron los colores RGBA correspondientes, pero no se genero la imagen con contornos
+        Mat temp= mRgba;
         SaveImage();
+        mRgba=temp;
+        try{
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
 
         return false; // don't need subsequent touch events
     }
@@ -207,6 +217,12 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
 
         if (mIsColorSelected) {
             Log.d(TAG, "onCameraFrame(miscolorselected): Done 1");
+            if(mRgba.empty()){
+                Log.d(TAG, "onCameraFrame: Crash");
+                exit(0);}
+            /**
+             * TODO Checa esto richi, hay que revisar por que la variable mRgba se vacia
+             */
             mDetector.process(mRgba);
             List<MatOfPoint> contours = mDetector.getContours();
             Log.e(TAG, "Contours count: " + contours.size());
@@ -218,7 +234,7 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
 
             Mat spectrumLabel = mRgba.submat(4, 4 + mSpectrum.rows(), 70, 70 + mSpectrum.cols());
             mSpectrum.copyTo(spectrumLabel);
-
+            SaveImage();
         }else{
             mRgba = inputFrame.rgba();
         }
@@ -253,7 +269,7 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
 
     int pp_num=0;//PP NCH 23/07/2017 Identifica contador para Imagen Objeto de referencia y objeto a medir
 
-    public void SaveImage(){
+    /*public void SaveImage(){
         /**
          * PP NCH 23/07/2017
          * Convierte el objeto Mat mRgba en un bitmap para asi poder guardarlo en un archivo PNG
@@ -263,7 +279,7 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
          *  1 - Imagen Original
          *  2 - Imagen Objeto a medir
          *  3 - Imagen Objeto de referencia
-         */
+         //
         Bitmap pp_bmp = null;//pp NCH 23/07/2017 Temporal para poder guardar Mat mRgba en un archivo
         pp_num++;
         try {
@@ -321,5 +337,74 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
             }
         }
 
-    }
+    }*/
+    public void SaveImage(){
+        /**
+         * PP NCH 23/07/2017
+         * Convierte el objeto Mat mRgba en un bitmap para asi poder guardarlo en un archivo PNG
+         * en el directorio /proportion
+         * y un numero que identifica que imagen es
+         *
+         *  1 - Imagen Original
+         *  2 - Imagen Objeto a medir
+         *  3 - Imagen Objeto de referencia
+         */
+         Bitmap pp_bmp = null;//pp NCH 23/07/2017 Temporal para poder guardar Mat mRgba en un archivo
+         pp_num++;
+         try {
+         pp_bmp = Bitmap.createBitmap(mRgba.cols(), mRgba.rows(), Bitmap.Config.ARGB_8888);
+         Utils.matToBitmap(mRgba, pp_bmp);
+         } catch (CvException e) {
+         Log.d(TAG, e.getMessage());
+         }
+
+         mRgba.release();
+
+
+         FileOutputStream out = null;
+
+         String filename = "Blob_intento_"+pp_num+".png";
+
+
+         File sd = new File(Environment.getExternalStorageDirectory() + "/proportion");
+         boolean success = true;
+         if (!sd.exists()) {
+         success = sd.mkdir();
+         }
+         if (success) {
+         File dest = new File(sd, filename);
+
+         try {
+         out = new FileOutputStream(dest);
+         pp_bmp.compress(Bitmap.CompressFormat.PNG, 100, out); // pp_bmp is your Bitmap instance
+         // PNG is a lossless format, the compression factor (100) is ignored
+
+         } catch (Exception e) {
+         e.printStackTrace();
+         Log.d(TAG, e.getMessage());
+         } finally {
+         try {
+         if (out != null) {
+         out.close();
+         Log.d(TAG, "OK!!");
+
+         // PP NCH 00/00/0000 Comentario
+         if(pp_num==1) {
+         //Act(mOpenCvCameraView);
+             if (mOpenCvCameraView != null) {
+
+             //mOpenCvCameraView.disableView();
+             //Act(mOpenCvCameraView);
+             }
+         }
+
+         }
+         } catch (IOException e) {
+         Log.d(TAG, e.getMessage() + "Error");
+         e.printStackTrace();
+         }
+         }
+         }
+
+         }
 }

@@ -141,7 +141,7 @@ public class P extends Activity {
             //Convertir a bitmap desde direccion de la imagen
             Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
             pp_mat1 = new Mat (myBitmap.getHeight(), myBitmap.getWidth(), CvType.CV_8UC1);
-            postproceso();
+            //postproceso();
             //Rotar Imagen
             Matrix matrix = new Matrix();
             matrix.postRotate(90);
@@ -160,7 +160,8 @@ public class P extends Activity {
 
         mDetector.setHsvColor(pp_mBlobColorHsv);
         Log.d(TAG, "postproceso: Still working 1");
-        mDetector.process(pp_mat1);
+
+        mDetector.process(pp_mat1);//aqui mueres
         Log.d(TAG, "postproceso: Still working 2");
         List<MatOfPoint> contours = mDetector.getContours();
         Log.e(TAG, "Contours count: " + contours.size());
