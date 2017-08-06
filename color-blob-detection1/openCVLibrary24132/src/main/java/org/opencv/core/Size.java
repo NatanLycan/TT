@@ -1,5 +1,7 @@
 package org.opencv.core;
 
+import java.io.Serializable;
+
 /**
  * <p>template<typename _Tp> class CV_EXPORTS Size_ <code></p>
  *
@@ -62,7 +64,7 @@ package org.opencv.core;
  *
  * @see <a href="http://docs.opencv.org/modules/core/doc/basic_structures.html#size">org.opencv.core.Size_</a>
  */
-public class Size {
+public class Size implements Serializable {
 
     public double width, height;
 

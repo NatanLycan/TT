@@ -195,12 +195,6 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         Mat temp= mRgba;
         SaveImage();
         mRgba=temp;
-        try{
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
 
         return false; // don't need subsequent touch events
     }
@@ -258,10 +252,33 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
          * Genera un intend para abrir la actividad P
          */
 
+        // PP NLJS 22/07/2017 Creo intent para una nueva Actividad
         Intent intent =new Intent(this,P.class);
 
-        // PP NLJS 22/07/2017 Envio extra Scalar con los valores hsv
+        // PP NLJS 22/07/2017 Envio los siguientes datos como EXRAS
+        // private Mat                  mRgba;
+        // private Scalar               mBlobColorHsv;
+        // private Scalar               mBlobColorRgba;
+        // private ColorBlobDetector    mDetector;
+        // private Mat                  mSpectrum;
+        // private Size                 SPECTRUM_SIZE;
+        // private Scalar               CONTOUR_COLOR;*/
+
+//        if(mRgba!=null)Log.d(TAG, "Act: mRgba no es nulo");
+//        if(mBlobColorHsv!=null) Log.d(TAG, "Act: mBlobColorHsv no es nulo");
+//        if(mBlobColorRgba!=null) Log.d(TAG, "Act: mBlobColorRgba no es nulo");
+//        if(mDetector!=null) Log.d(TAG, "Act: mDetector no es nulo");
+//        if(mSpectrum!=null) Log.d(TAG, "Act: mSpectrum no es nulo");
+//        if(SPECTRUM_SIZE!=null) Log.d(TAG, "Act: SPECTRUM_SIZE no es nulo");
+//        if(CONTOUR_COLOR!=null) Log.d(TAG, "Act: CONTOUR_COLOR no es nulo");
+
+        intent.putExtra("PP_EXTRA_MAT",mRgba);
         intent.putExtra("PP_EXTRA_SCALAR",mBlobColorHsv);
+        intent.putExtra("PP_EXTRA_SCALAR2",mBlobColorRgba);
+        intent.putExtra("PP_EXTRA_COLORBLOBDETECTOR",mDetector);
+        intent.putExtra("PP_EXTRA_MAT2",mSpectrum);
+        intent.putExtra("PP_EXTRA_SIZE",SPECTRUM_SIZE);
+        intent.putExtra("PP_EXTRA_SCALAR3",CONTOUR_COLOR);
 
         // PP NLJS 16/07/2017 Inicializo la actividad
         startActivity(intent);
@@ -269,75 +286,6 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
 
     int pp_num=0;//PP NCH 23/07/2017 Identifica contador para Imagen Objeto de referencia y objeto a medir
 
-    /*public void SaveImage(){
-        /**
-         * PP NCH 23/07/2017
-         * Convierte el objeto Mat mRgba en un bitmap para asi poder guardarlo en un archivo PNG
-         * en el directorio /proportion
-         * y un numero que identifica que imagen es
-         *
-         *  1 - Imagen Original
-         *  2 - Imagen Objeto a medir
-         *  3 - Imagen Objeto de referencia
-         //
-        Bitmap pp_bmp = null;//pp NCH 23/07/2017 Temporal para poder guardar Mat mRgba en un archivo
-        pp_num++;
-        try {
-            pp_bmp = Bitmap.createBitmap(mRgba.cols(), mRgba.rows(), Bitmap.Config.ARGB_8888);
-            Utils.matToBitmap(mRgba, pp_bmp);
-        } catch (CvException e) {
-            Log.d(TAG, e.getMessage());
-        }
-
-        mRgba.release();
-
-
-        FileOutputStream out = null;
-
-        String filename = "Blob_intento_"+pp_num+".png";
-
-
-        File sd = new File(Environment.getExternalStorageDirectory() + "/proportion");
-        boolean success = true;
-        if (!sd.exists()) {
-            success = sd.mkdir();
-        }
-        if (success) {
-            File dest = new File(sd, filename);
-
-            try {
-                out = new FileOutputStream(dest);
-                pp_bmp.compress(Bitmap.CompressFormat.PNG, 100, out); // pp_bmp is your Bitmap instance
-                // PNG is a lossless format, the compression factor (100) is ignored
-
-            } catch (Exception e) {
-                e.printStackTrace();
-                Log.d(TAG, e.getMessage());
-            } finally {
-                try {
-                    if (out != null) {
-                        out.close();
-                        Log.d(TAG, "OK!!");
-
-                        // PP NCH 00/00/0000 Comentario
-                        if(pp_num==1) {
-                            //Act(mOpenCvCameraView);
-                            if (mOpenCvCameraView != null) {
-
-                                mOpenCvCameraView.disableView();
-                                Act(mOpenCvCameraView);
-                            }
-                        }
-
-                    }
-                } catch (IOException e) {
-                    Log.d(TAG, e.getMessage() + "Error");
-                    e.printStackTrace();
-                }
-            }
-        }
-
-    }*/
     public void SaveImage(){
         /**
          * PP NCH 23/07/2017
@@ -348,63 +296,92 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
          *  1 - Imagen Original
          *  2 - Imagen Objeto a medir
          *  3 - Imagen Objeto de referencia
+         *
+         *  PP NCH 30/07/2017
+         *  Solo guarda la imagen final con la seleccion de los dos objetos  si requiere repetir se hara el de los tres procesos
          */
-         Bitmap pp_bmp = null;//pp NCH 23/07/2017 Temporal para poder guardar Mat mRgba en un archivo
-         pp_num++;
-         try {
-         pp_bmp = Bitmap.createBitmap(mRgba.cols(), mRgba.rows(), Bitmap.Config.ARGB_8888);
-         Utils.matToBitmap(mRgba, pp_bmp);
-         } catch (CvException e) {
-         Log.d(TAG, e.getMessage());
-         }
 
-         mRgba.release();
+        //PP NCH 23/07/2017 Creo bitmap temporal para poder guardar Mat mRgba en un archivo
+        Bitmap pp_bmp = null;
 
+        //PP NLJS 06/08/2017 Intento inicializar el Bitmap
+        try {
+            //PP NLJS 06/08/2017 Establezco el tamaño del Bitmap
+            pp_bmp = Bitmap.createBitmap(mRgba.cols(), mRgba.rows(), Bitmap.Config.ARGB_8888);
+            //PP NLJS 06/08/2017 Realizo la conversión
+            Utils.matToBitmap(mRgba, pp_bmp);
+        } catch (CvException e) {
+            Log.d(TAG, e.getMessage());
+            Log.d(TAG, "PP Función: SaveImage. No fué posible transformar mRgba a Bitmap.");
+            exit(0);
+        }
+        //PP NLJS 06/08/2017 Libero el espacio ocupado por mRgba
+        mRgba.release();
 
-         FileOutputStream out = null;
+        //PP NLJS 06/08/2017 Reviso si el almacenamiento externo esta disponible para guardar la imagen
+        boolean pp_flag = isExternalStorageWritable();
+        Log.d(TAG, "PP Función: SaveImage. Validación de almacenamiento externo: " + pp_flag);
 
-         String filename = "Blob_intento_"+pp_num+".png";
+        //PP NLJS 06/08/2017 Creo el File donde guardar la imagen y el directorio
+        File pp_img = getAlbumStorageDir("Proportion");
 
+        //PP NLJS 06/08/2017 Válido que pp_img no sea nulo
+        if(pp_img.exists()){
+            long pp_totFiles = pp_img.length();
+            String filename = "Proportion_" + pp_totFiles + ".png";
 
-         File sd = new File(Environment.getExternalStorageDirectory() + "/proportion");
-         boolean success = true;
-         if (!sd.exists()) {
-         success = sd.mkdir();
-         }
-         if (success) {
-         File dest = new File(sd, filename);
+            boolean pp_flag_comp = false;
 
-         try {
-         out = new FileOutputStream(dest);
-         pp_bmp.compress(Bitmap.CompressFormat.PNG, 100, out); // pp_bmp is your Bitmap instance
-         // PNG is a lossless format, the compression factor (100) is ignored
+            //PP NLJS 06/08/2017 Creo el FOS y File destino para guardar la img en la memoria del teléfono
+            FileOutputStream pp_out = null;
+            File pp_img2 = new File(pp_img,filename);
 
-         } catch (Exception e) {
-         e.printStackTrace();
-         Log.d(TAG, e.getMessage());
-         } finally {
-         try {
-         if (out != null) {
-         out.close();
-         Log.d(TAG, "OK!!");
+            //PP NLJS 06/08/2017 Intento inicializar el FOS
+            try {
+                pp_out = new FileOutputStream(pp_img2);
+                pp_flag_comp = pp_bmp.compress(Bitmap.CompressFormat.PNG, 100, pp_out); // pp_bmp is your Bitmap instance
+                pp_out.close();
 
-         // PP NCH 00/00/0000 Comentario
-         if(pp_num==1) {
-         //Act(mOpenCvCameraView);
-             if (mOpenCvCameraView != null) {
+                if (mOpenCvCameraView != null) {
+                    mOpenCvCameraView.disableView();
+                    Act(mOpenCvCameraView);
+                }else Act(mOpenCvCameraView);
 
-             //mOpenCvCameraView.disableView();
-             //Act(mOpenCvCameraView);
-             }
-         }
+            } catch (Exception e) {
+                e.printStackTrace();
+                Log.d(TAG, "PP Función: SaveImage. Error al crear el FOS. Compress : " + pp_flag_comp);
+            }
+        }
+    }
+    public boolean isExternalStorageWritable() {
+        /**
+         * PP NLJS 06/08/2017
+         * Revisa si el almacenamiento externo esta disponible para leer y escribir
+         *
+         */
 
-         }
-         } catch (IOException e) {
-         Log.d(TAG, e.getMessage() + "Error");
-         e.printStackTrace();
-         }
-         }
-         }
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state)) {
+            return true;
+        }
+        return false;
+    }
+    public File getAlbumStorageDir(String albumName) {
+        /**
+         * PP NLJS 06/08/2017
+         * Crea el directorio donde se van a guardar la fotos (Este será público para otras aplicaciones)
+         *
+         */
 
-         }
+        // PP NLJS 06/08/2017 Creo el File que se va a utilizar y la ruta de almacenamiento
+        // PP NLJS 06/08/2017 DIRECTORI_PICTURE Es un parametro necesario para indicar que el archivo a guardar será una imagen y la ruta se genere bien
+        File pp_file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), albumName);
+
+        // PP NLJS 06/08/2017 Creo el directorio y mando un msg de error en caso de que ya exista o no se haya podido crear
+        if (!pp_file.mkdirs()) {
+            Log.e(TAG, "PP Función: getAlbumStorageDir. El directorio ya existía o no se pudo crear. " + pp_file.getAbsolutePath());
+        }
+        return pp_file;
+    }
+
 }

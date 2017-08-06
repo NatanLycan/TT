@@ -2,9 +2,12 @@ package org.opencv.samples.colorblobdetect;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -22,11 +25,16 @@ import java.io.File;
 import java.util.List;
 
 import org.opencv.android.Utils;
+import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfPoint;
+import org.opencv.core.Rect;
 import org.opencv.core.Scalar;
+import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
+
+import static java.lang.System.exit;
 
 public class P extends Activity {
     private static final String  TAG = "P::Activity";
@@ -35,47 +43,68 @@ public class P extends Activity {
     Button botonAbrir;
     Button botonConfirmar;
     ImageView imageView;
-    Mat pp_mat1;
     private Scalar CONTOUR_COLOR;
+    private Mat                  mRgba;
+    private Scalar               mBlobColorHsv;
     private ColorBlobDetector    mDetector;
     private Scalar               mBlobColorRgba;
-    private Scalar               pp_mBlobColorHsv;
+    private Mat                  mSpectrum;
+    private Size                 SPECTRUM_SIZE;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_p);
 
-        // PP NLJS 15/07/2017 Obtengo la información del intend que lo mando a llamar
+        // PP NLJS 15/07/2017 Obtengo la información del intent que lo mando a llamar
         Intent intent = getIntent();
 
         mBlobColorRgba = new Scalar(255);
         mDetector = new ColorBlobDetector();
 
 
-        // PP NLJS 15/07/2017 Obtengo la información del intend que lo mando a llamar
-        pp_mBlobColorHsv = (Scalar)getIntent().getExtras().getSerializable("PP_EXTRA_SCALAR");
-        Log.d(TAG, "Extra HSV0: " + pp_mBlobColorHsv.val[0]);
-        Log.d(TAG, "Extra HSV1: " + pp_mBlobColorHsv.val[1]);
-        Log.d(TAG, "Extra HSV2: " + pp_mBlobColorHsv.val[2]);
+        // PP NLJS 15/07/2017 Obtengo los siguientes EXTRAS del intend que lo mando a llamar
+        // private Mat                  mRgba;
+        // private Scalar               mBlobColorHsv;
+        // private Scalar               mBlobColorRgba;
+        // private ColorBlobDetector    mDetector;
+        // private Mat                  mSpectrum;
+        // private Size                 SPECTRUM_SIZE;
+        // private Scalar               CONTOUR_COLOR;*/
+        mRgba = (Mat)getIntent().getExtras().getSerializable("PP_EXTRA_MAT");
+        mBlobColorHsv = (Scalar)getIntent().getExtras().getSerializable("PP_EXTRA_SCALAR");
+        mBlobColorRgba = (Scalar)getIntent().getExtras().getSerializable("PP_EXTRA_SCALAR2");
+        mDetector = (ColorBlobDetector) getIntent().getExtras().getSerializable("PP_EXTRA_COLORBLOBDETECTOR");
+        mSpectrum = (Mat) getIntent().getExtras().getSerializable("PP_EXTRA_MAT2");
+        SPECTRUM_SIZE = (Size) getIntent().getExtras().getSerializable("PP_EXTRA_SIZE");
+        CONTOUR_COLOR = (Scalar) getIntent().getExtras().getSerializable("PP_EXTRA_SCALAR3");
 
+//        if(mRgba!=null)Log.d(TAG, "P: mRgba no es nulo");
+//        if(mBlobColorHsv!=null) Log.d(TAG, "P: mBlobColorHsv no es nulo");
+//        if(mBlobColorRgba!=null) Log.d(TAG, "P: mBlobColorRgba no es nulo");
+//        if(mDetector!=null) Log.d(TAG, "P: mDetector no es nulo");
+//        if(mSpectrum!=null) Log.d(TAG, "P: mSpectrum no es nulo");
+//        if(SPECTRUM_SIZE!=null) Log.d(TAG, "P: SPECTRUM_SIZE no es nulo");
+//        if(CONTOUR_COLOR!=null) Log.d(TAG, "P: CONTOUR_COLOR no es nulo");
 
-        // PP NLJS 15/07/2017 Obtengo los valores RGB
-        /*mBlobColorRgba.val[0] = intent.getDoubleExtra(ColorBlobDetectionActivity.EXTRA_RED,0.0);
-        mBlobColorRgba.val[1] = intent.getDoubleExtra(ColorBlobDetectionActivity.EXTRA_GREEN,0.0);
-        mBlobColorRgba.val[2] = intent.getDoubleExtra(ColorBlobDetectionActivity.EXTRA_BLUE,0.0);
-        */
-
-        // PP NLJS 15/07/2017 Imprimo valores RGB, solo como prueba en consola
-        /*Log.d(TAG, "Extra rojo: " + mBlobColorRgba.val[0]);
-        Log.d(TAG, "Extra verde: " + mBlobColorRgba.val[1]);
-        Log.d(TAG, "Extra azul: " + mBlobColorRgba.val[2]);
-
-
-        mBlobColorRgba.val[3]= (double) 255;
-        */
 
         imageView = (ImageView) findViewById(R.id.test_image);
+        imageView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                 Bitmap bitmap = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
+
+                int x = (int)event.getX();
+                int y = (int)event.getY();
+                int pixel = bitmap.getPixel(x,y);
+                int redValue = Color.red(pixel);
+                int blueValue = Color.blue(pixel);
+                int greenValue = Color.green(pixel);
+
+                postproceso( redValue, blueValue, greenValue );
+                return true;
+            }
+        });
         botonAbrir = (Button) findViewById(R.id.botonAbrirImagen);
         botonConfirmar = (Button) findViewById(R.id.botonConfirmar);
 
@@ -95,7 +124,6 @@ public class P extends Activity {
             if ( imagen != null ){
                 imageView.setImageBitmap(imagen);
                 botonConfirmar.setEnabled(true);
-                //postproceso();
             }else{
                 Log.i("Hola", "La imagen no existe");
             }
@@ -140,8 +168,7 @@ public class P extends Activity {
         if(imgFile.exists()){
             //Convertir a bitmap desde direccion de la imagen
             Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-            pp_mat1 = new Mat (myBitmap.getHeight(), myBitmap.getWidth(), CvType.CV_8UC1);
-            //postproceso();
+            mRgba = new Mat (myBitmap.getHeight(), myBitmap.getWidth(), CvType.CV_8UC4);
             //Rotar Imagen
             Matrix matrix = new Matrix();
             matrix.postRotate(90);
@@ -152,46 +179,79 @@ public class P extends Activity {
 
     }
 
-    public void postproceso(){
+    /**
+     * Esta Funcion es de ColorBLOB
+     * @param hsvColor
+     * @return
+     */
+    private Scalar converScalarHsv2Rgba(Scalar hsvColor) {
+        Mat pointMatRgba = new Mat();
+        Mat pointMatHsv = new Mat(1, 1, CvType.CV_8UC3, hsvColor);
+        Imgproc.cvtColor(pointMatHsv, pointMatRgba, Imgproc.COLOR_HSV2RGB_FULL, 4);
 
+        return new Scalar(pointMatRgba.get(0, 0));
+    }
+
+
+    /**
+     * Esta funcion es similar a
+     */
+    public void postproceso(int R, int G, int B){
         /**
-         * TODO: Arreglar el error que crashea la app
+         * TODO: Hacer el postproceso y con los valores obtenidos hacer lo que hacia el activity dle color blob
          */
+       /* int cols = mRgba.cols();
+        int rows = mRgba.rows();
 
-        mDetector.setHsvColor(pp_mBlobColorHsv);
-        Log.d(TAG, "postproceso: Still working 1");
+        int xOffset = (imageView.getWidth() - cols) / 2;
+        int yOffset = (imageView.getHeight() - rows) / 2;
 
-        mDetector.process(pp_mat1);//aqui mueres
-        Log.d(TAG, "postproceso: Still working 2");
-        List<MatOfPoint> contours = mDetector.getContours();
-        Log.e(TAG, "Contours count: " + contours.size());
+        x-=xOffset;
+        y-=yOffset;
 
-        Imgproc.drawContours(pp_mat1, contours, -1, CONTOUR_COLOR);
+        if ((x < 0) || (y < 0) || (x > cols) || (y > rows)) return false;
 
-        Mat colorLabel = pp_mat1.submat(4, 68, 4, 68);
-        colorLabel.setTo(mBlobColorRgba);
+        Rect touchedRect = new Rect();
 
+        touchedRect.x = (x>4) ? x-4 : 0;
+        touchedRect.y = (y>4) ? y-4 : 0;
 
-        Bitmap img = Bitmap.createBitmap(pp_mat1.cols(), pp_mat1.rows(),Bitmap.Config.ARGB_8888);
-        Utils.matToBitmap(pp_mat1, img);
-        ImageView vf = (ImageView) findViewById(R.id.view_final);
-        if( vf != null )
-            vf.setImageBitmap(img);
+        touchedRect.width = (x+4 < cols) ? x + 4 - touchedRect.x : cols - touchedRect.x;
+        touchedRect.height = (y+4 < rows) ? y + 4 - touchedRect.y : rows - touchedRect.y;
 
-        /*
-        mBlobColorHsv= converScalarRgba2Hsv(mBlobColorRgba);
+        Mat touchedRegionRgba = mRgba.submat(touchedRect);
+
+        Mat touchedRegionHsv = new Mat();
+        Imgproc.cvtColor(touchedRegionRgba, touchedRegionHsv, Imgproc.COLOR_RGB2HSV_FULL);
+
+        // Calculate average color of touched region
+        mBlobColorHsv = Core.sumElems(touchedRegionHsv);
+        int pointCount = touchedRect.width*touchedRect.height;
+        for (int i = 0; i < mBlobColorHsv.val.length; i++)
+            mBlobColorHsv.val[i] /= pointCount;
+
+        mBlobColorRgba = converScalarHsv2Rgba(mBlobColorHsv);
+
+        Log.i(TAG, "Touched rgba color: (" + mBlobColorRgba.val[0] + ", " + mBlobColorRgba.val[1] +
+                ", " + mBlobColorRgba.val[2] + ", " + mBlobColorRgba.val[3] + ")");
 
         mDetector.setHsvColor(mBlobColorHsv);
 
         Imgproc.resize(mDetector.getSpectrum(), mSpectrum, SPECTRUM_SIZE);
 
-        Mat spectrumLabel = pp_mat1.submat(4, 4 + mSpectrum.rows(), 70, 70 + mSpectrum.cols());
-        mSpectrum.copyTo(spectrumLabel);*/
+        touchedRegionRgba.release();
+        touchedRegionHsv.release();
 
+        Mat temp= mRgba;
+        mRgba=temp;
 
+        Bitmap img = Bitmap.createBitmap(mRgba.cols(), mRgba.rows(),Bitmap.Config.ARGB_8888);
+        Utils.matToBitmap(mRgba, img);
+        ImageView vf = (ImageView) findViewById(R.id.view_final);
+
+        if( vf != null )
+            vf.setImageBitmap(img);
+*/
     }
-
-
-
 
 }

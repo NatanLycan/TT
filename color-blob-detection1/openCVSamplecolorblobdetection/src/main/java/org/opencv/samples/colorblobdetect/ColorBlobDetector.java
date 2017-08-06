@@ -2,6 +2,7 @@ package org.opencv.samples.colorblobdetect;
 
 import android.util.Log;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -15,7 +16,7 @@ import org.opencv.imgproc.Imgproc;
 
 import static java.lang.System.exit;
 
-public class ColorBlobDetector {
+public class ColorBlobDetector implements Serializable {
     // Lower and Upper bounds for range checking in HSV color space
     private Scalar mLowerBound = new Scalar(0);
     private Scalar mUpperBound = new Scalar(0);
@@ -40,32 +41,46 @@ public class ColorBlobDetector {
 
 
     public void setHsvColor(Scalar hsvColor) {
-        double minH = (hsvColor.val[0] >= mColorRadius.val[0]) ? hsvColor.val[0]-mColorRadius.val[0] : 0;
-        double maxH = (hsvColor.val[0]+mColorRadius.val[0] <= 255) ? hsvColor.val[0]+mColorRadius.val[0] : 255;
 
+        Log.d(TAG, "setHSVColor: Still working 0");
+        if ( hsvColor == null )
+            Log.d(TAG, "setHSVColor: Es nulo ");
+
+        double minH = (hsvColor.val[0] >= mColorRadius.val[0]) ? hsvColor.val[0]-mColorRadius.val[0] : 0;
+        Log.d(TAG, "setHSVColor: Still working 1");
+        double maxH = (hsvColor.val[0]+mColorRadius.val[0] <= 255) ? hsvColor.val[0]+mColorRadius.val[0] : 255;
+        Log.d(TAG, "setHSVColor: Still working 2");
         mLowerBound.val[0] = minH;
+
         mUpperBound.val[0] = maxH;
 
 
-        
+        Log.d(TAG, "setHSVColor: Still working 3");
 
         mLowerBound.val[1] = hsvColor.val[1] - mColorRadius.val[1];
         mUpperBound.val[1] = hsvColor.val[1] + mColorRadius.val[1];
 
+        Log.d(TAG, "setHSVColor: Still working 4");
         mLowerBound.val[2] = hsvColor.val[2] - mColorRadius.val[2];
         mUpperBound.val[2] = hsvColor.val[2] + mColorRadius.val[2];
 
+        Log.d(TAG, "setHSVColor: Still working 5");
         mLowerBound.val[3] = 0;
         mUpperBound.val[3] = 255;
 
+        Log.d(TAG, "setHSVColor: Still working 6");
 
         Mat spectrumHsv = new Mat(1, (int)(maxH-minH), CvType.CV_8UC3);
 
+        Log.d(TAG, "setHSVColor: Still working 7");
         for (int j = 0; j < maxH-minH; j++) {
             byte[] tmp = {(byte)(minH+j), (byte)255, (byte)255};
+
+            Log.d(TAG, "setHSVColor: Still working 8");
             spectrumHsv.put(0, j, tmp);
         }
 
+        Log.d(TAG, "setHSVColor: Still working 9");
         Imgproc.cvtColor(spectrumHsv, mSpectrum, Imgproc.COLOR_HSV2RGB_FULL, 4);
 
 
@@ -80,18 +95,12 @@ public class ColorBlobDetector {
     }
 
     public void process(Mat rgbaImage) {
+        mDilatedMask = rgbaImage;
         Imgproc.pyrDown(rgbaImage, mPyrDownMat);
         Imgproc.pyrDown(mPyrDownMat, mPyrDownMat);
-        Log.d(TAG, "setHsvColor: Still alive Z0");
-        if(mPyrDownMat.empty()) {Log.d(TAG, "process: Z0 Entrada vacia"); exit(0);}else
-            Log.d(TAG, "process: Todo bien Z0");
         Imgproc.cvtColor(mPyrDownMat, mHsvMat, Imgproc.COLOR_RGB2HSV_FULL);
-
-        Log.d(TAG, "setHsvColor: Still alive Z1");
         Core.inRange(mHsvMat, mLowerBound, mUpperBound, mMask);
-        Log.d(TAG, "setHsvColor: Still alive Z2");
         Imgproc.dilate(mMask, mDilatedMask, new Mat());
-        Log.d(TAG, "setHsvColor: Still alive Z3");
 
         List<MatOfPoint> contours = new ArrayList<MatOfPoint>();
 
