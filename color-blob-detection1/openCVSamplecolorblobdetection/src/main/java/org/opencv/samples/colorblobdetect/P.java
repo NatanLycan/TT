@@ -45,6 +45,7 @@ public class P extends Activity {
 
     // PP NLJS 13/08/2017 Creo variables necesarias para cargar la imagen
     private ImageView imageView;
+    private ImageView imV;
     private Bitmap loadedImage;
 
     // PP NLJS 13/08/2017 Creo variables que recibirá de la actividad que lo mando a llamar
@@ -81,6 +82,7 @@ public class P extends Activity {
         // private String               pp_imgAdd;
 
         mRgba = (Mat)getIntent().getExtras().getSerializable("PP_EXTRA_MAT");
+        Log.d(TAG, "chargeFile2: width1: "+mRgba.cols());
         mBlobColorHsv = (Scalar)getIntent().getExtras().getSerializable("PP_EXTRA_SCALAR");
         mBlobColorRgba = (Scalar)getIntent().getExtras().getSerializable("PP_EXTRA_SCALAR2");
         mDetector = (ColorBlobDetector) getIntent().getExtras().getSerializable("PP_EXTRA_COLORBLOBDETECTOR");
@@ -92,11 +94,13 @@ public class P extends Activity {
         Log.d(TAG, "PP Función: (Activity: P) onCreate. pp_imgAdd : " + pp_imgAdd);
         // PP NLJS 13/08/2017
         imageView = (ImageView) findViewById(R.id.test_image);
-
-
+        imV = (ImageView) findViewById(R.id.view_final);
+        Log.d(TAG, "chargeFile2: width1_1: "+mRgba.cols());
         // PP NLJS 13/08/2017 Abro la imagen en el ImageView
         chargeFile(pp_imgAdd);
-
+        Log.d(TAG, "chargeFile2: width1_2: "+mRgba.cols());
+        chargeFile2();
+        Log.d(TAG, "chargeFile2: width1_3: "+mRgba.cols());
 
         // PP QBR 13/08/2017
         imageView.setOnTouchListener(new View.OnTouchListener() {
@@ -231,6 +235,7 @@ public class P extends Activity {
          * TODO: Hacer el postproceso y con los valores obtenidos hacer lo que hacia el activity dle color blob
          */
         try{
+            Log.d(TAG, "postproceso: Error: width "+mRgba.cols());
             mDetector.process(mRgba);
             List<MatOfPoint> contours = mDetector.getContours();
             if(mRgba.empty()) Log.d(TAG, "postproceso: mRgba esta vacio");
@@ -247,15 +252,38 @@ public class P extends Activity {
          * Carga la imagen original en em imageView principal
          *
          */
+        Log.d(TAG, "chargeFile2: width4: "+mRgba.cols());
         try {
             BitmapFactory.Options options = new BitmapFactory.Options();
+            Log.d(TAG, "chargeFile2: width4_1: "+mRgba.cols());
             options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+            Log.d(TAG, "chargeFile2: width4_2: "+mRgba.cols());
+            Mat temp=mRgba.clone();
             Bitmap pp_bitmap = BitmapFactory.decodeFile(imgAdd, options);
+            mRgba=temp.clone();
+            Log.d(TAG, "chargeFile2: width4_3: "+mRgba.cols()+"    Height: "+mRgba.rows());
             imageView.setImageBitmap(pp_bitmap);
+
+
         }catch (Exception e){
             // PP NLJS 13/08/2017 Mando mensaje de error en caso de que la img no se pudiera cargar en el ImageView
             Log.d(TAG, "PP Función: (Activity: P) chargeImage. No se pudo cargar la imagen: "+ e.getMessage());
         }
+    }
+
+    //PP NCH 13/08/2017
+    void chargeFile2(){
+        Log.d(TAG, "chargeFile2: width2: "+mRgba.cols());
+        try{
+            Log.d(TAG, "chargeFile2: width3: "+mRgba.cols());
+            Bitmap pp_bitmap2 = Bitmap.createBitmap(mRgba.cols(), mRgba.rows(),Bitmap.Config.ARGB_8888);
+            Utils.matToBitmap(mRgba,pp_bitmap2);
+            imV.setImageBitmap(pp_bitmap2);
+        }catch (Exception e){
+            Log.d(TAG, "chargeFile2: Error: "+e.getMessage());
+        }
+
+
     }
 
 }

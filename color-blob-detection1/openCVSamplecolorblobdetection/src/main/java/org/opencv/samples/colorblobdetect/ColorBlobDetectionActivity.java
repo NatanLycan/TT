@@ -138,6 +138,8 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
 
     public void onCameraViewStopped() {
         mRgba.release();
+
+
     }
 
     public boolean onTouch(View v, MotionEvent event) {
@@ -187,13 +189,11 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
 
         touchedRegionRgba.release();
         touchedRegionHsv.release();
-
         // PP NCH 16/07/2017 llamada a la funcion cuando usuario da click en algun punto del mOpenCVcameraView
         //en este punto ya se obtuvieron los colores RGBA correspondientes, pero no se genero la imagen con contornos
-        Mat temp= mRgba;
+        Mat temp= mRgba.clone();
         SaveImage();
-        mRgba=temp;
-
+        mRgba=temp.clone();
         return false; // don't need subsequent touch events
     }
 
@@ -264,6 +264,8 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         // private String               pp_imgAdd;
 
         intent.putExtra("PP_EXTRA_MAT",mRgba);
+        Log.d(TAG, "chargeFile2: width: "+mRgba.cols());
+        Log.d(TAG, "chargeFile2: rowa: "+mRgba.rows());
         intent.putExtra("PP_EXTRA_SCALAR",mBlobColorHsv);
         intent.putExtra("PP_EXTRA_SCALAR2",mBlobColorRgba);
         intent.putExtra("PP_EXTRA_COLORBLOBDETECTOR",mDetector);
@@ -308,7 +310,7 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
             exit(0);
         }
         //PP NLJS 06/08/2017 Libero el espacio ocupado por mRgba
-        mRgba.release();
+        //mRgba.release();
 
         //PP NLJS 06/08/2017 Reviso si el almacenamiento externo esta disponible para guardar la imagen
         boolean pp_flag = isExternalStorageWritable();
@@ -341,9 +343,14 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
                 Log.d(TAG, "PP Función: SaveImage. La imagen se guardó exitosamente. pp_imgAdd : " + pp_imgAdd);
 
                 if (mOpenCvCameraView != null) {
+                    Mat lol= mRgba.clone();
                     mOpenCvCameraView.disableView();
+                    mRgba=lol.clone();
                     Act(mOpenCvCameraView);
-                }else Act(mOpenCvCameraView);
+
+                }else {
+                    Act(mOpenCvCameraView);
+                }
 
             } catch (Exception e) {
                 e.printStackTrace();
