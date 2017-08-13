@@ -40,10 +40,17 @@ public class P extends Activity {
     private static final String  TAG = "P::Activity";
 
     private static int RESULT_LOAD_IMAGE = 1;
-    Button botonAbrir;
-    Button botonConfirmar;
-    ImageView imageView;
-    private Scalar CONTOUR_COLOR;
+    private Button botonAbrir;
+    private Button botonConfirmar;
+
+    // PP NLJS 13/08/2017 Creo variables necesarias para cargar la imagen
+    private ImageView imageView;
+    private Bitmap loadedImage;
+
+    // PP NLJS 13/08/2017 Creo variables que recibirá de la actividad que lo mando a llamar
+    private String               pp_imgAdd;
+
+    private Scalar               CONTOUR_COLOR;
     private Mat                  mRgba;
     private Scalar               mBlobColorHsv;
     private ColorBlobDetector    mDetector;
@@ -70,7 +77,9 @@ public class P extends Activity {
         // private ColorBlobDetector    mDetector;
         // private Mat                  mSpectrum;
         // private Size                 SPECTRUM_SIZE;
-        // private Scalar               CONTOUR_COLOR;*/
+        // private Scalar               CONTOUR_COLOR;
+        // private String               pp_imgAdd;
+
         mRgba = (Mat)getIntent().getExtras().getSerializable("PP_EXTRA_MAT");
         mBlobColorHsv = (Scalar)getIntent().getExtras().getSerializable("PP_EXTRA_SCALAR");
         mBlobColorRgba = (Scalar)getIntent().getExtras().getSerializable("PP_EXTRA_SCALAR2");
@@ -79,16 +88,36 @@ public class P extends Activity {
         SPECTRUM_SIZE = (Size) getIntent().getExtras().getSerializable("PP_EXTRA_SIZE");
         CONTOUR_COLOR = (Scalar) getIntent().getExtras().getSerializable("PP_EXTRA_SCALAR3");
 
-//        if(mRgba!=null)Log.d(TAG, "P: mRgba no es nulo");
-//        if(mBlobColorHsv!=null) Log.d(TAG, "P: mBlobColorHsv no es nulo");
-//        if(mBlobColorRgba!=null) Log.d(TAG, "P: mBlobColorRgba no es nulo");
-//        if(mDetector!=null) Log.d(TAG, "P: mDetector no es nulo");
-//        if(mSpectrum!=null) Log.d(TAG, "P: mSpectrum no es nulo");
-//        if(SPECTRUM_SIZE!=null) Log.d(TAG, "P: SPECTRUM_SIZE no es nulo");
-//        if(CONTOUR_COLOR!=null) Log.d(TAG, "P: CONTOUR_COLOR no es nulo");
-
-
+        pp_imgAdd = intent.getStringExtra("PP_EXTRA_STRING");
+        Log.d(TAG, "PP Función: (Activity: P) onCreate. pp_imgAdd : " + pp_imgAdd);
+        // PP NLJS 13/08/2017
         imageView = (ImageView) findViewById(R.id.test_image);
+
+
+        // PP NLJS 13/08/2017 Abro la imagen en el ImageView
+        chargeFile(pp_imgAdd);
+
+
+        // PP QBR 13/08/2017
+        imageView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                Bitmap bitmap = ((BitmapDrawable)imageView.getDrawable()).getBitmap();
+
+                int x = (int)event.getX();
+                int y = (int)event.getY();
+                int pixel = bitmap.getPixel(x,y);
+                int redValue = Color.red(pixel);
+                int blueValue = Color.blue(pixel);
+                int greenValue = Color.green(pixel);
+
+                postproceso( redValue, blueValue, greenValue );
+                return true;
+            }
+        });
+
+        /* PP NLJS 13/08/2017
+
         imageView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -104,7 +133,7 @@ public class P extends Activity {
                 postproceso( redValue, blueValue, greenValue );
                 return true;
             }
-        });
+        });*/
         botonAbrir = (Button) findViewById(R.id.botonAbrirImagen);
         botonConfirmar = (Button) findViewById(R.id.botonConfirmar);
 
@@ -113,6 +142,7 @@ public class P extends Activity {
         CONTOUR_COLOR = new Scalar(255,0,0,255);
 
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -200,58 +230,32 @@ public class P extends Activity {
         /**
          * TODO: Hacer el postproceso y con los valores obtenidos hacer lo que hacia el activity dle color blob
          */
-       /* int cols = mRgba.cols();
-        int rows = mRgba.rows();
+        try{
+            mDetector.process(mRgba);
+            List<MatOfPoint> contours = mDetector.getContours();
+            if(mRgba.empty()) Log.d(TAG, "postproceso: mRgba esta vacio");
+            if(contours.equals("")) Log.d(TAG, "postproceso: contours esta vacio");
+        }catch (Exception e){
+            Log.d(TAG, "postproceso: Error: "+e.getMessage());
+        }
+    }
 
-        int xOffset = (imageView.getWidth() - cols) / 2;
-        int yOffset = (imageView.getHeight() - rows) / 2;
 
-        x-=xOffset;
-        y-=yOffset;
-
-        if ((x < 0) || (y < 0) || (x > cols) || (y > rows)) return false;
-
-        Rect touchedRect = new Rect();
-
-        touchedRect.x = (x>4) ? x-4 : 0;
-        touchedRect.y = (y>4) ? y-4 : 0;
-
-        touchedRect.width = (x+4 < cols) ? x + 4 - touchedRect.x : cols - touchedRect.x;
-        touchedRect.height = (y+4 < rows) ? y + 4 - touchedRect.y : rows - touchedRect.y;
-
-        Mat touchedRegionRgba = mRgba.submat(touchedRect);
-
-        Mat touchedRegionHsv = new Mat();
-        Imgproc.cvtColor(touchedRegionRgba, touchedRegionHsv, Imgproc.COLOR_RGB2HSV_FULL);
-
-        // Calculate average color of touched region
-        mBlobColorHsv = Core.sumElems(touchedRegionHsv);
-        int pointCount = touchedRect.width*touchedRect.height;
-        for (int i = 0; i < mBlobColorHsv.val.length; i++)
-            mBlobColorHsv.val[i] /= pointCount;
-
-        mBlobColorRgba = converScalarHsv2Rgba(mBlobColorHsv);
-
-        Log.i(TAG, "Touched rgba color: (" + mBlobColorRgba.val[0] + ", " + mBlobColorRgba.val[1] +
-                ", " + mBlobColorRgba.val[2] + ", " + mBlobColorRgba.val[3] + ")");
-
-        mDetector.setHsvColor(mBlobColorHsv);
-
-        Imgproc.resize(mDetector.getSpectrum(), mSpectrum, SPECTRUM_SIZE);
-
-        touchedRegionRgba.release();
-        touchedRegionHsv.release();
-
-        Mat temp= mRgba;
-        mRgba=temp;
-
-        Bitmap img = Bitmap.createBitmap(mRgba.cols(), mRgba.rows(),Bitmap.Config.ARGB_8888);
-        Utils.matToBitmap(mRgba, img);
-        ImageView vf = (ImageView) findViewById(R.id.view_final);
-
-        if( vf != null )
-            vf.setImageBitmap(img);
-*/
+    void chargeFile(String imgAdd) {
+        /**
+         * PP NLJS 13/08/2017
+         * Carga la imagen original en em imageView principal
+         *
+         */
+        try {
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+            Bitmap pp_bitmap = BitmapFactory.decodeFile(imgAdd, options);
+            imageView.setImageBitmap(pp_bitmap);
+        }catch (Exception e){
+            // PP NLJS 13/08/2017 Mando mensaje de error en caso de que la img no se pudiera cargar en el ImageView
+            Log.d(TAG, "PP Función: (Activity: P) chargeImage. No se pudo cargar la imagen: "+ e.getMessage());
+        }
     }
 
 }

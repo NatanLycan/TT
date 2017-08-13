@@ -52,12 +52,10 @@ import static java.lang.System.exit;
 
 public class ColorBlobDetectionActivity extends Activity implements OnTouchListener, CvCameraViewListener2 {
 
-    // PP NLJS 16/07/2017 Creo EXTRA para enviar el rgb de la foto del objeto principal
-    /*public final static String EXTRA_RED = "rojo";
-    public final static String EXTRA_GREEN = "verde";
-    public final static String EXTRA_BLUE = "azul";
-    */
     private static final String  TAG              = "OCVSample::Activity";
+
+    // PP NLJS 13/08/2017 Creo variable para almacenar la dirección donde se guardará la foto, y enviar esto a la actividad P
+    private  String              pp_imgAdd = "Dirección por defecto";
 
     private boolean              mIsColorSelected = false;
     private Mat                  mRgba;
@@ -255,22 +253,15 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         // PP NLJS 22/07/2017 Creo intent para una nueva Actividad
         Intent intent =new Intent(this,P.class);
 
-        // PP NLJS 22/07/2017 Envio los siguientes datos como EXRAS
+        // PP NLJS 22/07/2017 Envio los siguientes datos como EXTRAS
         // private Mat                  mRgba;
         // private Scalar               mBlobColorHsv;
         // private Scalar               mBlobColorRgba;
         // private ColorBlobDetector    mDetector;
         // private Mat                  mSpectrum;
         // private Size                 SPECTRUM_SIZE;
-        // private Scalar               CONTOUR_COLOR;*/
-
-//        if(mRgba!=null)Log.d(TAG, "Act: mRgba no es nulo");
-//        if(mBlobColorHsv!=null) Log.d(TAG, "Act: mBlobColorHsv no es nulo");
-//        if(mBlobColorRgba!=null) Log.d(TAG, "Act: mBlobColorRgba no es nulo");
-//        if(mDetector!=null) Log.d(TAG, "Act: mDetector no es nulo");
-//        if(mSpectrum!=null) Log.d(TAG, "Act: mSpectrum no es nulo");
-//        if(SPECTRUM_SIZE!=null) Log.d(TAG, "Act: SPECTRUM_SIZE no es nulo");
-//        if(CONTOUR_COLOR!=null) Log.d(TAG, "Act: CONTOUR_COLOR no es nulo");
+        // private Scalar               CONTOUR_COLOR;
+        // private String               pp_imgAdd;
 
         intent.putExtra("PP_EXTRA_MAT",mRgba);
         intent.putExtra("PP_EXTRA_SCALAR",mBlobColorHsv);
@@ -279,6 +270,7 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         intent.putExtra("PP_EXTRA_MAT2",mSpectrum);
         intent.putExtra("PP_EXTRA_SIZE",SPECTRUM_SIZE);
         intent.putExtra("PP_EXTRA_SCALAR3",CONTOUR_COLOR);
+        intent.putExtra("PP_EXTRA_STRING",pp_imgAdd);
 
         // PP NLJS 16/07/2017 Inicializo la actividad
         startActivity(intent);
@@ -327,7 +319,9 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
 
         //PP NLJS 06/08/2017 Válido que pp_img no sea nulo
         if(pp_img.exists()){
-            long pp_totFiles = pp_img.length();
+            //PP NLJS 13/08/2017 Cuento cuantas fotos hay en la carpeta de Proportion para asignarle un número a esta nueva img
+            String [] pp_Files = pp_img.list();
+            int pp_totFiles = pp_Files.length;
             String filename = "Proportion_" + pp_totFiles + ".png";
 
             boolean pp_flag_comp = false;
@@ -341,6 +335,10 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
                 pp_out = new FileOutputStream(pp_img2);
                 pp_flag_comp = pp_bmp.compress(Bitmap.CompressFormat.PNG, 100, pp_out); // pp_bmp is your Bitmap instance
                 pp_out.close();
+
+                // PP NLJS 13/08/2017 Guardo la dirección de la foto que se acaba de guardar
+                pp_imgAdd = pp_img2.getAbsolutePath();
+                Log.d(TAG, "PP Función: SaveImage. La imagen se guardó exitosamente. pp_imgAdd : " + pp_imgAdd);
 
                 if (mOpenCvCameraView != null) {
                     mOpenCvCameraView.disableView();
