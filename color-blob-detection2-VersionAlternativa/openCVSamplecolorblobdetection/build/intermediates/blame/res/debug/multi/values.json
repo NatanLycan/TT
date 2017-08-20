@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "C:\\Users\\Nathaniel\\Desktop\\color-blob-detection1\\openCVSamplecolorblobdetection\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
+        "outputFile": "C:\\Users\\Nathaniel\\Desktop\\color-blob-detection_ver_al\\openCVSamplecolorblobdetection\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
         "map": [
             {
                 "to": {
@@ -3980,7 +3980,7 @@
                     "endOffset": 36100
                 },
                 "from": {
-                    "file": "C:\\Users\\Nathaniel\\Desktop\\color-blob-detection1\\openCVSamplecolorblobdetection\\src\\main\\res\\values\\strings.xml",
+                    "file": "C:\\Users\\Nathaniel\\Desktop\\color-blob-detection_ver_al\\openCVSamplecolorblobdetection\\src\\main\\res\\values\\strings.xml",
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,
@@ -3999,7 +3999,7 @@
                     "endOffset": 36148
                 },
                 "from": {
-                    "file": "C:\\Users\\Nathaniel\\Desktop\\color-blob-detection1\\openCVSamplecolorblobdetection\\src\\main\\res\\values\\strings.xml",
+                    "file": "C:\\Users\\Nathaniel\\Desktop\\color-blob-detection_ver_al\\openCVSamplecolorblobdetection\\src\\main\\res\\values\\strings.xml",
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,

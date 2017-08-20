@@ -61,12 +61,15 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
 
     private boolean              mIsColorSelected = false;
     private Mat                  mRgba;
+    private Mat                  pp_mRgba_original;
     private Scalar               mBlobColorRgba;
     private Scalar               mBlobColorHsv;
     private ColorBlobDetector    mDetector;
     private Mat                  mSpectrum;
     private Size                 SPECTRUM_SIZE;
     private Scalar               CONTOUR_COLOR;
+    private  String              pp_imgAdd = "Dirección por defecto";
+    private  String              pp_imgAdd2 = "Dirección por defecto 2";
 
     private CameraBridgeViewBase mOpenCvCameraView;
 
@@ -135,7 +138,7 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         mBlobColorRgba = new Scalar(255);
         mBlobColorHsv = new Scalar(255);
         SPECTRUM_SIZE = new Size(200, 64);
-        CONTOUR_COLOR = new Scalar(0,0,255,255);
+        CONTOUR_COLOR = new Scalar(255,0,0,255);
     }
 
     public void onCameraViewStopped() {
@@ -153,7 +156,7 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
          */
         if(pp_num==2){SaveImage();}
         if(pp_num==1){CONTOUR_COLOR = new Scalar(0,255,0,255);pp_num++;}
-        if(pp_num==0){pp_num++; }
+        if(pp_num==0){pp_num++; pp_mRgba_original=mRgba.clone(); }
 
 
         int cols = mRgba.cols();
@@ -246,7 +249,6 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
 
                 Mat spectrumLabel = mRgba.submat(4, 4 + mSpectrum.rows(), 70, 70 + mSpectrum.cols());
                 mSpectrum.copyTo(spectrumLabel);
-                //SaveImage();
 
             } else {
                 mRgba = inputFrame.rgba();
@@ -296,62 +298,111 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
          *  PP NCH 30/07/2017
          *  Solo guarda la imagen final con la seleccion de los dos objetos  si requiere repetir se hara el de los tres procesos
          */
-        Bitmap pp_bmp = null;//pp NCH 23/07/2017 Temporal para poder guardar Mat mRgba en un archivo
-        pp_num++;
+
+        //PP NCH 23/07/2017 Creo bitmap temporal para poder guardar Mat mRgba en un archivo
+        Bitmap pp_bmp = null;
+        Bitmap pp_bmp_ori = null;
+
+
+        //PP NLJS 06/08/2017 Intento inicializar el Bitmap
         try {
+            //PP NLJS 06/08/2017 Establezco el tamaño del Bitmap
             pp_bmp = Bitmap.createBitmap(mRgba.cols(), mRgba.rows(), Bitmap.Config.ARGB_8888);
+            pp_bmp_ori = Bitmap.createBitmap(pp_mRgba_original.cols(), pp_mRgba_original.rows(), Bitmap.Config.ARGB_8888);
+            //PP NLJS 06/08/2017 Realizo la conversión
             Utils.matToBitmap(mRgba, pp_bmp);
+            Utils.matToBitmap(pp_mRgba_original, pp_bmp_ori);
+
         } catch (CvException e) {
             Log.d(TAG, e.getMessage());
+            Log.d(TAG, "PP Función: SaveImage. No fué posible transformar mRgba a Bitmap.");
+            exit(0);
         }
+        //PP NLJS 06/08/2017 Libero el espacio ocupado por mRgba
+        //mRgba.release();
 
-        mRgba.release();
+        //PP NLJS 06/08/2017 Reviso si el almacenamiento externo esta disponible para guardar la imagen
+        boolean pp_flag = isExternalStorageWritable();
+        Log.d(TAG, "PP Función: SaveImage. Validación de almacenamiento externo: " + pp_flag);
 
+        //PP NLJS 06/08/2017 Creo el File donde guardar la imagen y el directorio
+        File pp_img = getAlbumStorageDir("Proportion");
 
-        FileOutputStream out = null;
+        //PP NLJS 06/08/2017 Válido que pp_img no sea nulo
+        if(pp_img.exists()){
+            //PP NLJS 13/08/2017 Cuento cuantas fotos hay en la carpeta de Proportion para asignarle un número a esta nueva img
+            String [] pp_Files = pp_img.list();
+            int pp_totFiles = pp_Files.length;
+            String filename = "Proportion_" + pp_totFiles + ".png";
+            String filename2 = "Proportion_" + pp_totFiles + "_ori.png";
+            boolean pp_flag_comp = false;
+            boolean pp_flag_comp2 = false;
 
-        String filename = "Blob_intento_"+pp_num+".png";
+            //PP NLJS 06/08/2017 Creo el FOS y File destino para guardar la img en la memoria del teléfono
+            FileOutputStream pp_out = null;
+            FileOutputStream pp_out2 = null;
+            File pp_img2 = new File(pp_img,filename);
+            File pp_img3 = new File(pp_img,filename2);
 
-
-        File sd = new File(Environment.getExternalStorageDirectory() + "/proportion");
-        boolean success = true;
-        if (!sd.exists()) {
-            success = sd.mkdir();
-        }
-        if (success) {
-            File dest = new File(sd, filename);
-
+            //PP NLJS 06/08/2017 Intento inicializar el FOS
             try {
-                out = new FileOutputStream(dest);
-                pp_bmp.compress(Bitmap.CompressFormat.PNG, 100, out); // pp_bmp is your Bitmap instance
-                // PNG is a lossless format, the compression factor (100) is ignored
+                pp_out = new FileOutputStream(pp_img2);
+                pp_out2 = new FileOutputStream(pp_img3);
+                pp_flag_comp = pp_bmp.compress(Bitmap.CompressFormat.PNG, 100, pp_out); // pp_bmp is your Bitmap instance
+                pp_flag_comp2 = pp_bmp_ori.compress(Bitmap.CompressFormat.PNG, 100, pp_out2); // pp_bmp is your Bitmap instance
+                pp_out.close();
+                pp_out.close();
+
+                // PP NLJS 13/08/2017 Guardo la dirección de la foto que se acaba de guardar
+                pp_imgAdd = pp_img2.getAbsolutePath();
+                pp_imgAdd2 = pp_img3.getAbsolutePath();
+                Log.d(TAG, "PP Función: SaveImage. La imagen se guardó exitosamente. pp_imgAdd : " + pp_imgAdd);
+
+                if (mOpenCvCameraView != null) {
+                    Mat lol= mRgba.clone();
+                    mOpenCvCameraView.disableView();
+                    mRgba=lol.clone();
+                    Act(mOpenCvCameraView);
+
+                }else {
+                    Act(mOpenCvCameraView);
+                }
 
             } catch (Exception e) {
                 e.printStackTrace();
-                Log.d(TAG, e.getMessage());
-            } finally {
-                try {
-                    if (out != null) {
-                        out.close();
-                        Log.d(TAG, "OK!!");
-
-                        // PP NCH 00/00/0000 Comentario
-
-                            //Act(mOpenCvCameraView);
-                        if (mOpenCvCameraView != null) {
-                            mOpenCvCameraView.disableView();
-                            Act(mOpenCvCameraView);
-                        }else Act(mOpenCvCameraView);
-
-
-                    }
-                } catch (IOException e) {
-                    Log.d(TAG, e.getMessage() + "Error");
-                    e.printStackTrace();
-                }
+                Log.d(TAG, "PP Función: SaveImage. Error al crear el FOS. Compress : " + pp_flag_comp);
             }
         }
+    }
+    public boolean isExternalStorageWritable() {
+        /**
+         * PP NLJS 06/08/2017
+         * Revisa si el almacenamiento externo esta disponible para leer y escribir
+         *
+         */
 
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state)) {
+            return true;
+        }
+        return false;
+    }
+    public File getAlbumStorageDir(String albumName) {
+        /**
+         * PP NLJS 06/08/2017
+         * Crea el directorio donde se van a guardar la fotos (Este será público para otras aplicaciones)
+         *
+         */
+
+        // PP NLJS 06/08/2017 Creo el File que se va a utilizar y la ruta de almacenamiento
+        // PP NLJS 06/08/2017 DIRECTORI_PICTURE Es un parametro necesario para indicar que el archivo a guardar será una imagen y la ruta se genere bien
+        File pp_file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), albumName);
+
+        // PP NLJS 06/08/2017 Creo el directorio y mando un msg de error en caso de que ya exista o no se haya podido crear
+        if (!pp_file.mkdirs()) {
+            Log.e(TAG, "PP Función: getAlbumStorageDir. El directorio ya existía o no se pudo crear. " + pp_file.getAbsolutePath());
+        }
+        return pp_file;
     }
 
 }

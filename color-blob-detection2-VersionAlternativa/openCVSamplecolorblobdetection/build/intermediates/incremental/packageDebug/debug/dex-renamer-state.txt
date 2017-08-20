@@ -1,19 +1,19 @@
-#Sun Jul 30 14:26:42 CDT 2017
+#Sun Aug 20 15:07:22 CDT 2017
 renamed.5=classes6.dex
 renamed.4=classes5.dex
 renamed.3=classes4.dex
 renamed.2=classes3.dex
 renamed.1=classes2.dex
 renamed.0=classes.dex
-base.5=C\:\\Users\\Nathaniel\\Desktop\\color-blob-detection1\\openCVSamplecolorblobdetection\\build\\intermediates\\transforms\\dexMerger\\debug\\37
-base.4=C\:\\Users\\Nathaniel\\Desktop\\color-blob-detection1\\openCVSamplecolorblobdetection\\build\\intermediates\\transforms\\dexMerger\\debug\\41
-base.3=C\:\\Users\\Nathaniel\\Desktop\\color-blob-detection1\\openCVSamplecolorblobdetection\\build\\intermediates\\transforms\\dexMerger\\debug\\36
-base.2=C\:\\Users\\Nathaniel\\Desktop\\color-blob-detection1\\openCVSamplecolorblobdetection\\build\\intermediates\\transforms\\dexMerger\\debug\\38
-base.1=C\:\\Users\\Nathaniel\\Desktop\\color-blob-detection1\\openCVSamplecolorblobdetection\\build\\intermediates\\transforms\\dexMerger\\debug\\35
-base.0=C\:\\Users\\Nathaniel\\Desktop\\color-blob-detection1\\openCVSamplecolorblobdetection\\build\\intermediates\\transforms\\dexMerger\\debug\\34
-file.5=C\:\\Users\\Nathaniel\\Desktop\\color-blob-detection1\\openCVSamplecolorblobdetection\\build\\intermediates\\transforms\\dexMerger\\debug\\37\\classes.dex
-file.4=C\:\\Users\\Nathaniel\\Desktop\\color-blob-detection1\\openCVSamplecolorblobdetection\\build\\intermediates\\transforms\\dexMerger\\debug\\41\\classes.dex
-file.3=C\:\\Users\\Nathaniel\\Desktop\\color-blob-detection1\\openCVSamplecolorblobdetection\\build\\intermediates\\transforms\\dexMerger\\debug\\36\\classes.dex
-file.2=C\:\\Users\\Nathaniel\\Desktop\\color-blob-detection1\\openCVSamplecolorblobdetection\\build\\intermediates\\transforms\\dexMerger\\debug\\38\\classes.dex
-file.1=C\:\\Users\\Nathaniel\\Desktop\\color-blob-detection1\\openCVSamplecolorblobdetection\\build\\intermediates\\transforms\\dexMerger\\debug\\35\\classes.dex
-file.0=C\:\\Users\\Nathaniel\\Desktop\\color-blob-detection1\\openCVSamplecolorblobdetection\\build\\intermediates\\transforms\\dexMerger\\debug\\34\\classes.dex
+base.5=C\:\\Users\\Nathaniel\\Desktop\\color-blob-detection_ver_al\\openCVSamplecolorblobdetection\\build\\intermediates\\transforms\\dexMerger\\debug\\12
+base.4=C\:\\Users\\Nathaniel\\Desktop\\color-blob-detection_ver_al\\openCVSamplecolorblobdetection\\build\\intermediates\\transforms\\dexMerger\\debug\\11
+base.3=C\:\\Users\\Nathaniel\\Desktop\\color-blob-detection_ver_al\\openCVSamplecolorblobdetection\\build\\intermediates\\transforms\\dexMerger\\debug\\18
+base.2=C\:\\Users\\Nathaniel\\Desktop\\color-blob-detection_ver_al\\openCVSamplecolorblobdetection\\build\\intermediates\\transforms\\dexMerger\\debug\\15
+base.1=C\:\\Users\\Nathaniel\\Desktop\\color-blob-detection_ver_al\\openCVSamplecolorblobdetection\\build\\intermediates\\transforms\\dexMerger\\debug\\14
+base.0=C\:\\Users\\Nathaniel\\Desktop\\color-blob-detection_ver_al\\openCVSamplecolorblobdetection\\build\\intermediates\\transforms\\dexMerger\\debug\\13
+file.5=C\:\\Users\\Nathaniel\\Desktop\\color-blob-detection_ver_al\\openCVSamplecolorblobdetection\\build\\intermediates\\transforms\\dexMerger\\debug\\12\\classes.dex
+file.4=C\:\\Users\\Nathaniel\\Desktop\\color-blob-detection_ver_al\\openCVSamplecolorblobdetection\\build\\intermediates\\transforms\\dexMerger\\debug\\11\\classes.dex
+file.3=C\:\\Users\\Nathaniel\\Desktop\\color-blob-detection_ver_al\\openCVSamplecolorblobdetection\\build\\intermediates\\transforms\\dexMerger\\debug\\18\\classes.dex
+file.2=C\:\\Users\\Nathaniel\\Desktop\\color-blob-detection_ver_al\\openCVSamplecolorblobdetection\\build\\intermediates\\transforms\\dexMerger\\debug\\15\\classes.dex
+file.1=C\:\\Users\\Nathaniel\\Desktop\\color-blob-detection_ver_al\\openCVSamplecolorblobdetection\\build\\intermediates\\transforms\\dexMerger\\debug\\14\\classes.dex
+file.0=C\:\\Users\\Nathaniel\\Desktop\\color-blob-detection_ver_al\\openCVSamplecolorblobdetection\\build\\intermediates\\transforms\\dexMerger\\debug\\13\\classes.dex
