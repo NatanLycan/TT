@@ -1,0 +1,26 @@
+[
+    {
+        "outputFile": "C:\\Users\\Nathaniel\\Desktop\\color-blob-detection-verAlt-3.3.0\\openCVSamplecolorblobdetection\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-w720dp-v13\\values-w720dp-v13.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 76,
+                    "endOffset": 127
+                },
+                "from": {
+                    "file": "C:\\Users\\Nathaniel\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-22.2.1.aar\\18606abc327b55b63d6085e0fc82315f\\res\\values-w720dp\\values-w720dp.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 293,
+                        "endColumn": 76,
+                        "endOffset": 365
+                    }
+                }
+            }
+        ]
+    }
+]
