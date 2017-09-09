@@ -99,6 +99,7 @@ public class ColorBlobDetector implements Serializable{
             if (Imgproc.contourArea(contour) > mMinContourArea*maxArea) {
                 Core.multiply(contour, new Scalar(4,4), contour);
                 mContours.add(contour);
+                break;
             }
         }
     }

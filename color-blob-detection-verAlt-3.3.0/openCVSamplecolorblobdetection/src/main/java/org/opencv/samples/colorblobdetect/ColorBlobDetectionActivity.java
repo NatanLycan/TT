@@ -52,6 +52,8 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
     private  String              pp_imgAdd = "Dirección por defecto";
     private  String              pp_imgAdd2 = "Dirección por defecto 2";
 
+    private boolean nath = false;
+
     private CameraBridgeViewBase mOpenCvCameraView;
 
     private BaseLoaderCallback  mLoaderCallback = new BaseLoaderCallback(this) {
@@ -141,8 +143,8 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
          * 3- El tercer toque continuara a la siguiente etapa
          */
         if(pp_num==2){SaveImage();}
-        if(pp_num==1){CONTOUR_COLOR = new Scalar(0,255,0,255);pp_num++;}
-        if(pp_num==0){pp_num++; pp_mRgba_original=mRgba.clone(); }
+        if(pp_num==1){CONTOUR_COLOR = new Scalar(0,255,0,255);pp_num++;nath=true;}
+        if(pp_num==0){pp_num++; pp_mRgba_original=mRgba.clone(); nath=true;}
 
 
         int cols = mRgba.cols();
@@ -157,7 +159,6 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         Log.i(TAG, "Touch image coordinates: (" + x + ", " + y + ")");
 
         if ((x < 0) || (y < 0) || (x > cols) || (y > rows)) return false;
-
         Rect touchedRect = new Rect();
 
         touchedRect.x = (x>4) ? x-4 : 0;
@@ -203,34 +204,35 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
          * seleccionados  y como no cambia la imagen no se agregan mas contornos
          */
         if(pp_num==2){}
-        else {
-            if (mIsColorSelected) {
-                Log.d(TAG, "onCameraFrame(miscolorselected): Done 1");
-                if (mRgba.empty()) {
-                    Log.d(TAG, "onCameraFrame: Crash");
-                    exit(0);
-                }
-                /**
-                 * TODO Checa esto richi, hay que revisar por que la variable mRgba se vacia
-                 * DONE
-                 * NLJS evento onCameraViewStoppped limpia la variable mRgba por eso al llegar a estoya no tenia nada
-                 */
-                mDetector.process(mRgba);
-                List<MatOfPoint> contours = mDetector.getContours();
-                Log.e(TAG, "Contours count: " + contours.size());
-
-                Imgproc.drawContours(mRgba, contours, -1, CONTOUR_COLOR);
-
-                Mat colorLabel = mRgba.submat(4, 68, 4, 68);
-                colorLabel.setTo(mBlobColorRgba);
-
-                Mat spectrumLabel = mRgba.submat(4, 4 + mSpectrum.rows(), 70, 70 + mSpectrum.cols());
-                mSpectrum.copyTo(spectrumLabel);
-
-            } else {
-                mRgba = inputFrame.rgba();
+        else if (mIsColorSelected) {
+            Log.d(TAG, "onCameraFrame(miscolorselected): Done 1");
+            if (mRgba.empty()) {
+                Log.d(TAG, "onCameraFrame: Crash");
+                exit(0);
             }
+            /**
+             * TODO Checa esto richi, hay que revisar por que la variable mRgba se vacia
+             * DONE
+             * NLJS evento onCameraViewStoppped limpia la variable mRgba por eso al llegar a estoya no tenia nada
+             */
+            mDetector.process(mRgba);
+            List<MatOfPoint> contours = mDetector.getContours();
+            Log.e(TAG, "Contours count: " + contours.size());
+
+            Imgproc.drawContours(mRgba, contours, 0, CONTOUR_COLOR);//tercer parametro solo imprime el primer contorno
+            //este es el mas proximo
+
+            Mat colorLabel = mRgba.submat(4, 68, 4, 68);
+            colorLabel.setTo(mBlobColorRgba);
+
+            /*Mat spectrumLabel = mRgba.submat(4, 4 + mSpectrum.rows(), 70, 70 + mSpectrum.cols());
+            mSpectrum.copyTo(spectrumLabel);
+*/
+
+        } else {
+            mRgba = inputFrame.rgba();
         }
+
         return mRgba;
     }
 

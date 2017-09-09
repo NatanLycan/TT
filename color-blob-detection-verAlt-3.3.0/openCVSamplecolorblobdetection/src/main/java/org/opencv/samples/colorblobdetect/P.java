@@ -23,6 +23,7 @@ import org.opencv.core.Mat;
 import org.opencv.core.MatOfPoint;
 import org.opencv.core.Scalar;
 import org.opencv.core.Size;
+import org.opencv.features2d.FeatureDetector;
 import org.opencv.imgproc.Imgproc;
 
 import java.io.File;
@@ -107,6 +108,7 @@ public class P extends Activity {
 
         mBlobColorRgba.val[3]= (double) 255;
         */
+        
 
         imageView = (ImageView) findViewById(R.id.test_image);
         botonAbrir = (Button) findViewById(R.id.botonAbrirImagen);
@@ -235,9 +237,10 @@ public class P extends Activity {
             Log.d(TAG, "chargeFile2: width4_1: "+mRgba.cols());
             options.inPreferredConfig = Bitmap.Config.ARGB_8888;
             Log.d(TAG, "chargeFile2: width4_2: "+mRgba.cols());
-            Mat temp=mRgba.clone();
+            //Mat temp=mRgba.clone();
+            Log.d(TAG, "chargeFile2: width4_2: "+imgAdd);
             Bitmap pp_bitmap = BitmapFactory.decodeFile(imgAdd, options);
-            mRgba=temp.clone();
+            //mRgba=temp.clone();
             Log.d(TAG, "chargeFile2: width4_3: "+mRgba.cols()+"    Height: "+mRgba.rows());
 
 
