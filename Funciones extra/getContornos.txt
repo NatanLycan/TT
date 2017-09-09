@@ -1,0 +1,49 @@
+
+    public ArrayList<Point> getContornos(Mat matriz){
+        ArrayList<Point> lista = new ArrayList<>();
+        for(int i = 0; i< matriz.rows(); i++){
+            for(int j = 0 ; j< matriz.cols();j++){
+                double[] punto = matriz.get(i,j);
+                double r = punto[0];
+                double g = punto[1];
+                double b = punto[2];
+                if ( r == 255.0 && g == 0.0 && b == 0.0){
+                    lista.add(new Point(i,j));
+                    Log.d(TAG, "getContornos: x: " + i + " y: " + j);
+                }
+            }
+        }
+        double maxX = lista.get(0).x;
+        double minX = lista.get(0).x;
+        double maxY = lista.get(0).y;
+        double minY = lista.get(0).y;
+
+        for(Point p: lista){
+            double x = p.x;
+            double y = p.y;
+            maxX = Math.max(maxX, x);
+            minX = Math.min(minX, x);
+            maxY = Math.max(maxY, y);
+            minY = Math.min(minY, y);
+        }
+
+        Point arriba_izquierda = new Point( minX, maxY);
+        Point arriba_derecha = new Point ( maxX, maxY);
+        Point abajo_izquierda = new Point( minX, minY);
+        Point abajo_derecha = new Point(maxX, minY);
+
+        ArrayList<Point> res = new ArrayList<>();
+        res.add(arriba_derecha);
+        res.add(arriba_izquierda);
+        res.add(abajo_derecha);
+        res.add(abajo_izquierda);
+
+        return res;
+    }
+///////////////////////////////////////////////////////////////////
+// Se manda a llamar en el ontouch despues del if ( pp_num==1)   //
+///////////////////////////////////////////////////////////////////
+            ArrayList<Point> contornos = getContornos(mRgba);
+            for( Point p : contornos){
+                Log.d(TAG, "onTouch: x:" +p.x+" y: " + p.y );
+            }
