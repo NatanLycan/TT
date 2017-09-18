@@ -193,6 +193,22 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         touchedRegionRgba.release();
         touchedRegionHsv.release();
 
+        /**
+         /* NCH 17/09/2017 Este codigo estaba en la funcion onCameraFrame en el oomentario codigo reirado
+         *  Optimiza la actualizacion de frames no afecta a calculo del contornos
+         */
+
+
+        mDetector.process(mRgba);
+        List<MatOfPoint> contours = mDetector.getContours();
+        Log.e(TAG, "Contours count: " + contours.size());
+
+        Imgproc.drawContours(mRgba, contours, 0, CONTOUR_COLOR);//tercer parametro solo imprime el primer contorno
+        //este es el mas proximo
+
+        Mat colorLabel = mRgba.submat(4, 68, 4, 68);
+        colorLabel.setTo(mBlobColorRgba);
+
         return false; // don't need subsequent touch events
     }
 
@@ -212,20 +228,12 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
                 exit(0);
             }
             /**
-             * TODO Checa esto richi, hay que revisar por que la variable mRgba se vacia
+             * Checa esto richi, hay que revisar por que la variable mRgba se vacia
              * DONE
              * NLJS evento onCameraViewStoppped limpia la variable mRgba por eso al llegar a estoya no tenia nada
              */
-            mDetector.process(mRgba);
-            List<MatOfPoint> contours = mDetector.getContours();
-            Log.e(TAG, "Contours count: " + contours.size());
 
-            Imgproc.drawContours(mRgba, contours, 0, CONTOUR_COLOR);//tercer parametro solo imprime el primer contorno
-            //este es el mas proximo
-
-            Mat colorLabel = mRgba.submat(4, 68, 4, 68);
-            colorLabel.setTo(mBlobColorRgba);
-
+            // codigo retirado
             /*Mat spectrumLabel = mRgba.submat(4, 4 + mSpectrum.rows(), 70, 70 + mSpectrum.cols());
             mSpectrum.copyTo(spectrumLabel);
 */
@@ -346,6 +354,7 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
 
             //PP NLJS 06/08/2017 Intento inicializar el FOS
             try {
+                mOpenCvCameraView.disableView();
                 pp_out = new FileOutputStream(pp_img2);
                 pp_out2 = new FileOutputStream(pp_img3);
                 pp_flag_comp = pp_bmp.compress(Bitmap.CompressFormat.PNG, 100, pp_out); // pp_bmp is your Bitmap instance
@@ -393,7 +402,6 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
          * Crea el directorio donde se van a guardar la fotos (Este será público para otras aplicaciones)
          *
          */
-
         // PP NLJS 06/08/2017 Creo el File que se va a utilizar y la ruta de almacenamiento
         // PP NLJS 06/08/2017 DIRECTORI_PICTURE Es un parametro necesario para indicar que el archivo a guardar será una imagen y la ruta se genere bien
         File pp_file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), albumName);
