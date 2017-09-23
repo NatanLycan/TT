@@ -58,24 +58,10 @@ public class P extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_p);
 
-        // PP NLJS 15/07/2017 Obtengo la información del intend que lo mando a llamar
-        Intent intent = getIntent();
-
+        /*
         mBlobColorRgba = new Scalar(255);
         mDetector = new ColorBlobDetector();
 
-        // PP NLJS 15/07/2017 Obtengo los siguientes EXTRAS del intend que lo mando a llamar
-        // private Mat                  mRgba;
-        // private Scalar               mBlobColorHsv;
-        // private Scalar               mBlobColorRgba;
-        // private ColorBlobDetector    mDetector;
-        // private Mat                  mSpectrum;
-        // private Size                 SPECTRUM_SIZE;
-        // private Scalar               CONTOUR_COLOR;
-        // private String               pp_imgAdd;
-
-        mRgba = (Mat)getIntent().getExtras().getSerializable("PP_EXTRA_MAT");
-        Log.d(TAG, "chargeFile2: width1: "+mRgba.cols());
         mBlobColorHsv = (Scalar)getIntent().getExtras().getSerializable("PP_EXTRA_SCALAR");
         mBlobColorRgba = (Scalar)getIntent().getExtras().getSerializable("PP_EXTRA_SCALAR2");
         mDetector = (ColorBlobDetector) getIntent().getExtras().getSerializable("PP_EXTRA_COLORBLOBDETECTOR");
@@ -83,32 +69,11 @@ public class P extends Activity {
         SPECTRUM_SIZE = (Size) getIntent().getExtras().getSerializable("PP_EXTRA_SIZE");
         CONTOUR_COLOR = (Scalar) getIntent().getExtras().getSerializable("PP_EXTRA_SCALAR3");
 
+        */
+
+        // PP NLJS 15/07/2017 Obtengo la información del intend que lo mando a llamar
+        Intent intent = getIntent();
         pp_imgAdd = intent.getStringExtra("PP_EXTRA_STRING");
-        Log.d(TAG, "PP Función: (Activity: P) onCreate. pp_imgAdd : " + pp_imgAdd);
-        // PP NLJS 13/08/2017
-        imageView = (ImageView) findViewById(R.id.test_image);
-        Log.d(TAG, "chargeFile2: width1_1: "+mRgba.cols());
-        // PP NLJS 13/08/2017 Abro la imagen en el ImageView
-        chargeFile(pp_imgAdd);
-        Log.d(TAG, "chargeFile2: width1_2: "+mRgba.cols());
-        //chargeFile2();
-        Log.d(TAG, "chargeFile2: width1_3: "+mRgba.cols());
-
-        // PP NLJS 15/07/2017 Obtengo los valores RGB
-        /*mBlobColorRgba.val[0] = intent.getDoubleExtra(ColorBlobDetectionActivity.EXTRA_RED,0.0);
-        mBlobColorRgba.val[1] = intent.getDoubleExtra(ColorBlobDetectionActivity.EXTRA_GREEN,0.0);
-        mBlobColorRgba.val[2] = intent.getDoubleExtra(ColorBlobDetectionActivity.EXTRA_BLUE,0.0);
-        */
-
-        // PP NLJS 15/07/2017 Imprimo valores RGB, solo como prueba en consola
-        /*Log.d(TAG, "Extra rojo: " + mBlobColorRgba.val[0]);
-        Log.d(TAG, "Extra verde: " + mBlobColorRgba.val[1]);
-        Log.d(TAG, "Extra azul: " + mBlobColorRgba.val[2]);
-
-
-        mBlobColorRgba.val[3]= (double) 255;
-        */
-        
 
         imageView = (ImageView) findViewById(R.id.test_image);
         botonAbrir = (Button) findViewById(R.id.botonAbrirImagen);
@@ -116,7 +81,8 @@ public class P extends Activity {
 
         botonConfirmar.setEnabled(false);
 
-        CONTOUR_COLOR = new Scalar(255,0,0,255);
+        // PP NLJS 13/08/2017 Abro la imagen en el ImageView
+        chargeFile();
 
     }
 
@@ -187,92 +153,26 @@ public class P extends Activity {
 
     }
 
-    public void postproceso(){
-
-        /**
-         * TODO: Arreglar el error que crashea la app
-         */
-
-        mDetector.setHsvColor(mBlobColorHsv);
-        Log.d(TAG, "postproceso: Still working 1");
-
-        mDetector.process(mRgba);//aqui mueres
-        Log.d(TAG, "postproceso: Still working 2");
-        List<MatOfPoint> contours = mDetector.getContours();
-        Log.e(TAG, "Contours count: " + contours.size());
-
-        Imgproc.drawContours(mRgba, contours, -1, CONTOUR_COLOR);
-
-        Mat colorLabel = mRgba.submat(4, 68, 4, 68);
-        colorLabel.setTo(mBlobColorRgba);
-
-
-        Bitmap img = Bitmap.createBitmap(mRgba.cols(), mRgba.rows(),Bitmap.Config.ARGB_8888);
-
-        /*
-        mBlobColorHsv= converScalarRgba2Hsv(mBlobColorRgba);
-
-        mDetector.setHsvColor(mBlobColorHsv);
-
-        Imgproc.resize(mDetector.getSpectrum(), mSpectrum, SPECTRUM_SIZE);
-
-        Mat spectrumLabel = mRgba.submat(4, 4 + mSpectrum.rows(), 70, 70 + mSpectrum.cols());
-        mSpectrum.copyTo(spectrumLabel);*/
-
-
-    }
-
-
-
-
-    void chargeFile(String imgAdd) {
+    void chargeFile() {
         /**
          * PP NLJS 13/08/2017
          * Carga la imagen original en em imageView principal
          *
          */
-        Log.d(TAG, "chargeFile2: width4: "+mRgba.cols());
         try {
             BitmapFactory.Options options = new BitmapFactory.Options();
-            Log.d(TAG, "chargeFile2: width4_1: "+mRgba.cols());
             options.inPreferredConfig = Bitmap.Config.ARGB_8888;
-            Log.d(TAG, "chargeFile2: width4_2: "+mRgba.cols());
-            //Mat temp=mRgba.clone();
-            Log.d(TAG, "chargeFile2: width4_2: "+imgAdd);
-            Bitmap pp_bitmap = BitmapFactory.decodeFile(imgAdd, options);
-            //mRgba=temp.clone();
-            Log.d(TAG, "chargeFile2: width4_3: "+mRgba.cols()+"    Height: "+mRgba.rows());
-
-
+            Bitmap pp_bitmap = BitmapFactory.decodeFile(pp_imgAdd, options);
             //Rotar Imagen
             Matrix matrix = new Matrix();
             matrix.postRotate(90);
             Bitmap imagenRotada = Bitmap.createBitmap(pp_bitmap , 0, 0, pp_bitmap .getWidth(), pp_bitmap.getHeight(), matrix, true);
-
-
             imageView.setImageBitmap(imagenRotada);
-
 
         }catch (Exception e){
             // PP NLJS 13/08/2017 Mando mensaje de error en caso de que la img no se pudiera cargar en el ImageView
             Log.d(TAG, "PP Función: (Activity: P) chargeImage. No se pudo cargar la imagen: "+ e.getMessage());
         }
     }
-
-    //PP NCH 13/08/2017
-    void chargeFile2(){
-        Log.d(TAG, "chargeFile2: width2: "+mRgba.cols());
-        try{
-            Log.d(TAG, "chargeFile2: width3: "+mRgba.cols());
-            Bitmap pp_bitmap2 = Bitmap.createBitmap(mRgba.cols(), mRgba.rows(),Bitmap.Config.ARGB_8888);
-            Utils.matToBitmap(mRgba,pp_bitmap2);
-            imV.setImageBitmap(pp_bitmap2);
-        }catch (Exception e){
-            Log.d(TAG, "chargeFile2: Error: "+e.getMessage());
-        }
-
-
-    }
-
 
 }
