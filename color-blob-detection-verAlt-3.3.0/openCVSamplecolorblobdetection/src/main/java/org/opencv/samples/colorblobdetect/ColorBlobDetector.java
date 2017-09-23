@@ -9,6 +9,7 @@ import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfPoint;
+import org.opencv.core.Point;
 import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
 
@@ -80,6 +81,48 @@ public class ColorBlobDetector implements Serializable{
         List<MatOfPoint> contours = new ArrayList<MatOfPoint>();
 
         Imgproc.findContours(mDilatedMask, contours, mHierarchy, Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
+        //antes   RETR_EXTERNAL
+        // Find max contour area
+        double maxArea = 0;
+        Iterator<MatOfPoint> each = contours.iterator();
+        while (each.hasNext()) {
+            MatOfPoint wrapper = each.next();
+            double area = Imgproc.contourArea(wrapper);
+            if (area > maxArea){
+                maxArea = area;
+            }
+        }
+
+        // Filter contours by area and resize to fit the original image size
+        mContours.clear();
+        each = contours.iterator();
+        while (each.hasNext()) {
+            MatOfPoint contour = each.next();
+            if (Imgproc.contourArea(contour) > mMinContourArea*maxArea) {
+                Core.multiply(contour, new Scalar(4,4), contour);
+                mContours.add(contour);
+
+            }
+        }
+    }
+
+    /**
+     * NCH 23/09/2017 Prueba contours con offset
+     * @param rgbaImage
+     * @param p
+     */
+    public void process2(Mat rgbaImage, Point p) {
+        Imgproc.pyrDown(rgbaImage, mPyrDownMat);
+        Imgproc.pyrDown(mPyrDownMat, mPyrDownMat);
+
+        Imgproc.cvtColor(mPyrDownMat, mHsvMat, Imgproc.COLOR_RGB2HSV_FULL);
+
+        Core.inRange(mHsvMat, mLowerBound, mUpperBound, mMask);
+        Imgproc.dilate(mMask, mDilatedMask, new Mat());
+
+        List<MatOfPoint> contours = new ArrayList<MatOfPoint>();
+
+        Imgproc.findContours(mDilatedMask, contours, mHierarchy, Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE,p);
         //antes   RETR_EXTERNAL
         // Find max contour area
         double maxArea = 0;

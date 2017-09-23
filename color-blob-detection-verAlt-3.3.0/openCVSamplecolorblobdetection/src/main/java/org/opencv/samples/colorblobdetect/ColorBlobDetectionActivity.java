@@ -3,6 +3,7 @@ package org.opencv.samples.colorblobdetect;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.opencv.android.BaseLoaderCallback;
@@ -15,12 +16,14 @@ import org.opencv.core.CvException;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfPoint;
+import org.opencv.core.Point;
 import org.opencv.core.Rect;
 import org.opencv.core.Scalar;
 import org.opencv.core.Size;
 import org.opencv.android.CameraBridgeViewBase;
 import org.opencv.android.CameraBridgeViewBase.CvCameraViewListener2;
 import org.opencv.imgproc.Imgproc;
+import org.opencv.imgproc.Moments;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -35,6 +38,8 @@ import android.view.WindowManager;
 import android.view.View.OnTouchListener;
 import android.view.SurfaceView;
 
+import static java.lang.Math.abs;
+import static java.lang.Math.sqrt;
 import static java.lang.System.exit;
 
 public class ColorBlobDetectionActivity extends Activity implements OnTouchListener, CvCameraViewListener2 {
@@ -198,12 +203,18 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
          *  Optimiza la actualizacion de frames no afecta a calculo del contornos
          */
 
-
+        Point p = new Point(x,y);
         mDetector.process(mRgba);
+        //mDetector.process2(mRgba,p);
         List<MatOfPoint> contours = mDetector.getContours();
         Log.e(TAG, "Contours count: " + contours.size());
 
-        Imgproc.drawContours(mRgba, contours, 0, CONTOUR_COLOR);//tercer parametro solo imprime el primer contorno
+        //NCH 23/09/2017 Busco contorno con centro mas cerca al click
+        List<MatOfPoint> thecontour= TheContour(contours,p);
+
+        //Imgproc.drawContours(mRgba, contours, 0, CONTOUR_COLOR);//tercer parametro solo imprime el primer contorno
+        Imgproc.drawContours(mRgba, thecontour, 0, CONTOUR_COLOR);//tercer parametro solo imprime el primer contorno
+
         //este es el mas proximo
 
         Mat colorLabel = mRgba.submat(4, 68, 4, 68);
@@ -212,6 +223,39 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         return false; // don't need subsequent touch events
     }
 
+    /**
+     * NCH 23/09/2017
+     * Busca el contorno cuyo centro este mas cerca del lugar donde sucecio el click
+     * @param Contours
+     * @param p
+     * @return
+     */
+    public List<MatOfPoint> TheContour (List<MatOfPoint> Contours, Point p){
+        double xdis=9999999;
+        double ydis=9999999;
+        int theone=0;
+        double disMax = 9999999;
+        Log.d(TAG, "TheContour: punto  x:"+p.x+"    y:"+p.y);
+        List<Moments> mu = new ArrayList<Moments>(Contours.size());
+        for (int i = 0; i < Contours.size(); i++) {
+            mu.add(i, Imgproc.moments(Contours.get(i), false));
+            Moments pu = mu.get(i);
+            double x =  (pu.get_m10() / pu.get_m00());
+            double y =  (pu.get_m01() / pu.get_m00());
+            //sCore.circle(rgbaImage, new Point(x, y), 4, new Scalar(255,49,0,255));
+            if ( disMax > distancia( p.x, p.y, x,y)){
+                disMax = distancia( p.x, p.y, x,y);
+                theone=i;
+                Log.d(TAG, "TheContour: centro x:"+x+"     y:"+y);
+            }
+        }
+        List<MatOfPoint> m= new ArrayList<MatOfPoint>();
+        m.add(Contours.get(theone));
+        return m;
+    }
+    public double distancia(double x1, double y1, double x2, double y2){
+        return sqrt( (x2-x1)*(x2-x1) + (y2-y1)*(y2-y1) );
+    }
     public Mat onCameraFrame(CvCameraViewFrame inputFrame) {
         /**
          * PP NCH  23/07/2017
@@ -234,6 +278,8 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
              */
 
             // codigo retirado
+
+
             /*Mat spectrumLabel = mRgba.submat(4, 4 + mSpectrum.rows(), 70, 70 + mSpectrum.cols());
             mSpectrum.copyTo(spectrumLabel);
 */
