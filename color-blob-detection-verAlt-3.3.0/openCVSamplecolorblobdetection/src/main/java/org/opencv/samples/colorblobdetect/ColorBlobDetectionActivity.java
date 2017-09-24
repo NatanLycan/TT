@@ -217,8 +217,20 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
 
         //este es el mas proximo
 
-        Mat colorLabel = mRgba.submat(4, 68, 4, 68);
-        colorLabel.setTo(mBlobColorRgba);
+        if(pp_num==1){
+            Mat colorLabel = mRgba.submat(4, 68, 4, 68);
+            colorLabel.setTo(mBlobColorRgba);
+        }
+        /**
+         * NCH 24/09/2017
+         * Se gaurdan los recuadros donde se muestra el color que se selecciono en cada pulsacion
+         */
+        if(pp_num==2){
+            Mat colorLabel2 = mRgba.submat(4, 68, 72, 136);
+            colorLabel2.setTo(mBlobColorRgba);
+
+        }
+
 
         return false; // don't need subsequent touch events
     }
