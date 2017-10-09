@@ -2,7 +2,6 @@ package org.opencv.samples.colorblobdetect;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +36,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.View.OnTouchListener;
 import android.view.SurfaceView;
+import android.widget.Button;
 
 import static java.lang.Math.abs;
 import static java.lang.Math.sqrt;
@@ -56,6 +56,9 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
     private Scalar               CONTOUR_COLOR;
     private  String              pp_imgAdd = "Dirección por defecto";
     private  String              pp_imgAdd2 = "Dirección por defecto 2";
+    private Button btntick;
+    private Button btnadd;
+    private Button btncross;
 
     private boolean nath = false;
 
@@ -97,6 +100,9 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         mOpenCvCameraView.setMaxFrameSize(1920, 1080);
         mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
         mOpenCvCameraView.setCvCameraViewListener(this);
+        btntick = (Button)findViewById(R.id.boton_cam);
+        btncross = (Button)findViewById(R.id.boton_cam2);
+        btnadd = (Button)findViewById(R.id.boton_cam3);
     }
 
     @Override
@@ -148,9 +154,18 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
          * 2- El segundo toque sera al Objeto de referencia
          * 3- El tercer toque continuara a la siguiente etapa
          */
+
         if(pp_num==2){SaveImage();}
-        if(pp_num==1){CONTOUR_COLOR = new Scalar(0,255,0,255);pp_num++;nath=true;}
-        if(pp_num==0){pp_num++; pp_mRgba_original=mRgba.clone(); nath=true;}
+        if(pp_num==1){CONTOUR_COLOR = new Scalar(0,255,0,255);pp_num++;nath=true;
+            }
+        if(pp_num==0){pp_num++; pp_mRgba_original=mRgba.clone(); nath=true;
+            btntick.setVisibility(View.VISIBLE);
+            btntick.bringToFront();
+            btncross.setVisibility(View.VISIBLE);
+            btncross.bringToFront();
+            btnadd.setVisibility(View.VISIBLE);
+            btnadd.bringToFront();
+        }
 
 
         int cols = mRgba.cols();

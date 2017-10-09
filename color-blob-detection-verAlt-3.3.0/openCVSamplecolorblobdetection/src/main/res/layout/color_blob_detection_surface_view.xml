@@ -1,11 +1,49 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
+
 
     <org.opencv.android.JavaCameraView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:id="@+id/color_blob_detection_activity_surface_view" />
+    <Button
+        android:id="@+id/boton_cam2"
+        style="@android:style/Widget.Button"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="110dp"
+        android:layout_marginStart="290dp"
+        android:alpha="50"
+        android:background="@drawable/cross"
+        android:visibility="invisible" />
 
-</LinearLayout>
+    <Button
+        android:id="@+id/boton_cam"
+        style="@android:style/Widget.Button"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginStart="200dp"
+        android:alpha="50"
+        android:background="@drawable/tick"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/boton_cam3"
+        style="@android:style/Widget.Button"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="190dp"
+        android:layout_marginStart="380dp"
+        android:alpha="50"
+        android:background="@drawable/add"
+        android:visibility="invisible" />
+
+</FrameLayout>
+
+
+
+
+
