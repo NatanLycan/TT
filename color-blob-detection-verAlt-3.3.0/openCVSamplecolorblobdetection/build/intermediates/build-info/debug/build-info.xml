@@ -7,22 +7,22 @@
     format="10"
     ir-eligibility="COMPATIBLE"
     plugin-version="3.0.0-alpha7"
-    timestamp="1506275332039"
+    timestamp="1507260104469"
     token="7432455992725495701"
     verifier="COLD_SWAP_REQUESTED" >
 
     <task
         name="javac"
-        duration="414" />
+        duration="486" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="65" />
+        duration="29" />
     <task
         name="verifier"
-        duration="39" />
+        duration="9" />
 
     <artifact
         location="C:\Users\Nathaniel\Documents\GitHub\TT\color-blob-detection-verAlt-3.3.0\openCVSamplecolorblobdetection\build\intermediates\split-apk\debug\slices\slice_1.apk"
@@ -30,7 +30,7 @@
 
     <build
         build-mode="FULL"
-        timestamp="1506275049387"
+        timestamp="1507258983613"
         verifier="FULL_BUILD_REQUESTED" >
         <artifact
             location="C:\Users\Nathaniel\Documents\GitHub\TT\color-blob-detection-verAlt-3.3.0\openCVSamplecolorblobdetection\build\intermediates\split-apk\debug\slices\slice_1.apk"
@@ -72,7 +72,7 @@
     <build
         build-mode="COLD"
         ir-eligibility="COMPATIBLE"
-        timestamp="1506275332039"
+        timestamp="1507260104469"
         verifier="COLD_SWAP_REQUESTED" >
         <artifact
             location="C:\Users\Nathaniel\Documents\GitHub\TT\color-blob-detection-verAlt-3.3.0\openCVSamplecolorblobdetection\build\intermediates\split-apk\debug\slices\slice_1.apk"
