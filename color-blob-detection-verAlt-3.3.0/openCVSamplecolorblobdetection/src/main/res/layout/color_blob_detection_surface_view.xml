@@ -9,7 +9,7 @@
         android:layout_height="fill_parent"
         android:id="@+id/color_blob_detection_activity_surface_view" />
     <Button
-        android:id="@+id/boton_cam2"
+        android:id="@+id/boton_cross"
         style="@android:style/Widget.Button"
         android:layout_width="80dp"
         android:layout_height="80dp"
@@ -17,10 +17,12 @@
         android:layout_marginStart="290dp"
         android:alpha="50"
         android:background="@drawable/cross"
-        android:visibility="invisible" />
+        android:visibility="invisible"
+        android:onClick="BtnCrossF"
+        />
 
     <Button
-        android:id="@+id/boton_cam"
+        android:id="@+id/boton_tick"
         style="@android:style/Widget.Button"
         android:layout_width="80dp"
         android:layout_height="80dp"
@@ -28,10 +30,12 @@
         android:layout_marginStart="200dp"
         android:alpha="50"
         android:background="@drawable/tick"
-        android:visibility="invisible" />
+        android:visibility="invisible"
+        android:onClick="BtnTickF"
+        />
 
     <Button
-        android:id="@+id/boton_cam3"
+        android:id="@+id/boton_add"
         style="@android:style/Widget.Button"
         android:layout_width="80dp"
         android:layout_height="80dp"
@@ -39,7 +43,8 @@
         android:layout_marginStart="380dp"
         android:alpha="50"
         android:background="@drawable/add"
-        android:visibility="invisible" />
+        android:visibility="invisible"
+        android:onClick="BtnAddF"/>
 
 </FrameLayout>
 

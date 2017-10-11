@@ -59,6 +59,7 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
     private Button btntick;
     private Button btnadd;
     private Button btncross;
+    private Mat                  mRgba_Buttons_backup;
 
     private boolean nath = false;
 
@@ -100,9 +101,9 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         mOpenCvCameraView.setMaxFrameSize(1920, 1080);
         mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
         mOpenCvCameraView.setCvCameraViewListener(this);
-        btntick = (Button)findViewById(R.id.boton_cam);
-        btncross = (Button)findViewById(R.id.boton_cam2);
-        btnadd = (Button)findViewById(R.id.boton_cam3);
+        btntick = (Button)findViewById(R.id.boton_tick);
+        btncross = (Button)findViewById(R.id.boton_cross);
+        btnadd = (Button)findViewById(R.id.boton_add);
     }
 
     @Override
@@ -155,16 +156,25 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
          * 3- El tercer toque continuara a la siguiente etapa
          */
 
-        if(pp_num==2){SaveImage();}
+
         if(pp_num==1){CONTOUR_COLOR = new Scalar(0,255,0,255);pp_num++;nath=true;
+            btntick.setVisibility(View.VISIBLE);
+            btncross.setVisibility(View.VISIBLE);
+            btnadd.setVisibility(View.VISIBLE);
+            btntick.bringToFront();
+            btncross.bringToFront();
+            btnadd.bringToFront();
             }
         if(pp_num==0){pp_num++; pp_mRgba_original=mRgba.clone(); nath=true;
             btntick.setVisibility(View.VISIBLE);
-            btntick.bringToFront();
             btncross.setVisibility(View.VISIBLE);
-            btncross.bringToFront();
             btnadd.setVisibility(View.VISIBLE);
+            btntick.bringToFront();
+            btncross.bringToFront();
             btnadd.bringToFront();
+            //mOpenCvCameraView.setClickable(false);
+            //mOpenCvCameraView.disableView();
+
         }
 
 
@@ -226,6 +236,10 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
 
         //NCH 23/09/2017 Busco contorno con centro mas cerca al click
         List<MatOfPoint> thecontour= TheContour(contours,p);
+
+        //NCH 10/10/2017 Guardo la imagen inicial para por si elige no mantener la imagen
+
+        mRgba_Buttons_backup=mRgba.clone();
 
         //Imgproc.drawContours(mRgba, contours, 0, CONTOUR_COLOR);//tercer parametro solo imprime el primer contorno
         Imgproc.drawContours(mRgba, thecontour, 0, CONTOUR_COLOR);//tercer parametro solo imprime el primer contorno
@@ -484,5 +498,33 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
             Log.e(TAG, "PP Función: getAlbumStorageDir. El directorio ya existía o no se pudo crear. " + pp_file.getAbsolutePath());
         }
         return pp_file;
+    }
+
+    /** NCH 11/10/2017
+     * Botones (los 3) Funcion de pendiendo de la seleccion del Usuario
+     * @param view
+     */
+
+    public void BtnTickF(View view){
+        if(pp_num==2){SaveImage();}
+        btntick.setVisibility(View.INVISIBLE);
+        btncross.setVisibility(View.INVISIBLE);
+        btnadd.setVisibility(View.INVISIBLE);
+    }
+
+    public void BtnCrossF(View view){
+        CONTOUR_COLOR = new Scalar(255,0,0,255);
+        mRgba=mRgba_Buttons_backup.clone();
+        pp_num--;
+        btntick.setVisibility(View.INVISIBLE);
+        btncross.setVisibility(View.INVISIBLE);
+        btnadd.setVisibility(View.INVISIBLE);
+    }
+
+    public void BtnAddF(View view){
+        pp_num--;
+        btntick.setVisibility(View.INVISIBLE);
+        btncross.setVisibility(View.INVISIBLE);
+        btnadd.setVisibility(View.INVISIBLE);
     }
 }
