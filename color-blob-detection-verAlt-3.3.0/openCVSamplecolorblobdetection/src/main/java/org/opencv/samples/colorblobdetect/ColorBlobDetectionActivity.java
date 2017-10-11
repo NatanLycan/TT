@@ -43,42 +43,44 @@ import static java.lang.Math.sqrt;
 import static java.lang.System.exit;
 
 public class ColorBlobDetectionActivity extends Activity implements OnTouchListener, CvCameraViewListener2 {
-    private static final String  TAG              = "OCVSample::Activity";
+    private static final String TAG = "OCVSample::Activity";
 
-    private boolean              mIsColorSelected = false;
-    private Mat                  mRgba;
-    private Mat                  pp_mRgba_original;
-    private Scalar               mBlobColorRgba;
-    private Scalar               mBlobColorHsv;
-    private ColorBlobDetector    mDetector;
-    private Mat                  mSpectrum;
-    private Size                 SPECTRUM_SIZE;
-    private Scalar               CONTOUR_COLOR;
-    private  String              pp_imgAdd = "Dirección por defecto";
-    private  String              pp_imgAdd2 = "Dirección por defecto 2";
+    private boolean mIsColorSelected = false;
+    private Mat mRgba;
+    private Mat pp_mRgba_original;
+    private Scalar mBlobColorRgba;
+    private Scalar mBlobColorHsv;
+    private ColorBlobDetector mDetector;
+    private Mat mSpectrum;
+    private Size SPECTRUM_SIZE;
+    private Scalar CONTOUR_COLOR;
+    private String pp_imgAdd = "Dirección por defecto";
+    private String pp_imgAdd2 = "Dirección por defecto 2";
     private Button btntick;
     private Button btnadd;
     private Button btncross;
-    private Mat                  mRgba_Buttons_backup;
+    private Mat mRgba_Buttons_backup;
+    private boolean pp_espera = false;
+    private boolean savim= false;
 
     private boolean nath = false;
 
     private CameraBridgeViewBase mOpenCvCameraView;
 
-    private BaseLoaderCallback  mLoaderCallback = new BaseLoaderCallback(this) {
+    private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
         @Override
         public void onManagerConnected(int status) {
             switch (status) {
-                case LoaderCallbackInterface.SUCCESS:
-                {
+                case LoaderCallbackInterface.SUCCESS: {
                     Log.i(TAG, "OpenCV loaded successfully");
                     mOpenCvCameraView.enableView();
                     mOpenCvCameraView.setOnTouchListener(ColorBlobDetectionActivity.this);
-                } break;
-                default:
-                {
+                }
+                break;
+                default: {
                     super.onManagerConnected(status);
-                } break;
+                }
+                break;
             }
         }
     };
@@ -87,7 +89,9 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         Log.i(TAG, "Instantiated new " + this.getClass());
     }
 
-    /** Called when the activity is first created. */
+    /**
+     * Called when the activity is first created.
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         Log.i(TAG, "called onCreate");
@@ -101,22 +105,20 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         mOpenCvCameraView.setMaxFrameSize(1920, 1080);
         mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
         mOpenCvCameraView.setCvCameraViewListener(this);
-        btntick = (Button)findViewById(R.id.boton_tick);
-        btncross = (Button)findViewById(R.id.boton_cross);
-        btnadd = (Button)findViewById(R.id.boton_add);
+        btntick = (Button) findViewById(R.id.boton_tick);
+        btncross = (Button) findViewById(R.id.boton_cross);
+        btnadd = (Button) findViewById(R.id.boton_add);
     }
 
     @Override
-    public void onPause()
-    {
+    public void onPause() {
         super.onPause();
         if (mOpenCvCameraView != null)
             mOpenCvCameraView.disableView();
     }
 
     @Override
-    public void onResume()
-    {
+    public void onResume() {
         super.onResume();
         if (!OpenCVLoader.initDebug()) {
             Log.d(TAG, "Internal OpenCV library not found. Using OpenCV Manager for initialization");
@@ -140,7 +142,7 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         mBlobColorRgba = new Scalar(255);
         mBlobColorHsv = new Scalar(255);
         SPECTRUM_SIZE = new Size(200, 64);
-        CONTOUR_COLOR = new Scalar(255,0,0,255);
+        CONTOUR_COLOR = new Scalar(255, 0, 0, 255);
     }
 
     public void onCameraViewStopped() {
@@ -155,23 +157,33 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
          * 2- El segundo toque sera al Objeto de referencia
          * 3- El tercer toque continuara a la siguiente etapa
          */
-
-
-        if(pp_num==1){CONTOUR_COLOR = new Scalar(0,255,0,255);pp_num++;nath=true;
+        if ( pp_espera ){
+            return false;
+        }
+        if (pp_num == 1) {
+            CONTOUR_COLOR = new Scalar(0, 255, 0, 255);
+            pp_num++;
+            nath = true;
             btntick.setVisibility(View.VISIBLE);
             btncross.setVisibility(View.VISIBLE);
             btnadd.setVisibility(View.VISIBLE);
             btntick.bringToFront();
             btncross.bringToFront();
             btnadd.bringToFront();
-            }
-        if(pp_num==0){pp_num++; pp_mRgba_original=mRgba.clone(); nath=true;
+            pp_espera = true;
+        }
+        if (pp_num == 0) {
+            if(savim==false) {pp_mRgba_original = mRgba.clone();savim=true;}
+            pp_num++;
+            pp_mRgba_original = mRgba.clone();
+            nath = true;
             btntick.setVisibility(View.VISIBLE);
             btncross.setVisibility(View.VISIBLE);
             btnadd.setVisibility(View.VISIBLE);
             btntick.bringToFront();
             btncross.bringToFront();
             btnadd.bringToFront();
+            pp_espera = true;
             //mOpenCvCameraView.setClickable(false);
             //mOpenCvCameraView.disableView();
 
@@ -184,19 +196,19 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         int xOffset = (mOpenCvCameraView.getWidth() - cols) / 2;
         int yOffset = (mOpenCvCameraView.getHeight() - rows) / 2;
 
-        int x = (int)event.getX() - xOffset;
-        int y = (int)event.getY() - yOffset;
+        int x = (int) event.getX() - xOffset;
+        int y = (int) event.getY() - yOffset;
 
         Log.i(TAG, "Touch image coordinates: (" + x + ", " + y + ")");
 
         if ((x < 0) || (y < 0) || (x > cols) || (y > rows)) return false;
         Rect touchedRect = new Rect();
 
-        touchedRect.x = (x>4) ? x-4 : 0;
-        touchedRect.y = (y>4) ? y-4 : 0;
+        touchedRect.x = (x > 4) ? x - 4 : 0;
+        touchedRect.y = (y > 4) ? y - 4 : 0;
 
-        touchedRect.width = (x+4 < cols) ? x + 4 - touchedRect.x : cols - touchedRect.x;
-        touchedRect.height = (y+4 < rows) ? y + 4 - touchedRect.y : rows - touchedRect.y;
+        touchedRect.width = (x + 4 < cols) ? x + 4 - touchedRect.x : cols - touchedRect.x;
+        touchedRect.height = (y + 4 < rows) ? y + 4 - touchedRect.y : rows - touchedRect.y;
 
         Mat touchedRegionRgba = mRgba.submat(touchedRect);
 
@@ -205,7 +217,7 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
 
         // Calculate average color of touched region
         mBlobColorHsv = Core.sumElems(touchedRegionHsv);
-        int pointCount = touchedRect.width*touchedRect.height;
+        int pointCount = touchedRect.width * touchedRect.height;
         for (int i = 0; i < mBlobColorHsv.val.length; i++)
             mBlobColorHsv.val[i] /= pointCount;
 
@@ -228,25 +240,25 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
          *  Optimiza la actualizacion de frames no afecta a calculo del contornos
          */
 
-        Point p = new Point(x,y);
+        Point p = new Point(x, y);
         mDetector.process(mRgba);
         //mDetector.process2(mRgba,p);
         List<MatOfPoint> contours = mDetector.getContours();
         Log.e(TAG, "Contours count: " + contours.size());
 
         //NCH 23/09/2017 Busco contorno con centro mas cerca al click
-        List<MatOfPoint> thecontour= TheContour(contours,p);
+        List<MatOfPoint> thecontour = TheContour(contours, p);
 
         //NCH 10/10/2017 Guardo la imagen inicial para por si elige no mantener la imagen
 
-        mRgba_Buttons_backup=mRgba.clone();
+        mRgba_Buttons_backup = mRgba.clone();
 
         //Imgproc.drawContours(mRgba, contours, 0, CONTOUR_COLOR);//tercer parametro solo imprime el primer contorno
         Imgproc.drawContours(mRgba, thecontour, 0, CONTOUR_COLOR);//tercer parametro solo imprime el primer contorno
 
         //este es el mas proximo
 
-        if(pp_num==1){
+        if (pp_num == 1) {
             Mat colorLabel = mRgba.submat(4, 68, 4, 68);
             colorLabel.setTo(mBlobColorRgba);
         }
@@ -254,7 +266,7 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
          * NCH 24/09/2017
          * Se gaurdan los recuadros donde se muestra el color que se selecciono en cada pulsacion
          */
-        if(pp_num==2){
+        if (pp_num == 2) {
             Mat colorLabel2 = mRgba.submat(4, 68, 72, 136);
             colorLabel2.setTo(mBlobColorRgba);
 
@@ -267,36 +279,39 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
     /**
      * NCH 23/09/2017
      * Busca el contorno cuyo centro este mas cerca del lugar donde sucecio el click
+     *
      * @param Contours
      * @param p
      * @return
      */
-    public List<MatOfPoint> TheContour (List<MatOfPoint> Contours, Point p){
-        double xdis=9999999;
-        double ydis=9999999;
-        int theone=0;
+    public List<MatOfPoint> TheContour(List<MatOfPoint> Contours, Point p) {
+        double xdis = 9999999;
+        double ydis = 9999999;
+        int theone = 0;
         double disMax = 9999999;
-        Log.d(TAG, "TheContour: punto  x:"+p.x+"    y:"+p.y);
+        Log.d(TAG, "TheContour: punto  x:" + p.x + "    y:" + p.y);
         List<Moments> mu = new ArrayList<Moments>(Contours.size());
         for (int i = 0; i < Contours.size(); i++) {
             mu.add(i, Imgproc.moments(Contours.get(i), false));
             Moments pu = mu.get(i);
-            double x =  (pu.get_m10() / pu.get_m00());
-            double y =  (pu.get_m01() / pu.get_m00());
+            double x = (pu.get_m10() / pu.get_m00());
+            double y = (pu.get_m01() / pu.get_m00());
             //sCore.circle(rgbaImage, new Point(x, y), 4, new Scalar(255,49,0,255));
-            if ( disMax > distancia( p.x, p.y, x,y)){
-                disMax = distancia( p.x, p.y, x,y);
-                theone=i;
-                Log.d(TAG, "TheContour: centro x:"+x+"     y:"+y);
+            if (disMax > distancia(p.x, p.y, x, y)) {
+                disMax = distancia(p.x, p.y, x, y);
+                theone = i;
+                Log.d(TAG, "TheContour: centro x:" + x + "     y:" + y);
             }
         }
-        List<MatOfPoint> m= new ArrayList<MatOfPoint>();
+        List<MatOfPoint> m = new ArrayList<MatOfPoint>();
         m.add(Contours.get(theone));
         return m;
     }
-    public double distancia(double x1, double y1, double x2, double y2){
-        return sqrt( (x2-x1)*(x2-x1) + (y2-y1)*(y2-y1) );
+
+    public double distancia(double x1, double y1, double x2, double y2) {
+        return sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
     }
+
     public Mat onCameraFrame(CvCameraViewFrame inputFrame) {
         /**
          * PP NCH  23/07/2017
@@ -305,8 +320,8 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
          * Despues de seleccionar el color la imagen se mantiene igual, posteriormente se imprimen los contornos
          * seleccionados  y como no cambia la imagen no se agregan mas contornos
          */
-        if(pp_num==2){}
-        else if (mIsColorSelected) {
+        if (pp_num == 2) {
+        } else if (mIsColorSelected) {
             Log.d(TAG, "onCameraFrame(miscolorselected): Done 1");
             if (mRgba.empty()) {
                 Log.d(TAG, "onCameraFrame: Crash");
@@ -348,7 +363,7 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
          */
 
         // PP NLJS 22/07/2017 Creo intent para una nueva Actividad
-        Intent intent =new Intent(this,P.class);
+        Intent intent = new Intent(this, P.class);
 
         // PP NLJS 22/07/2017 Envio los siguientes datos como EXTRAS
         // private Mat                  mRgba;
@@ -360,25 +375,25 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         // private Scalar               CONTOUR_COLOR;
         // private String               pp_imgAdd;
 
-        intent.putExtra("PP_EXTRA_MAT",mRgba);
-        Log.d(TAG, "chargeFile2: width: "+mRgba.cols());
-        Log.d(TAG, "chargeFile2: rowa: "+mRgba.rows());
-        intent.putExtra("PP_EXTRA_SCALAR",mBlobColorHsv);
-        intent.putExtra("PP_EXTRA_SCALAR2",mBlobColorRgba);
-        intent.putExtra("PP_EXTRA_COLORBLOBDETECTOR",mDetector);
-        intent.putExtra("PP_EXTRA_MAT2",mSpectrum);
-        intent.putExtra("PP_EXTRA_SIZE",SPECTRUM_SIZE);
-        intent.putExtra("PP_EXTRA_SCALAR3",CONTOUR_COLOR);
-        intent.putExtra("PP_EXTRA_STRING",pp_imgAdd);
+        intent.putExtra("PP_EXTRA_MAT", mRgba);
+        Log.d(TAG, "chargeFile2: width: " + mRgba.cols());
+        Log.d(TAG, "chargeFile2: rowa: " + mRgba.rows());
+        intent.putExtra("PP_EXTRA_SCALAR", mBlobColorHsv);
+        intent.putExtra("PP_EXTRA_SCALAR2", mBlobColorRgba);
+        intent.putExtra("PP_EXTRA_COLORBLOBDETECTOR", mDetector);
+        intent.putExtra("PP_EXTRA_MAT2", mSpectrum);
+        intent.putExtra("PP_EXTRA_SIZE", SPECTRUM_SIZE);
+        intent.putExtra("PP_EXTRA_SCALAR3", CONTOUR_COLOR);
+        intent.putExtra("PP_EXTRA_STRING", pp_imgAdd);
 
         // PP NLJS 16/07/2017 Inicializo la actividad
         startActivity(intent);
     }
 
-    int pp_num=0;//PP NCH 23/07/2017 Identifica contador para Imagen Objeto de referencia y objeto a medir
+    int pp_num = 0;//PP NCH 23/07/2017 Identifica contador para Imagen Objeto de referencia y objeto a medir
 
 
-    public void SaveImage(){
+    public void SaveImage() {
         /**
          * PP NCH 23/07/2017
          * Convierte el objeto Mat mRgba en un bitmap para asi poder guardarlo en un archivo PNG
@@ -423,11 +438,11 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         File pp_img = getAlbumStorageDir("Proportion");
 
         //PP NLJS 06/08/2017 Válido que pp_img no sea nulo
-        if(pp_img.exists()){
+        if (pp_img.exists()) {
             //PP NLJS 13/08/2017 Cuento cuantas fotos hay en la carpeta de Proportion para asignarle un número a esta nueva img
-            String [] pp_Files = pp_img.list();
+            String[] pp_Files = pp_img.list();
             int pp_totFiles = pp_Files.length;
-            pp_totFiles=pp_totFiles/2;
+            pp_totFiles = pp_totFiles / 2;
             String filename = "Proportion_" + pp_totFiles + ".png";
             String filename2 = "Proportion_" + pp_totFiles + "_ori.png";
             boolean pp_flag_comp = false;
@@ -436,8 +451,8 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
             //PP NLJS 06/08/2017 Creo el FOS y File destino para guardar la img en la memoria del teléfono
             FileOutputStream pp_out = null;
             FileOutputStream pp_out2 = null;
-            File pp_img2 = new File(pp_img,filename);
-            File pp_img3 = new File(pp_img,filename2);
+            File pp_img2 = new File(pp_img, filename);
+            File pp_img3 = new File(pp_img, filename2);
 
             //PP NLJS 06/08/2017 Intento inicializar el FOS
             try {
@@ -455,12 +470,12 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
                 Log.d(TAG, "PP Función: SaveImage. La imagen se guardó exitosamente. pp_imgAdd : " + pp_imgAdd);
 
                 if (mOpenCvCameraView != null) {
-                    Mat lol= mRgba.clone();
+                    Mat lol = mRgba.clone();
                     mOpenCvCameraView.disableView();
-                    mRgba=lol.clone();
+                    mRgba = lol.clone();
                     Act(mOpenCvCameraView);
 
-                }else {
+                } else {
                     Act(mOpenCvCameraView);
                 }
 
@@ -470,6 +485,7 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
             }
         }
     }
+
     public boolean isExternalStorageWritable() {
         /**
          * PP NLJS 06/08/2017
@@ -483,6 +499,7 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         }
         return false;
     }
+
     public File getAlbumStorageDir(String albumName) {
         /**
          * PP NLJS 06/08/2017
@@ -500,31 +517,38 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         return pp_file;
     }
 
-    /** NCH 11/10/2017
+    /**
+     * NCH 11/10/2017
      * Botones (los 3) Funcion de pendiendo de la seleccion del Usuario
+     *
      * @param view
      */
 
-    public void BtnTickF(View view){
-        if(pp_num==2){SaveImage();}
+    public void BtnTickF(View view) {
+        if (pp_num == 2) {
+            SaveImage();
+        }
         btntick.setVisibility(View.INVISIBLE);
         btncross.setVisibility(View.INVISIBLE);
         btnadd.setVisibility(View.INVISIBLE);
+        pp_espera=false;
     }
 
-    public void BtnCrossF(View view){
-        CONTOUR_COLOR = new Scalar(255,0,0,255);
-        mRgba=mRgba_Buttons_backup.clone();
+    public void BtnCrossF(View view) {
+        CONTOUR_COLOR = new Scalar(255, 0, 0, 255);
+        mRgba = mRgba_Buttons_backup.clone();
         pp_num--;
         btntick.setVisibility(View.INVISIBLE);
         btncross.setVisibility(View.INVISIBLE);
         btnadd.setVisibility(View.INVISIBLE);
+        pp_espera=false;
     }
 
-    public void BtnAddF(View view){
+    public void BtnAddF(View view) {
         pp_num--;
         btntick.setVisibility(View.INVISIBLE);
         btncross.setVisibility(View.INVISIBLE);
         btnadd.setVisibility(View.INVISIBLE);
+        pp_espera = false;
     }
 }
