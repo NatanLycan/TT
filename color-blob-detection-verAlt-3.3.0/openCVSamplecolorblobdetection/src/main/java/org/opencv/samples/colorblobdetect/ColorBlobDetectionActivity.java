@@ -43,6 +43,8 @@ import android.widget.Button;
 import static java.lang.Math.abs;
 import static java.lang.Math.sqrt;
 import static java.lang.System.exit;
+import static org.opencv.imgproc.Imgproc.COLOR_GRAY2BGR;
+import static org.opencv.imgproc.Imgproc.cvtColor;
 
 public class ColorBlobDetectionActivity extends Activity implements OnTouchListener, CvCameraViewListener2 {
     private static final String TAG = "OCVSample::Activity";
@@ -58,6 +60,7 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
     private Scalar CONTOUR_COLOR;
     private String pp_imgAdd = "Dirección por defecto";
     private String pp_imgAdd2 = "Dirección por defecto 2";
+    private String pp_imgAdd3 = "Dirección por defecto 2";
     private Button btntick;
     private Button btnadd;
     private Button btncross;
@@ -66,6 +69,7 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
     private boolean savim = false;
     private String MEDIDA = "";
     private boolean nath = false;
+    private Mat dibujada;
 
     private CameraBridgeViewBase mOpenCvCameraView;
 
@@ -91,7 +95,7 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         Log.i(TAG, "Instantiated new " + this.getClass());
     }
 
-    public void mensaje(String m){
+    public void mensaje(String m) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(m)
@@ -104,6 +108,7 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         AlertDialog alert = builder.create();
         alert.show();
     }
+
     /**
      * Called when the activity is first created.
      */
@@ -233,7 +238,7 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         Mat touchedRegionRgba = mRgba.submat(touchedRect);
 
         Mat touchedRegionHsv = new Mat();
-        Imgproc.cvtColor(touchedRegionRgba, touchedRegionHsv, Imgproc.COLOR_RGB2HSV_FULL);
+        cvtColor(touchedRegionRgba, touchedRegionHsv, Imgproc.COLOR_RGB2HSV_FULL);
 
         // Calculate average color of touched region
         mBlobColorHsv = Core.sumElems(touchedRegionHsv);
@@ -291,7 +296,7 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
             colorLabel2.setTo(mBlobColorRgba);
 
         }
-        resultado();
+
 
         return false; // don't need subsequent touch events
     }
@@ -370,7 +375,7 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
     private Scalar converScalarHsv2Rgba(Scalar hsvColor) {
         Mat pointMatRgba = new Mat();
         Mat pointMatHsv = new Mat(1, 1, CvType.CV_8UC3, hsvColor);
-        Imgproc.cvtColor(pointMatHsv, pointMatRgba, Imgproc.COLOR_HSV2RGB_FULL, 4);
+        cvtColor(pointMatHsv, pointMatRgba, Imgproc.COLOR_HSV2RGB_FULL, 4);
 
         return new Scalar(pointMatRgba.get(0, 0));
     }
@@ -431,6 +436,7 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         //PP NCH 23/07/2017 Creo bitmap temporal para poder guardar Mat mRgba en un archivo
         Bitmap pp_bmp = null;
         Bitmap pp_bmp_ori = null;
+        Bitmap pp_bmp_draw = null;
 
 
         //PP NLJS 06/08/2017 Intento inicializar el Bitmap
@@ -438,9 +444,11 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
             //PP NLJS 06/08/2017 Establezco el tamaño del Bitmap
             pp_bmp = Bitmap.createBitmap(mRgba.cols(), mRgba.rows(), Bitmap.Config.ARGB_8888);
             pp_bmp_ori = Bitmap.createBitmap(pp_mRgba_original.cols(), pp_mRgba_original.rows(), Bitmap.Config.ARGB_8888);
+            pp_bmp_draw = Bitmap.createBitmap(dibujada.cols(), dibujada.rows(), Bitmap.Config.ARGB_8888);
             //PP NLJS 06/08/2017 Realizo la conversión
             Utils.matToBitmap(mRgba, pp_bmp);
             Utils.matToBitmap(pp_mRgba_original, pp_bmp_ori);
+            Utils.matToBitmap(dibujada, pp_bmp_draw);
 
         } catch (CvException e) {
             Log.d(TAG, e.getMessage());
@@ -465,34 +473,42 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
             pp_totFiles = pp_totFiles / 2;
             String filename = "Proportion_" + pp_totFiles + ".png";
             String filename2 = "Proportion_" + pp_totFiles + "_ori.png";
+            String filename3 = "Proportion_" + pp_totFiles + "_draw.png";
             boolean pp_flag_comp = false;
             boolean pp_flag_comp2 = false;
+            boolean pp_flag_comp3 = false;
 
             //PP NLJS 06/08/2017 Creo el FOS y File destino para guardar la img en la memoria del teléfono
             FileOutputStream pp_out = null;
             FileOutputStream pp_out2 = null;
+            FileOutputStream pp_out3 = null;
             File pp_img2 = new File(pp_img, filename);
             File pp_img3 = new File(pp_img, filename2);
+            File pp_img4 = new File(pp_img, filename3);
 
             //PP NLJS 06/08/2017 Intento inicializar el FOS
             try {
                 mOpenCvCameraView.disableView();
                 pp_out = new FileOutputStream(pp_img2);
                 pp_out2 = new FileOutputStream(pp_img3);
+                pp_out3 = new FileOutputStream(pp_img4);
                 pp_flag_comp = pp_bmp.compress(Bitmap.CompressFormat.PNG, 100, pp_out); // pp_bmp is your Bitmap instance
                 pp_flag_comp2 = pp_bmp_ori.compress(Bitmap.CompressFormat.PNG, 100, pp_out2); // pp_bmp is your Bitmap instance
+                pp_flag_comp3 = pp_bmp_draw.compress(Bitmap.CompressFormat.PNG, 100, pp_out3); // pp_bmp is your Bitmap instance
                 pp_out.close();
-                pp_out.close();
+                pp_out2.close();
+                pp_out3.close();
 
                 // PP NLJS 13/08/2017 Guardo la dirección de la foto que se acaba de guardar
                 pp_imgAdd = pp_img2.getAbsolutePath();
                 pp_imgAdd2 = pp_img3.getAbsolutePath();
+                pp_imgAdd3 = pp_img4.getAbsolutePath();
                 Log.d(TAG, "PP Función: SaveImage. La imagen se guardó exitosamente. pp_imgAdd : " + pp_imgAdd);
 
                 if (mOpenCvCameraView != null) {
-                    Mat lol = mRgba.clone();
+                    //Mat lol = mRgba.clone();
                     mOpenCvCameraView.disableView();
-                    mRgba = lol.clone();
+                    //mRgba = lol.clone();
                     Act(mOpenCvCameraView);
 
                 } else {
@@ -501,7 +517,7 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
 
             } catch (Exception e) {
                 e.printStackTrace();
-                Log.d(TAG, "PP Función: SaveImage. Error al crear el FOS. Compress : " + pp_flag_comp);
+                Log.d(TAG, "PP Función: SaveImage. Error al crear el FOS. Compress : " + pp_flag_comp + " " + pp_flag_comp2 + " " + pp_flag_comp3);
             }
         }
     }
@@ -546,6 +562,8 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
 
     public void BtnTickF(View view) {
         if (pp_num == 2) {
+            //mRgba=dibujada.clone();
+            resultado();
             SaveImage();
         }
         btntick.setVisibility(View.INVISIBLE);
@@ -571,6 +589,7 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         btnadd.setVisibility(View.INVISIBLE);
         pp_espera = false;
     }
+
     public void resultado() {
         /**
          *  NCH 14/10/2017
@@ -585,7 +604,8 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
          *  color
          */
 
-        int up = -1, down = mRgba.cols()+1, left = mRgba.rows()+1, right = -1;
+        int down_r = -1, up_r = mRgba.cols() + 1, left_r = mRgba.rows() + 1, right_r = -1;
+        int down_g = -1, up_g = mRgba.cols() + 1, left_g = mRgba.rows() + 1, right_g = -1;
         for (int x = 0; x < mRgba.rows(); x++) {
             for (int y = 0; y < mRgba.cols(); y++) {
                 double[] data = mRgba.get(x, y);
@@ -594,14 +614,34 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
                 double b = data[2];
                 //Log.d(TAG, "resultado: colores nat R:" + data[0]+"     G: "+data[1]+"     B: "+data[2]);
                 if (r == 255 && g == 0 && b == 0) {
-                    if(x>up)up=x;
-                    if(x<down)down=x;
-                    if(y>right)right=y;
-                    if(y<left)left=y;
+                    if (x > down_r) down_r = x;
+                    if (x < up_r) up_r = x;
+                    if (y > right_r) right_r = y;
+                    if (y < left_r) left_r = y;
+                }
+                if (r == 0 && g == 255 && b == 0) {
+                    if (x > down_g) down_g = x;
+                    if (x < up_g) up_g = x;
+                    if (y > right_g) right_g = y;
+                    if (y < left_g) left_g = y;
                 }
             }
         }
-        Log.d(TAG, "resultado: puntos maximos up:"+up+"  down:+"+down+"   left:"+left+"   right:"+right);
+        Log.d(TAG, "resultado: puntos maximos up_r:" + up_r + "  down_r:" + down_r + "   left_r:" + left_r + "   right_r:" + right_r);
+        dibujo(new Point(right_r, up_r), new Point(left_r, down_r), 1);
+        dibujo(new Point(right_g, up_g), new Point(left_g, down_g), 2);
+    }
 
+    public void dibujo(Point p1, Point p2, int i) {
+        /**
+         *  NCH 14/10/2017
+         *  Esta funcion recibe los puntos (right-up) (left-down) y dibuja el rectangulo
+         */
+
+        if (i == 1) {
+            dibujada = pp_mRgba_original.clone();
+            //cvtColor(dibujada, dibujada, COLOR_GRAY2BGR);
+            Imgproc.rectangle(dibujada, p1, p2, new Scalar(255, 0, 0), 3);
+        }else Imgproc.rectangle(dibujada, p1, p2, new Scalar(0, 255, 0), 3);
     }
 }
