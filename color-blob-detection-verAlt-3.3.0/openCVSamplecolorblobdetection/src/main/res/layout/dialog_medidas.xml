@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/rd_centimetros"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Centimetros" />
+
+        <RadioButton
+            android:id="@+id/rd_pulgadas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rd_centimetros"
+            android:text="Pulgadas" />
+
+        <RadioButton
+            android:id="@+id/rd_pies"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rd_pulgadas"
+            android:text="Pies" />
+
+        <Button
+            android:id="@+id/btn_aceptar"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rd_pies"
+            android:layout_centerInParent="true"
+            android:text="Aceptar"
+            />
+    </RadioGroup>
+
+</RelativeLayout>
