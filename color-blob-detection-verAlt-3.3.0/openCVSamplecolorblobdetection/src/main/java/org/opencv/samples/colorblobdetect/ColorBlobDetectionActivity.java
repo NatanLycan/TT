@@ -25,6 +25,8 @@ import org.opencv.imgproc.Imgproc;
 import org.opencv.imgproc.Moments;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -61,8 +63,8 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
     private Button btncross;
     private Mat mRgba_Buttons_backup;
     private boolean pp_espera = false;
-    private boolean savim= false;
-
+    private boolean savim = false;
+    private String MEDIDA = "";
     private boolean nath = false;
 
     private CameraBridgeViewBase mOpenCvCameraView;
@@ -89,6 +91,19 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         Log.i(TAG, "Instantiated new " + this.getClass());
     }
 
+    public void mensaje(String m){
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(m)
+                .setCancelable(false)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        //do things
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
     /**
      * Called when the activity is first created.
      */
@@ -108,6 +123,8 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         btntick = (Button) findViewById(R.id.boton_tick);
         btncross = (Button) findViewById(R.id.boton_cross);
         btnadd = (Button) findViewById(R.id.boton_add);
+        MEDIDA = getIntent().getStringExtra("MEDIDA");
+        mensaje("Has selecionado la siguiente unidad de medida : " + MEDIDA.toLowerCase());
     }
 
     @Override
@@ -157,7 +174,7 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
          * 2- El segundo toque sera al Objeto de referencia
          * 3- El tercer toque continuara a la siguiente etapa
          */
-        if ( pp_espera ){
+        if (pp_espera) {
             return false;
         }
         if (pp_num == 1) {
@@ -173,7 +190,10 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
             pp_espera = true;
         }
         if (pp_num == 0) {
-            if(savim==false) {pp_mRgba_original = mRgba.clone();savim=true;}
+            if (savim == false) {
+                pp_mRgba_original = mRgba.clone();
+                savim = true;
+            }
             pp_num++;
             pp_mRgba_original = mRgba.clone();
             nath = true;
@@ -271,7 +291,7 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
             colorLabel2.setTo(mBlobColorRgba);
 
         }
-
+        resultado();
 
         return false; // don't need subsequent touch events
     }
@@ -531,7 +551,7 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         btntick.setVisibility(View.INVISIBLE);
         btncross.setVisibility(View.INVISIBLE);
         btnadd.setVisibility(View.INVISIBLE);
-        pp_espera=false;
+        pp_espera = false;
     }
 
     public void BtnCrossF(View view) {
@@ -541,7 +561,7 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         btntick.setVisibility(View.INVISIBLE);
         btncross.setVisibility(View.INVISIBLE);
         btnadd.setVisibility(View.INVISIBLE);
-        pp_espera=false;
+        pp_espera = false;
     }
 
     public void BtnAddF(View view) {
@@ -550,5 +570,38 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         btncross.setVisibility(View.INVISIBLE);
         btnadd.setVisibility(View.INVISIBLE);
         pp_espera = false;
+    }
+    public void resultado() {
+        /**
+         *  NCH 14/10/2017
+         *
+         *  Esta funcion devuelve el resultado grafico de todoo el proceso
+         *
+         *  mRgba contiene la imagen final con los contornos
+         *      - Contornos Rojo: Objeto a Medir
+         *      - Contornos Verde: Objeto de referencia
+         *  pp_mRgba_original contiene la imagen original
+         *
+         *  color
+         */
+
+        int up = -1, down = mRgba.cols()+1, left = mRgba.rows()+1, right = -1;
+        for (int x = 0; x < mRgba.rows(); x++) {
+            for (int y = 0; y < mRgba.cols(); y++) {
+                double[] data = mRgba.get(x, y);
+                double r = data[0];
+                double g = data[1];
+                double b = data[2];
+                //Log.d(TAG, "resultado: colores nat R:" + data[0]+"     G: "+data[1]+"     B: "+data[2]);
+                if (r == 255 && g == 0 && b == 0) {
+                    if(x>up)up=x;
+                    if(x<down)down=x;
+                    if(y>right)right=y;
+                    if(y<left)left=y;
+                }
+            }
+        }
+        Log.d(TAG, "resultado: puntos maximos up:"+up+"  down:+"+down+"   left:"+left+"   right:"+right);
+
     }
 }
