@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "C:\\Users\\Nathaniel\\Desktop\\color-blob-detection-verAlt-3.3.0\\openCVSamplecolorblobdetection\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
+        "outputFile": "C:\\Users\\Nathaniel\\Documents\\GitHub\\TT\\color-blob-detection-verAlt-3.3.0\\openCVSamplecolorblobdetection\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
         "map": [
             {
                 "to": {
@@ -1434,7 +1434,7 @@
                     "endOffset": 6329
                 },
                 "from": {
-                    "file": "C:\\Users\\Nathaniel\\Desktop\\color-blob-detection-verAlt-3.3.0\\openCVSamplecolorblobdetection\\src\\main\\res\\values\\colors.xml",
+                    "file": "C:\\Users\\Nathaniel\\Documents\\GitHub\\TT\\color-blob-detection-verAlt-3.3.0\\openCVSamplecolorblobdetection\\src\\main\\res\\values\\colors.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,
@@ -1453,7 +1453,7 @@
                     "endOffset": 6376
                 },
                 "from": {
-                    "file": "C:\\Users\\Nathaniel\\Desktop\\color-blob-detection-verAlt-3.3.0\\openCVSamplecolorblobdetection\\src\\main\\res\\values\\colors.xml",
+                    "file": "C:\\Users\\Nathaniel\\Documents\\GitHub\\TT\\color-blob-detection-verAlt-3.3.0\\openCVSamplecolorblobdetection\\src\\main\\res\\values\\colors.xml",
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,
@@ -1472,7 +1472,7 @@
                     "endOffset": 6427
                 },
                 "from": {
-                    "file": "C:\\Users\\Nathaniel\\Desktop\\color-blob-detection-verAlt-3.3.0\\openCVSamplecolorblobdetection\\src\\main\\res\\values\\colors.xml",
+                    "file": "C:\\Users\\Nathaniel\\Documents\\GitHub\\TT\\color-blob-detection-verAlt-3.3.0\\openCVSamplecolorblobdetection\\src\\main\\res\\values\\colors.xml",
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,
@@ -4037,7 +4037,7 @@
                     "endOffset": 36231
                 },
                 "from": {
-                    "file": "C:\\Users\\Nathaniel\\Desktop\\color-blob-detection-verAlt-3.3.0\\openCVSamplecolorblobdetection\\src\\main\\res\\values\\strings.xml",
+                    "file": "C:\\Users\\Nathaniel\\Documents\\GitHub\\TT\\color-blob-detection-verAlt-3.3.0\\openCVSamplecolorblobdetection\\src\\main\\res\\values\\strings.xml",
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,
@@ -4152,7 +4152,7 @@
                     "endOffset": 36971
                 },
                 "from": {
-                    "file": "C:\\Users\\Nathaniel\\Desktop\\color-blob-detection-verAlt-3.3.0\\openCVSamplecolorblobdetection\\src\\main\\res\\values\\styles.xml",
+                    "file": "C:\\Users\\Nathaniel\\Documents\\GitHub\\TT\\color-blob-detection-verAlt-3.3.0\\openCVSamplecolorblobdetection\\src\\main\\res\\values\\styles.xml",
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,

@@ -167,7 +167,6 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
             btntick.setVisibility(View.VISIBLE);
             btncross.setVisibility(View.VISIBLE);
             btnadd.setVisibility(View.VISIBLE);
-
             btntick.bringToFront();
             btncross.bringToFront();
             btnadd.bringToFront();
