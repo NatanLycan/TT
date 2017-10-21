@@ -69,6 +69,8 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
     private boolean savim = false;
     private String MEDIDA = "";
     private boolean nath = false;
+    ArrayList<List<MatOfPoint>> ListaContornosRojos = new ArrayList<List<MatOfPoint>>();
+    ArrayList<List<MatOfPoint>> ListaContornosVerdes = new ArrayList<List<MatOfPoint>>();
     private Mat dibujada;
 
     private CameraBridgeViewBase mOpenCvCameraView;
@@ -273,6 +275,13 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
 
         //NCH 23/09/2017 Busco contorno con centro mas cerca al click
         List<MatOfPoint> thecontour = TheContour(contours, p);
+        if ( pp_num == 1 ){
+            ListaContornosRojos.add(thecontour);
+        }
+        else{
+            ListaContornosVerdes.add(thecontour);
+        }
+
 
         //NCH 10/10/2017 Guardo la imagen inicial para por si elige no mantener la imagen
 
@@ -563,6 +572,7 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
     public void BtnTickF(View view) {
         if (pp_num == 2) {
             //mRgba=dibujada.clone();
+            //resultado2();
             resultado();
             SaveImage();
         }
@@ -591,6 +601,43 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
     }
 
     public void resultado() {
+        double down_rojo = -1, up_rojo  = mRgba.cols()+1, left_rojo = mRgba.rows()+1, right_rojo = -1;
+        double down_verde = -1, up_verde = mRgba.cols()+1, left_verde= mRgba.rows()+1, right_verde = -1;
+        for(List<MatOfPoint> contornos : ListaContornosRojos ){
+            for(MatOfPoint mop: contornos) {
+                org.opencv.core.Point[] points = mop.toArray();
+                for (int i = 0; i < points.length; i++)
+                {
+                    double x = points[i].x ;
+                    double y = points[i].y ;
+                    if(x>right_rojo)right_rojo=x;
+                    if(x<left_rojo)left_rojo=x;
+                    if(y>down_rojo)down_rojo=y;
+                    if(y<up_rojo)up_rojo=y;
+                }
+            }
+        }
+        for(List<MatOfPoint> contornos : ListaContornosVerdes ){
+            for(MatOfPoint mop: contornos) {
+                org.opencv.core.Point[] points = mop.toArray();
+                for (int i = 0; i < points.length; i++)
+                {
+                    double x = points[i].x ;
+                    double y = points[i].y ;
+                    if(x>right_verde)right_verde=x;
+                    if(x<left_verde)left_verde=x;
+                    if(y>down_verde)down_verde=y;
+                    if(y<up_verde)up_verde=y;
+                }
+            }
+        }
+        Log.d(TAG, "resultado: puntos maximos rojos up:"+up_rojo+"  down:+"+down_rojo+"   left:"+left_rojo+"   right:"+right_rojo);
+        Log.d(TAG, "resultado: puntos maximos verde up:"+up_verde+"  down:+"+down_verde+"   left:"+left_verde+"   right:"+right_verde);
+        dibujo(new Point(right_rojo, up_rojo), new Point(left_rojo, down_rojo), 1);
+        dibujo(new Point(right_verde, up_verde), new Point(left_verde, down_verde), 2);
+    }
+
+    public void resultado2() {
         /**
          *  NCH 14/10/2017
          *
@@ -628,8 +675,7 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
             }
         }
         Log.d(TAG, "resultado: puntos maximos up_r:" + up_r + "  down_r:" + down_r + "   left_r:" + left_r + "   right_r:" + right_r);
-        dibujo(new Point(right_r, up_r), new Point(left_r, down_r), 1);
-        dibujo(new Point(right_g, up_g), new Point(left_g, down_g), 2);
+        Log.d(TAG, "resultado: puntos maximos up_g:" + up_g + "  down_g:" + down_g + "   left_g:" + left_g + "   right_g:" + right_g);
     }
 
     public void dibujo(Point p1, Point p2, int i) {
