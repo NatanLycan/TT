@@ -641,7 +641,7 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         if (i == 1) {
             dibujada = pp_mRgba_original.clone();
             //cvtColor(dibujada, dibujada, COLOR_GRAY2BGR);
-            Imgproc.rectangle(dibujada, p1, p2, new Scalar(255, 0, 0), 3);
-        }else Imgproc.rectangle(dibujada, p1, p2, new Scalar(0, 255, 0), 3);
+            Imgproc.rectangle(dibujada, p1, p2, new Scalar(255, 0, 0, 255), 1);
+        }else Imgproc.rectangle(dibujada, p1, p2, new Scalar(0, 255, 0,255), 1);
     }
 }
