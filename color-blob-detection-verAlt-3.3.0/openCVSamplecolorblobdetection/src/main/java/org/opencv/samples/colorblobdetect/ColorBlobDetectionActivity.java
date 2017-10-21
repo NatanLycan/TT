@@ -44,6 +44,7 @@ import static java.lang.Math.abs;
 import static java.lang.Math.sqrt;
 import static java.lang.System.exit;
 import static org.opencv.imgproc.Imgproc.COLOR_GRAY2BGR;
+import static org.opencv.imgproc.Imgproc.LINE_8;
 import static org.opencv.imgproc.Imgproc.cvtColor;
 
 public class ColorBlobDetectionActivity extends Activity implements OnTouchListener, CvCameraViewListener2 {
@@ -72,6 +73,11 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
     ArrayList<List<MatOfPoint>> ListaContornosRojos = new ArrayList<List<MatOfPoint>>();
     ArrayList<List<MatOfPoint>> ListaContornosVerdes = new ArrayList<List<MatOfPoint>>();
     private Mat dibujada;
+    private double x_r_Pix = 0, y_r_Pix = 0;//x & y en pixeles referencia (Tarjeta)
+    private double x_g_Pix = 0, y_g_Pix = 0;//x & y en pixeles O. a medir
+    private double x_r_cm = 8.6, y_r_cm = 5.4;//x & y en centimetros
+    private double x_g_um = 0, y_g_um = 0;//dependiendo de la unidad seleccionada se transformara el resulatado medido
+
 
     private CameraBridgeViewBase mOpenCvCameraView;
 
@@ -275,12 +281,11 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
 
         //NCH 23/09/2017 Busco contorno con centro mas cerca al click
         List<MatOfPoint> thecontour = TheContour(contours, p);
-        if ( pp_num == 1 ){
+       /* if (pp_num == 1) {
             ListaContornosRojos.add(thecontour);
-        }
-        else{
+        } else {
             ListaContornosVerdes.add(thecontour);
-        }
+        }*/
 
 
         //NCH 10/10/2017 Guardo la imagen inicial para por si elige no mantener la imagen
@@ -600,44 +605,58 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         pp_espera = false;
     }
 
-    public void resultado() {
-        double down_rojo = -1, up_rojo  = mRgba.cols()+1, left_rojo = mRgba.rows()+1, right_rojo = -1;
-        double down_verde = -1, up_verde = mRgba.cols()+1, left_verde= mRgba.rows()+1, right_verde = -1;
-        for(List<MatOfPoint> contornos : ListaContornosRojos ){
-            for(MatOfPoint mop: contornos) {
-                org.opencv.core.Point[] points = mop.toArray();
-                for (int i = 0; i < points.length; i++)
-                {
-                    double x = points[i].x ;
-                    double y = points[i].y ;
-                    if(x>right_rojo)right_rojo=x;
-                    if(x<left_rojo)left_rojo=x;
-                    if(y>down_rojo)down_rojo=y;
-                    if(y<up_rojo)up_rojo=y;
+    /*
+        public void resultado2() {
+            double down_rojo = -1, up_rojo = mRgba.cols() + 1, left_rojo = mRgba.rows() + 1, right_rojo = -1;
+            double down_verde = -1, up_verde = mRgba.cols() + 1, left_verde = mRgba.rows() + 1, right_verde = -1;
+            for (List<MatOfPoint> contornos : ListaContornosRojos) {
+                for (MatOfPoint mop : contornos) {
+                    org.opencv.core.Point[] points = mop.toArray();
+                    for (int i = 0; i < points.length; i++) {
+                        double x = points[i].x;
+                        double y = points[i].y;
+                        if (x > right_rojo) right_rojo = x;
+                        if (x < left_rojo) left_rojo = x;
+                        if (y > down_rojo) down_rojo = y;
+                        if (y < up_rojo) up_rojo = y;
+                    }
                 }
             }
-        }
-        for(List<MatOfPoint> contornos : ListaContornosVerdes ){
-            for(MatOfPoint mop: contornos) {
-                org.opencv.core.Point[] points = mop.toArray();
-                for (int i = 0; i < points.length; i++)
-                {
-                    double x = points[i].x ;
-                    double y = points[i].y ;
-                    if(x>right_verde)right_verde=x;
-                    if(x<left_verde)left_verde=x;
-                    if(y>down_verde)down_verde=y;
-                    if(y<up_verde)up_verde=y;
+            for (List<MatOfPoint> contornos : ListaContornosVerdes) {
+                for (MatOfPoint mop : contornos) {
+                    org.opencv.core.Point[] points = mop.toArray();
+                    for (int i = 0; i < points.length; i++) {
+                        double x = points[i].x;
+                        double y = points[i].y;
+                        if (x > right_verde) right_verde = x;
+                        if (x < left_verde) left_verde = x;
+                        if (y > down_verde) down_verde = y;
+                        if (y < up_verde) up_verde = y;
+                    }
                 }
             }
-        }
-        Log.d(TAG, "resultado: puntos maximos rojos up:"+up_rojo+"  down:+"+down_rojo+"   left:"+left_rojo+"   right:"+right_rojo);
-        Log.d(TAG, "resultado: puntos maximos verde up:"+up_verde+"  down:+"+down_verde+"   left:"+left_verde+"   right:"+right_verde);
-        dibujo(new Point(right_rojo, up_rojo), new Point(left_rojo, down_rojo), 1);
-        dibujo(new Point(right_verde, up_verde), new Point(left_verde, down_verde), 2);
-    }
+            Log.d(TAG, "resultado: puntos maximos rojos up:" + up_rojo + "  down:+" + down_rojo + "   left:" + left_rojo + "   right:" + right_rojo);
+            Log.d(TAG, "resultado: puntos maximos verde up:" + up_verde + "  down:+" + down_verde + "   left:" + left_verde + "   right:" + right_verde);
+            dibujo(new Point(right_rojo, up_rojo), new Point(left_rojo, down_rojo), 1);
+            dibujo(new Point(right_verde, up_verde), new Point(left_verde, down_verde), 2);
+            x_r_Pix = abs(right_rojo - left_rojo);
+            y_r_Pix = abs(up_rojo - down_rojo);
+            x_g_Pix = abs(right_verde - left_verde);
+            y_g_Pix = abs(up_verde - down_verde);
 
-    public void resultado2() {
+            x_g_um = x_g_Pix * (x_r_cm / x_r_Pix);
+            y_g_um = y_g_Pix * (y_r_cm / y_r_Pix);
+
+
+            Log.d(TAG, "resultado: Tarjeta   x: " + x_r_Pix + "     y: " + y_r_Pix);
+            Log.d(TAG, "resultado: Objeto   x: " + x_g_Pix + "     y: " + y_g_Pix);
+            Log.d(TAG, "resultado: Tarjeta   x: " + x_r_cm + "     y: " + y_r_cm);
+            Log.d(TAG, "resultado: Objeto   x: " + x_g_um + "     y: " + y_g_um);
+
+
+        }
+    */
+    public void resultado() {
         /**
          *  NCH 14/10/2017
          *
@@ -674,8 +693,38 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
                 }
             }
         }
+        dibujo(new Point(right_r, up_r), new Point(left_r, down_r), 1);
+        dibujo(new Point(right_g, up_g), new Point(left_g, down_g), 2);
         Log.d(TAG, "resultado: puntos maximos up_r:" + up_r + "  down_r:" + down_r + "   left_r:" + left_r + "   right_r:" + right_r);
         Log.d(TAG, "resultado: puntos maximos up_g:" + up_g + "  down_g:" + down_g + "   left_g:" + left_g + "   right_g:" + right_g);
+
+
+        x_r_Pix = abs(up_r - down_r);
+        y_r_Pix = abs(right_r - left_r);
+        x_g_Pix = abs(up_g - down_g);
+        y_g_Pix = abs(right_g - left_g);
+
+        /**
+         * TODO
+         */
+        if (y_g_Pix > x_g_Pix) {
+            Double x = y_g_Pix;
+            y_g_Pix = x_g_Pix;
+            x_g_Pix = x;
+        }
+
+        x_g_um = x_g_Pix * (x_r_cm / x_r_Pix);
+        y_g_um = y_g_Pix * (y_r_cm / y_r_Pix);
+
+        String sw = "Medidas Obtenidas: " + String.format("%.2f", x_g_um) + " * " + String.format("%.2f", y_g_um);
+        Imgproc.putText(dibujada, sw, new Point(100, 100), 1, 4, new Scalar(0, 0, 0, 255), 6, LINE_8, false);
+        Imgproc.putText(dibujada, sw, new Point(100, 100), 1, 4, new Scalar(255, 255, 255, 255), 4, LINE_8, false);
+
+
+        Log.d(TAG, "resultado: Tarjeta   x: " + x_r_Pix + "     y: " + y_r_Pix);
+        Log.d(TAG, "resultado: Objeto   x: " + x_g_Pix + "     y: " + y_g_Pix);
+        Log.d(TAG, "resultado: Tarjeta   x: " + x_r_cm + "     y: " + y_r_cm);
+        Log.d(TAG, "resultado: Objeto   x: " + x_g_um + "     y: " + y_g_um);
     }
 
     public void dibujo(Point p1, Point p2, int i) {
@@ -688,6 +737,6 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
             dibujada = pp_mRgba_original.clone();
             //cvtColor(dibujada, dibujada, COLOR_GRAY2BGR);
             Imgproc.rectangle(dibujada, p1, p2, new Scalar(255, 0, 0, 255), 1);
-        }else Imgproc.rectangle(dibujada, p1, p2, new Scalar(0, 255, 0,255), 1);
+        } else Imgproc.rectangle(dibujada, p1, p2, new Scalar(0, 255, 0, 255), 1);
     }
 }
