@@ -1,4 +1,4 @@
-#Thu Oct 05 22:21:47 CDT 2017
-base.0=C\:\\Users\\Nathaniel\\Documents\\GitHub\\TT\\color-blob-detection-verAlt-3.3.0\\openCVSamplecolorblobdetection\\build\\intermediates\\transforms\\dexMerger\\debug\\1
+#Sun Oct 22 22:33:53 CDT 2017
+base.0=C\:\\Users\\Larissa\\Downloads\\0.Versiones Proportion\\color-blob-detection-verAlt-3.3.0\\openCVSamplecolorblobdetection\\build\\intermediates\\transforms\\dexMerger\\debug\\1
 renamed.0=classes.dex
-file.0=C\:\\Users\\Nathaniel\\Documents\\GitHub\\TT\\color-blob-detection-verAlt-3.3.0\\openCVSamplecolorblobdetection\\build\\intermediates\\transforms\\dexMerger\\debug\\1\\classes.dex
+file.0=C\:\\Users\\Larissa\\Downloads\\0.Versiones Proportion\\color-blob-detection-verAlt-3.3.0\\openCVSamplecolorblobdetection\\build\\intermediates\\transforms\\dexMerger\\debug\\1\\classes.dex

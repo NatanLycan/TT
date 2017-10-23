@@ -73,9 +73,11 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
     ArrayList<List<MatOfPoint>> ListaContornosRojos = new ArrayList<List<MatOfPoint>>();
     ArrayList<List<MatOfPoint>> ListaContornosVerdes = new ArrayList<List<MatOfPoint>>();
     private Mat dibujada;
+    // PP NLJS 21/10/2017 Creo objeto Mat para marcar los vértices y hacer corrección de angulos;
+    private Mat vertices;
     private double x_r_Pix = 0, y_r_Pix = 0;//x & y en pixeles referencia (Tarjeta)
     private double x_g_Pix = 0, y_g_Pix = 0;//x & y en pixeles O. a medir
-    private double x_r_cm = 8.6, y_r_cm = 5.4;//x & y en centimetros
+    private double x_r_cm = 8.6, y_r_cm = 5.4;//x & y en centimetros (Tarjeta)
     private double x_g_um = 0, y_g_um = 0;//dependiendo de la unidad seleccionada se transformara el resulatado medido
 
 
@@ -423,7 +425,8 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         intent.putExtra("PP_EXTRA_MAT2", mSpectrum);
         intent.putExtra("PP_EXTRA_SIZE", SPECTRUM_SIZE);
         intent.putExtra("PP_EXTRA_SCALAR3", CONTOUR_COLOR);
-        intent.putExtra("PP_EXTRA_STRING", pp_imgAdd);
+        // PP NLJS 22/10/2017 Mando pp_imgAdd3 para desplegar la img con los resultados gráficos
+        intent.putExtra("PP_EXTRA_STRING", pp_imgAdd3);
 
         // PP NLJS 16/07/2017 Inicializo la actividad
         startActivity(intent);
@@ -484,7 +487,7 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
             //PP NLJS 13/08/2017 Cuento cuantas fotos hay en la carpeta de Proportion para asignarle un número a esta nueva img
             String[] pp_Files = pp_img.list();
             int pp_totFiles = pp_Files.length;
-            pp_totFiles = pp_totFiles / 2;
+            pp_totFiles = pp_totFiles / 3;
             String filename = "Proportion_" + pp_totFiles + ".png";
             String filename2 = "Proportion_" + pp_totFiles + "_ori.png";
             String filename3 = "Proportion_" + pp_totFiles + "_draw.png";
@@ -663,15 +666,22 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
          *  Esta funcion devuelve el resultado grafico de todoo el proceso
          *
          *  mRgba contiene la imagen final con los contornos
-         *      - Contornos Rojo: Objeto a Medir
-         *      - Contornos Verde: Objeto de referencia
+         *      - Contornos Rojo: Objeto a Medir (22/10/2017 NLJS Rojo es la tarjeta, objeto de referencia)
+         *      - Contornos Verde: Objeto de referencia (22/10/2017 NLJS Verde es el objeto a medir)
          *  pp_mRgba_original contiene la imagen original
          *
          *  color
          */
 
-        int down_r = -1, up_r = mRgba.cols() + 1, left_r = mRgba.rows() + 1, right_r = -1;
-        int down_g = -1, up_g = mRgba.cols() + 1, left_g = mRgba.rows() + 1, right_g = -1;
+        // PP NLJS 22/10/2017 Por la forma en la que se hace el recorrido me parece que los valores up corresponden a rows y los valores left a cols,
+        // cols siempre es mayor a rows , por la orientacion esto significa que cols es el eje X, el que se recorre de izq a derecha, xq la matrix mRgba esta 'acostada'
+        //int down_r = -1, up_r = mRgba.cols() + 1, left_r = mRgba.rows() + 1, right_r = -1;
+        //int down_g = -1, up_g = mRgba.cols() + 1, left_g = mRgba.rows() + 1, right_g = -1;
+        int down_r = -1, up_r = mRgba.rows() + 1, left_r = mRgba.cols() + 1, right_r = -1;
+        int down_g = -1, up_g = mRgba.rows() + 1, left_g = mRgba.cols() + 1, right_g = -1;
+        Log.d(TAG, "resultado: width: " + mRgba.cols());
+        Log.d(TAG, "resultado: rowa: " + mRgba.rows());
+
         for (int x = 0; x < mRgba.rows(); x++) {
             for (int y = 0; y < mRgba.cols(); y++) {
                 double[] data = mRgba.get(x, y);
@@ -695,6 +705,12 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         }
         dibujo(new Point(right_r, up_r), new Point(left_r, down_r), 1);
         dibujo(new Point(right_g, up_g), new Point(left_g, down_g), 2);
+
+        // PP NLJS 21/10/2017 Uno los 4 vertices encontrados con lineas rectas;
+        /// Ignorar linea de codigo Imgproc.line(dibujada, new Point(right_r, up_r),new Point(left_r, down_r), new Scalar(0, 0, 255, 255), 1);
+
+
+
         Log.d(TAG, "resultado: puntos maximos up_r:" + up_r + "  down_r:" + down_r + "   left_r:" + left_r + "   right_r:" + right_r);
         Log.d(TAG, "resultado: puntos maximos up_g:" + up_g + "  down_g:" + down_g + "   left_g:" + left_g + "   right_g:" + right_g);
 
@@ -707,18 +723,36 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         /**
          * TODO
          */
-        if (y_g_Pix > x_g_Pix) {
+        // PP NLJS 22/10/2017 No es necesario cambiar estas medidas porque no afectan en la formula;
+        /*if (y_g_Pix > x_g_Pix) {
             Double x = y_g_Pix;
             y_g_Pix = x_g_Pix;
             x_g_Pix = x;
+        }*/
+
+        // PP NLJS 22/10/2017 Es necesario saber cual es la medida mayor en pixeles de la tarjeta (conocer x) para aplicar la formula correcta;
+        // PP NLJS 22/10/2017 Bandera para saber si la tarjeta estaba parada (y era mayor que x);
+        Boolean pp_flag = false;
+        if (y_r_Pix > x_r_Pix) {
+            pp_flag = true;
         }
 
-        x_g_um = x_g_Pix * (x_r_cm / x_r_Pix);
-        y_g_um = y_g_Pix * (y_r_cm / y_r_Pix);
+        // PP NLJS 22/10/2017 Si la tarjeta estaba parada y_r_Pix debe ir en la primer formula,
+        // recuerden que x_r_cm y y_r_cm tienen valores constantes (x_r_cm siempre es el mayor por eso si importa saber como esta la tarjeta y no importa como esta el objeto);
+        if(pp_flag == true){
+            x_g_um = (x_g_Pix * x_r_cm) / y_r_Pix;
+            y_g_um = (y_g_Pix * y_r_cm) / x_r_Pix;
+        }else {
+            x_g_um = (x_g_Pix * x_r_cm) / x_r_Pix;
+            y_g_um = (y_g_Pix * y_r_cm) / y_r_Pix;
+        }
+
+        Log.d(TAG, "resultado: x_g_um:" + x_g_um);
+        Log.d(TAG, "resultado: y_g_um:" + y_g_um);
 
         String sw = "Medidas Obtenidas: " + String.format("%.2f", x_g_um) + " * " + String.format("%.2f", y_g_um);
-        Imgproc.putText(dibujada, sw, new Point(100, 100), 1, 4, new Scalar(0, 0, 0, 255), 6, LINE_8, false);
-        Imgproc.putText(dibujada, sw, new Point(100, 100), 1, 4, new Scalar(255, 255, 255, 255), 4, LINE_8, false);
+        Imgproc.putText(dibujada, sw, new Point(100, 100), 1, 2, new Scalar(0, 0, 0, 255), 6, LINE_8, false);
+        Imgproc.putText(dibujada, sw, new Point(100, 100), 1, 2, new Scalar(255, 255, 255, 255), 4, LINE_8, false);
 
 
         Log.d(TAG, "resultado: Tarjeta   x: " + x_r_Pix + "     y: " + y_r_Pix);
