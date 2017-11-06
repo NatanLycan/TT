@@ -683,6 +683,7 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         Log.d(TAG, "resultado: rowa: " + mRgba.rows());
 
         for (int x = 0; x < mRgba.rows(); x++) {
+
             for (int y = 0; y < mRgba.cols(); y++) {
                 double[] data = mRgba.get(x, y);
                 double r = data[0];
@@ -703,16 +704,22 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
                 }
             }
         }
-        dibujo(new Point(right_r, up_r), new Point(left_r, down_r), 1);
-        dibujo(new Point(right_g, up_g), new Point(left_g, down_g), 2);
-
-        // PP NLJS 21/10/2017 Uno los 4 vertices encontrados con lineas rectas;
-        /// Ignorar linea de codigo Imgproc.line(dibujada, new Point(right_r, up_r),new Point(left_r, down_r), new Scalar(0, 0, 255, 255), 1);
-
-
+        //dibujo(new Point(right_r, up_r), new Point(left_r, down_r), 1);
+        //dibujo(new Point(right_g, up_g), new Point(left_g, down_g), 2);
 
         Log.d(TAG, "resultado: puntos maximos up_r:" + up_r + "  down_r:" + down_r + "   left_r:" + left_r + "   right_r:" + right_r);
         Log.d(TAG, "resultado: puntos maximos up_g:" + up_g + "  down_g:" + down_g + "   left_g:" + left_g + "   right_g:" + right_g);
+
+        // PP NLJS 06/11/2017 Se crea el objeto en el cual se dibujarán las líneas;
+        dibujada = pp_mRgba_original.clone();
+
+        // PP NLJS 21/10/2017 Uno los 4 vertices encontrados con lineas rectas;
+        busca_coordenadas_vertices( right_r, left_r,1);
+        busca_coordenadas_vertices(up_r,down_r,2);
+
+        // PP NLJS 06/11/2017 Se dibujan las diagonales de la tarjeta;
+        dibujo(new Point(right_r, up_r), new Point(left_r, down_r), 1);
+        dibujo(new Point(right_g, up_g), new Point(left_g, down_g), 2);
 
 
         x_r_Pix = abs(up_r - down_r);
@@ -768,9 +775,76 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
          */
 
         if (i == 1) {
-            dibujada = pp_mRgba_original.clone();
+
             //cvtColor(dibujada, dibujada, COLOR_GRAY2BGR);
             Imgproc.rectangle(dibujada, p1, p2, new Scalar(255, 0, 0, 255), 1);
         } else Imgproc.rectangle(dibujada, p1, p2, new Scalar(0, 255, 0, 255), 1);
+    }
+
+    public void busca_coordenadas_vertices(double num1 ,double num2,int op){
+        /**
+         * PP NLJS 22/10/2017
+         * Recorre la matriz con los puntos máximos para encontrar las coordenadas de los vertices
+         *
+         */
+        int x=0,x2=0,y2 = 0;
+        // PP NLJS 22/10/2017 Recorre la img de abajo a arriba
+        if(op == 1){
+            x=0;
+            x2=mRgba.rows()-1;
+            y2 = mRgba.rows() - 1;
+            Log.d(TAG, "resultado: n1:" + (int)num1);
+            Log.d(TAG, "resultado: n2:" + (int)num2);
+
+            for (int y = 0; y < mRgba.rows(); y++) {
+
+                double[] data = mRgba.get(y,(int)num1);
+                double[] data2 = mRgba.get(y2,(int)num2);
+                double r = data[0];
+                double g = data[1];
+                double b = data[2];
+                double r2 = data2[0];
+                double g2 = data2[1];
+                double b2 = data2[2];
+
+                if (r == 255 && g == 0 && b == 0) {
+                    if(y > x) x = y;
+                }
+                if (r2 == 255 && g2 == 0 && b2 == 0) {
+                    if(y2 < x2) x2 = y2;
+                }y2--;
+            }
+            Imgproc.line(dibujada,  new Point(num2,x2), new Point(num1,x),new Scalar(0, 0, 255, 255), 1);
+        }else {
+            x=0;
+            x2=mRgba.cols()-1;
+            y2 = mRgba.cols() - 1;
+            Log.d(TAG, "resultado: n1:" + (int) num1);
+            Log.d(TAG, "resultado: n2:" + (int) num2);
+
+            for (int y = 0; y < mRgba.cols(); y++) {
+
+                double[] data = mRgba.get((int) num1,y);
+                double[] data2 = mRgba.get((int) num2,y2);
+                double r = data[0];
+                double g = data[1];
+                double b = data[2];
+                double r2 = data2[0];
+                double g2 = data2[1];
+                double b2 = data2[2];
+
+                if (r == 255 && g == 0 && b == 0) {
+                    if(y > x) x = y;
+                }
+                if (r2 == 255 && g2 == 0 && b2 == 0) {
+                    if(y2 < x2) x2 = y2;
+                }y2--;
+            }
+            Imgproc.line(dibujada, new Point(x2, num2),new Point(x,num1), new Scalar(0, 0, 255, 255), 1);
+
+        }
+        Log.d(TAG, "resultado: x1:" + x);
+        Log.d(TAG, "resultado: x2:" + x2);
+
     }
 }
