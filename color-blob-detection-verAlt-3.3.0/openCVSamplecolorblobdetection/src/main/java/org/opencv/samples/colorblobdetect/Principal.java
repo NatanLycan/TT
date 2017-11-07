@@ -20,6 +20,7 @@ public class Principal extends Activity {
     RadioButton rd_pies = null;
     Button boton_camara = null;
     Button btnAceptar = null;
+    Button btnGaleria = null;
     Dialog dialog = null;
 
     @Override
@@ -28,6 +29,7 @@ public class Principal extends Activity {
         setContentView(R.layout.activity_principal);
         boton_camara = (Button) findViewById(R.id.boton_camara);
         btnAceptar = (Button) findViewById(R.id.btn_aceptar);
+        btnGaleria = (Button) findViewById(R.id.boton_galeria);
         boton_camara.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,7 +79,13 @@ public class Principal extends Activity {
                 dialog.show();
             }
         });
-
+        btnGaleria.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Principal.this, Galeria.class);
+                Principal.this.startActivity(intent);
+            }
+        });
 
     }
 }
