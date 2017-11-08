@@ -160,6 +160,7 @@ public class P extends Activity {
          *
          */
         try {
+            Log.d(TAG, "chargeFile: entrada: "+pp_imgAdd);
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inPreferredConfig = Bitmap.Config.ARGB_8888;
             Bitmap pp_bitmap = BitmapFactory.decodeFile(pp_imgAdd, options);

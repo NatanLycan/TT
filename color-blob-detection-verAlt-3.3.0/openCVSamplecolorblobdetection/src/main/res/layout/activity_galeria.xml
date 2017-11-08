@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#aaaaaa"
     tools:context="org.opencv.samples.colorblobdetect.Galeria"
-    android:padding="5dp">
+    android:padding="1dp">
 
 
     <!--<GridView-->
@@ -38,5 +38,6 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/gallery"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+        android:layout_height="match_parent"
+        android:background="@drawable/geom720"></android.support.v7.widget.RecyclerView>
 </RelativeLayout>

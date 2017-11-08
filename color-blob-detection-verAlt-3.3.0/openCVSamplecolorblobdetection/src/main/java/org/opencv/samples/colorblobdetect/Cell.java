@@ -1,12 +1,15 @@
 package org.opencv.samples.colorblobdetect;
 
+import android.graphics.Bitmap;
+
 /**
  * Created by TTII_B095
  */
 
 public class Cell {
     private String title;
-    private Integer img;
+//    private Integer img;
+    private Bitmap img;
 
     public String getTitle() {
         return title;
@@ -16,11 +19,19 @@ public class Cell {
         this.title = title;
     }
 
-    public Integer getImg() {
+    public Bitmap getImg() {
         return img;
     }
 
-    public void setImg(Integer img) {
+    public void setImg(Bitmap img) {
         this.img = img;
     }
+
+    //    public Integer getImg() {
+//        return img;
+//    }
+//
+//    public void setImg(Integer img) {
+//        this.img = img;
+//    }
 }

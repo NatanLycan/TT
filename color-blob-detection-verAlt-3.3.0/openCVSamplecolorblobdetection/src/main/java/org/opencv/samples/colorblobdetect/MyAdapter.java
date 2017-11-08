@@ -37,11 +37,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public void onBindViewHolder(MyAdapter.ViewHolder viewHolder, int i) {
         viewHolder.title.setText(galleryList.get(i).getTitle());
         viewHolder.img.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        viewHolder.img.setImageResource(galleryList.get(i).getImg());
+        //viewHolder.img.setImageResource(galleryList.get(i).getImg());
+        viewHolder.img.setImageBitmap(galleryList.get(i).getImg());
         viewHolder.img.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, "Image", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Pictures/Proportion", Toast.LENGTH_SHORT).show();
             }
         });
     }

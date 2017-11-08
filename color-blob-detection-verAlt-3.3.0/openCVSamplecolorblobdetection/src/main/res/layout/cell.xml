@@ -9,8 +9,8 @@
         android:textColor="#000000"
         android:textStyle="bold"
         android:adjustViewBounds="true"
-        android:layout_width="match_parent"
-        android:layout_height="200px" />
+        android:layout_width="700px"
+        android:layout_height="500px" />
 
     <android.support.v7.widget.AppCompatAutoCompleteTextView
         android:id="@+id/title"
