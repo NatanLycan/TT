@@ -52,7 +52,6 @@
             android:label="@string/app_name"
             android:screenOrientation="landscape" />
         <activity android:name=".P" />
-        <activity android:name=".Galeria"></activity>
     </application>
 
 </manifest>

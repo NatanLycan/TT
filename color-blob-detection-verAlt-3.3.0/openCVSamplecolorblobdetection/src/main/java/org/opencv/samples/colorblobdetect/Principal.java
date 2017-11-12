@@ -82,8 +82,8 @@ public class Principal extends Activity {
         btnGaleria.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Principal.this, Galeria.class);
-                Principal.this.startActivity(intent);
+                //Intent intent = new Intent(Principal.this, Galeria.class);
+                //Principal.this.startActivity(intent);
             }
         });
 

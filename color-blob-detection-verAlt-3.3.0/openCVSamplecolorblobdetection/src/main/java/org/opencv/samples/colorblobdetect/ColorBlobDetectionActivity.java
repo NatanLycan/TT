@@ -2,6 +2,7 @@ package org.opencv.samples.colorblobdetect;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,6 +80,9 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
     private double x_g_Pix = 0, y_g_Pix = 0;//x & y en pixeles O. a medir
     private double x_r_cm = 8.6, y_r_cm = 5.4;//x & y en centimetros (Tarjeta)
     private double x_g_um = 0, y_g_um = 0;//dependiendo de la unidad seleccionada se transformara el resulatado medido
+    // PP NLJS 11/11/2017 Arreglo para hacer búsquedas en la matriz
+    ArrayList <ArrayList<double[]>> find;
+
 
 
     private CameraBridgeViewBase mOpenCvCameraView;
@@ -462,6 +466,7 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
             pp_bmp = Bitmap.createBitmap(mRgba.cols(), mRgba.rows(), Bitmap.Config.ARGB_8888);
             pp_bmp_ori = Bitmap.createBitmap(pp_mRgba_original.cols(), pp_mRgba_original.rows(), Bitmap.Config.ARGB_8888);
             pp_bmp_draw = Bitmap.createBitmap(dibujada.cols(), dibujada.rows(), Bitmap.Config.ARGB_8888);
+
             //PP NLJS 06/08/2017 Realizo la conversión
             Utils.matToBitmap(mRgba, pp_bmp);
             Utils.matToBitmap(pp_mRgba_original, pp_bmp_ori);
@@ -672,6 +677,8 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
          *
          *  color
          */
+        // PP NLJS 11/11/2017 Inicializa la matriz de búsqueda
+        getDataMatrix();
 
         // PP NLJS 22/10/2017 Por la forma en la que se hace el recorrido me parece que los valores up corresponden a rows y los valores left a cols,
         // cols siempre es mayor a rows , por la orientacion esto significa que cols es el eje X, el que se recorre de izq a derecha, xq la matrix mRgba esta 'acostada'
@@ -679,17 +686,22 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         //int down_g = -1, up_g = mRgba.cols() + 1, left_g = mRgba.rows() + 1, right_g = -1;
         int down_r = -1, up_r = mRgba.rows() + 1, left_r = mRgba.cols() + 1, right_r = -1;
         int down_g = -1, up_g = mRgba.rows() + 1, left_g = mRgba.cols() + 1, right_g = -1;
-        Log.d(TAG, "resultado: width: " + mRgba.cols());
-        Log.d(TAG, "resultado: rowa: " + mRgba.rows());
+
+        Log.d(TAG, "PP. Función: resultado: width: " + mRgba.cols());
+        Log.d(TAG, "PP. Función: resultado: rowa: " + mRgba.rows());
 
         for (int x = 0; x < mRgba.rows(); x++) {
+            // PP NLJS 11/11/2017 Obtiene la fila x, la guarda en una variable temporal
+            ArrayList<double[]> temporal = find.get(x);
 
             for (int y = 0; y < mRgba.cols(); y++) {
-                double[] data = mRgba.get(x, y);
+                // PP NLJS 11/11/2017 Obtiene la pel pixel y, guarda el RGB en una variable temporal
+                double[] data = temporal.get(y);
+
                 double r = data[0];
                 double g = data[1];
                 double b = data[2];
-                //Log.d(TAG, "resultado: colores nat R:" + data[0]+"     G: "+data[1]+"     B: "+data[2]);
+
                 if (r == 255 && g == 0 && b == 0) {
                     if (x > down_r) down_r = x;
                     if (x < up_r) up_r = x;
@@ -702,22 +714,53 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
                     if (y > right_g) right_g = y;
                     if (y < left_g) left_g = y;
                 }
-            }
-        }
-        //dibujo(new Point(right_r, up_r), new Point(left_r, down_r), 1);
-            //dibujo(new Point(right_g, up_g), new Point(left_g, down_g), 2);
+            } //for cols
+        } //for rows
 
-        Log.d(TAG, "resultado: puntos maximos up_r:" + up_r + "  down_r:" + down_r + "   left_r:" + left_r + "   right_r:" + right_r);
-        Log.d(TAG, "resultado: puntos maximos up_g:" + up_g + "  down_g:" + down_g + "   left_g:" + left_g + "   right_g:" + right_g);
+        Log.d(TAG, "PP. Función: Resultado. puntos maximos up_r:" + up_r + "  down_r:" + down_r + "   left_r:" + left_r + "   right_r:" + right_r);
+        Log.d(TAG, "PP. Función: Resultado.  puntos maximos up_g:" + up_g + "  down_g:" + down_g + "   left_g:" + left_g + "   right_g:" + right_g);
 
         // PP NLJS 06/11/2017 Se crea el objeto en el cual se dibujarán las líneas;
         dibujada = pp_mRgba_original.clone();
 
-        // PP NLJS 21/10/2017 Uno los 4 vertices encontrados con lineas rectas;
-        busca_coordenadas_vertices( right_r, left_r,1);
-        busca_coordenadas_vertices(up_r,down_r,2);
 
-        // PP NLJS 06/11/2017 Se dibujan las diagonales de la tarjeta;
+        // PP NLJS 21/10/2017 Guarda los 4 vertices como puntos y los une con lineas rectas;
+        ArrayList<Point>verticesTar = new ArrayList<Point>(4);
+        ArrayList<Point>verticesObj = new ArrayList<Point>(4);
+
+        // PP NLJS 21/10/2017 Vértices tarjeta, es importante el orden en el que se mandan a llamar estas 4 lineas;
+        findVertexes(left_r,right_r, 1,255,0,0,verticesTar);
+        findVertexes(down_r,up_r,2,255,0,0,verticesTar);
+
+        Log.d(TAG, "PP. Función: Resultado. Points:" + verticesTar);
+
+        // PP NLJS 21/10/2017 Vértices objeto;
+        findVertexes(left_g, right_g,1,0,255,0,verticesObj);
+        findVertexes(down_g,up_g,2,0,255,0,verticesObj);
+
+        Log.d(TAG, "PP. Función: Resultado. Points:" + verticesObj);
+
+        // PP NLJS 11/11/2017 Calcular ángulo de rotación;
+        double angleTar = findAngle(verticesTar.get(2),verticesTar.get(3));
+        double angleObj = findAngle(verticesObj.get(2),verticesObj.get(3));
+
+        // PP NLJS 11/11/2017 Corregir vértices;
+        boolean flag = false;
+        flag = rotateVertex(verticesTar, angleTar);
+
+        // PP NLJS 11/11/2017 Contour es de apoyo para nosotros, cuando consideren que tiene buena precision comentar linea;
+        if(flag == true)    contour(verticesTar,0,255,255);
+        else Log.d(TAG, "PP. Función: Resultado. Error al calcular los neuvos vertices de la tarjeta." );
+
+        flag = false;
+        flag = rotateVertex(verticesObj, angleObj);
+        if(flag == true)    contour(verticesObj,0,255,255);
+        else Log.d(TAG, "PP. Función: Resultado. Error al calcular los neuvos vertices de la tarjeta." );
+
+        // PP NLJS 12/11/2017 Calculo de dimension con la correccion de vértices;
+        getRealDimensions(verticesTar,verticesObj);
+
+        // PP NLJS 06/11/2017 Se dibujan los rectangulos;
         dibujo(new Point(right_r, up_r), new Point(left_r, down_r), 1);
         dibujo(new Point(right_g, up_g), new Point(left_g, down_g), 2);
 
@@ -727,9 +770,7 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         x_g_Pix = abs(up_g - down_g);
         y_g_Pix = abs(right_g - left_g);
 
-        /**
-         * TODO
-         */
+
         // PP NLJS 22/10/2017 No es necesario cambiar estas medidas porque no afectan en la formula;
         /*if (y_g_Pix > x_g_Pix) {
             Double x = y_g_Pix;
@@ -762,10 +803,12 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         Imgproc.putText(dibujada, sw, new Point(100, 100), 1, 2, new Scalar(255, 255, 255, 255), 4, LINE_8, false);
 
 
-        Log.d(TAG, "resultado: Tarjeta   x: " + x_r_Pix + "     y: " + y_r_Pix);
-        Log.d(TAG, "resultado: Objeto   x: " + x_g_Pix + "     y: " + y_g_Pix);
+        //Log.d(TAG, "resultado: Tarjeta   x: " + x_r_Pix + "     y: " + y_r_Pix);
+        //Log.d(TAG, "resultado: Objeto   x: " + x_g_Pix + "     y: " + y_g_Pix);
         Log.d(TAG, "resultado: Tarjeta   x: " + x_r_cm + "     y: " + y_r_cm);
         Log.d(TAG, "resultado: Objeto   x: " + x_g_um + "     y: " + y_g_um);
+
+
     }
 
     public void dibujo(Point p1, Point p2, int i) {
@@ -781,70 +824,349 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         } else Imgproc.rectangle(dibujada, p1, p2, new Scalar(0, 255, 0, 255), 1);
     }
 
-    public void busca_coordenadas_vertices(double num1 ,double num2,int op){
+
+    void getDataMatrix(){
+        /**
+         * PP NLJS 11/11/2017
+         * Copia la información de la imagen a un ListArray para reducir el tiempo en las búsquedas
+         *
+         */
+
+        // PP NLJS 11/11/2017 Establece la primer dimension del arreglo, rows
+        find = new ArrayList<ArrayList<double[]>>(mRgba.rows());
+
+        for (int x = 0; x < mRgba.rows(); x++) {
+            // PP NLJS 11/11/2017 Crea arreglo temporal para llenar e insertar, segunda dimension, cols
+            ArrayList<double[]> temporal = new ArrayList<double[]>(mRgba.cols());
+
+            for (int y = 0; y < mRgba.cols(); y++) {
+                // PP NLJS 11/11/2017 Obtiene el pixel y su información, obligarnos a obtener el pixel en xy hace que tarde
+                // PP NLJS 11/11/2017 con esta función podremos obtener la fila y luego acceder al pixel, reduciendo el tiempo
+                double[] data = mRgba.get(x, y);
+
+                // PP NLJS 11/11/2017 Agrega los valores RGB a la fila temporal en la posicion y
+                temporal.add(y,data);
+            } //for cols
+
+            // PP NLJS 11/11/2017 Agrega la fila temporal en la posicion x
+            find.add(x,temporal);
+        } //for rows
+        Log.d(TAG, "PP. Función: getDataMatrix. Concluido.");
+    }
+
+    public void findVertexes(int num1,int num2,int op,int r, int g, int b, ArrayList<Point> vertices){
         /**
          * PP NLJS 22/10/2017
          * Recorre la matriz con los puntos máximos para encontrar las coordenadas de los vertices
          *
          */
-        int x=0,x2=0,y2 = 0;
+        int var1 = 0,var2 = 0, flag1 = 0, flag2 = 0;
+
         // PP NLJS 22/10/2017 Recorre la img de abajo a arriba
         if(op == 1){
-            x=0;
-            x2=mRgba.rows()-1;
-            y2 = mRgba.rows() - 1;
-            Log.d(TAG, "resultado: n1:" + (int)num1);
-            Log.d(TAG, "resultado: n2:" + (int)num2);
+            var1 = 0;
+            var2 = mRgba.rows() - 1;
+            int x2 = mRgba.rows() - 1,x;
 
-            for (int y = 0; y < mRgba.rows(); y++) {
+            Log.d(TAG, "PP. Función: findVertexes: n1:" + (int)num1);
+            Log.d(TAG, "PP. Función: findVertexes: n2:" + (int)num2);
 
-                double[] data = mRgba.get(y,(int)num1);
-                double[] data2 = mRgba.get(y2,(int)num2);
-                double r = data[0];
-                double g = data[1];
-                double b = data[2];
-                double r2 = data2[0];
-                double g2 = data2[1];
-                double b2 = data2[2];
+            for (x = 0; x < mRgba.rows(); x++) {
+                // PP NLJS 11/11/2017 Obtiene la fila x, la guarda en una variable temporal
+                ArrayList<double[]> temporal = find.get(x);
 
-                if (r == 255 && g == 0 && b == 0) {
-                    if(y > x) x = y;
+                // PP NLJS 11/11/2017 Obtiene la pel pixel y, guarda el RGB en una variable temporal
+                double[] data = temporal.get(num1);
+
+                // PP NLJS 11/11/2017 Variables temporales para validar que solo un valor RGB este en 255, los demás deberán de ser 0
+                int vartemp = 0;
+
+                if(data[0] == r) vartemp++;
+                if(data[1] == g) vartemp++;
+                if(data[2] == b) vartemp++;
+
+                if (vartemp == 3) {
+                    var1 = x;
+                    break;
                 }
-                if (r2 == 255 && g2 == 0 && b2 == 0) {
-                    if(y2 < x2) x2 = y2;
-                }y2--;
-            }
-            Imgproc.line(dibujada,  new Point(num2,x2), new Point(num1,x),new Scalar(0, 0, 255, 255), 1);
+
+            } //for rows
+
+            for (x2 = mRgba.rows() - 1; x2 > -1; x2--) {
+                // PP NLJS 11/11/2017 Obtiene la fila x, la guarda en una variable temporal
+                ArrayList<double[]> temporal2 = find.get(x2);
+
+                // PP NLJS 11/11/2017 Obtiene la pel pixel y, guarda el RGB en una variable temporal
+                double[] data2 = temporal2.get(num2);
+
+                // PP NLJS 11/11/2017 Variables temporales para validar que solo un valor RGB este en 255, los demás deberán de ser 0
+                int vartemp2 = 0;
+
+                if(data2[0] == r) vartemp2++;
+                if(data2[1] == g) vartemp2++;
+                if(data2[2] == b) vartemp2++;
+
+                if (vartemp2 == 3) {
+                    var2 = x2;
+                    break;
+                }
+
+            } //for rows
+
+            // PP NLJS 11/11/2017 Dibuja las diagonales y guarda los vertices en el arreglo
+            vertices.add(0,new Point(num2,var2));
+            vertices.add(1,new Point(num1,var1));
+            Imgproc.line(dibujada, vertices.get(0) , vertices.get(1),new Scalar(r, g, b, 255), 1);
         }else {
-            x=0;
-            x2=mRgba.cols()-1;
-            y2 = mRgba.cols() - 1;
-            Log.d(TAG, "resultado: n1:" + (int) num1);
-            Log.d(TAG, "resultado: n2:" + (int) num2);
+            var1 = 0;
+            var2 = mRgba.cols()-1;
 
-            for (int y = 0; y < mRgba.cols(); y++) {
+            int y2 = mRgba.cols() - 1, y;
 
-                double[] data = mRgba.get((int) num1,y);
-                double[] data2 = mRgba.get((int) num2,y2);
-                double r = data[0];
-                double g = data[1];
-                double b = data[2];
-                double r2 = data2[0];
-                double g2 = data2[1];
-                double b2 = data2[2];
+            Log.d(TAG, "PP. Función: findVertexes: n1:" + (int)num1);
+            Log.d(TAG, "PP. Función: findVertexes: n2:" + (int)num2);
 
-                if (r == 255 && g == 0 && b == 0) {
-                    if(y > x) x = y;
+            // PP NLJS 11/11/2017 Obtiene la fila x, la guarda en una variable temporal
+            ArrayList<double[]> temporal = find.get(num1);
+            ArrayList<double[]> temporal2 = find.get(num2);
+
+            for (y = 0; y < mRgba.cols(); y++)   {
+                // PP NLJS 11/11/2017 Obtiene la pel pixel y, guarda el RGB en una variable temporal
+                double[] data = temporal.get(y);
+
+                // PP NLJS 11/11/2017 Variables temporales para validar que solo un valor RGB este en 255, los demás deberán de ser 0
+                int vartemp = 0;
+
+                if(data[0] == r) vartemp++;
+                if(data[1] == g) vartemp++;
+                if(data[2] == b) vartemp++;
+
+                if (vartemp == 3) {
+                    var1 = y;
+                    break;
                 }
-                if (r2 == 255 && g2 == 0 && b2 == 0) {
-                    if(y2 < x2) x2 = y2;
-                }y2--;
-            }
-            Imgproc.line(dibujada, new Point(x2, num2),new Point(x,num1), new Scalar(0, 0, 255, 255), 1);
+            } //for rows
+
+            for (y2 = mRgba.cols() - 1; y2 > -1 ; y2--)   {
+                // PP NLJS 11/11/2017 Obtiene la pel pixel y, guarda el RGB en una variable temporal
+                double[] data2 = temporal2.get(y2);
+
+                // PP NLJS 11/11/2017 Variables temporales para validar que solo un valor RGB este en 255, los demás deberán de ser 0
+                int vartemp2 = 0;
+
+                if(data2[0] == r) vartemp2++;
+                if(data2[1] == g) vartemp2++;
+                if(data2[2] == b) vartemp2++;
+
+                if (vartemp2 == 3) {
+                    var2 = y2;
+                    break;
+                }
+            } //for rows
+
+            // PP NLJS 11/11/2017 Dibuja las diagonales y guarda los vertices en el arreglo
+            vertices.add(2,new Point(var1,num1));
+            vertices.add(3,new Point(var2,num2));
+            Imgproc.line(dibujada, vertices.get(2) , vertices.get(3),new Scalar(r, g, b, 255), 1);
 
         }
-        Log.d(TAG, "resultado: x1:" + x);
-        Log.d(TAG, "resultado: x2:" + x2);
+        Log.d(TAG, "PP. Función: findVertexes: var1:" + var1);
+        Log.d(TAG, "PP. Función: findVertexes: var2:" + var2);
+    }
+
+    double findAngle(Point p1, Point p2){
+        /**
+         * PP NLJS 22/10/2017
+         * A partir de analisis vectorial obtiene el angulo entre el plano y una de las diagonales
+         *
+         */
+
+        Point o1 = new Point(0,mRgba.rows() - 1);
+        Point o2 = new Point(mRgba.cols() - 1,mRgba.rows() - 1);
+        // Imgproc.line(dibujada,  o1, o2 ,new Scalar(122, 100, 200, 255), 1);
+        // Imgproc.line(dibujada,  o1, p1 ,new Scalar(122, 100, 200, 255), 1);
+        // Imgproc.line(dibujada,  o1, p2 ,new Scalar(122, 100, 200, 255), 1);
+
+        // PP NLJS 11/11/2017 Creación de vectores
+        Point vector = new Point(p1.x - p2.x, p1.y - p2.y);
+        Point base = new Point(o1.x - o2.x, o1.y - o2.y);
+
+        Log.d(TAG, "PP. Función: findAngle. vector:" + vector + " base: " + base);
+
+        // PP NLJS 11/11/2017 Producto punto
+        double punto = vector.x * base.x + vector.y * base.y;
+
+        // PP NLJS 11/11/2017 Producto cruz
+        ArrayList<Double> determinante = new ArrayList<Double>(3);
+        int h = 0;
+        determinante.add(0, base.y * h - vector.y * h);
+        determinante.add(1, vector.x * h - base.x * h);
+        determinante.add(2, base.x * vector.y - base.y * vector.x);
+
+        Log.d(TAG, "PP. Función: findAngle. determinante:" + determinante);
+
+        // PP NLJS 11/11/2017 Normas
+        double no = Math.sqrt( Math.pow(base.x,2) + Math.pow(base.y,2));
+        double np = Math.sqrt( Math.pow(vector.x,2) + Math.pow(vector.y,2));
+        double nd = Math.sqrt( Math.pow(determinante.get(0),2) + Math.pow(determinante.get(1),2) + Math.pow(determinante.get(2),2));
+
+        Log.d(TAG, "PP. Función: findAngle. no: " + no + " np: " + np + " nd: " + nd);
+
+        // PP NLJS 11/11/2017 Obtengo el álgulo, se hacen ambos para evitar perdida al transformar
+        double sinangle = nd / (no * np);
+        double cosangle = punto / (no * np);
+
+        Log.d(TAG, "PP. Función: findAngle. asinangle: " + Math.asin(sinangle) + " acosangle: " + Math.acos(cosangle));
+        Log.d(TAG, "PP. Función: findAngle. sinangle: " + sinangle + " cosangle: " + cosangle);
+
+        double temporal = Math.acos(cosangle);
+        if(temporal > 1) return  temporal - 0.5;
+
+        return temporal;
+    }
+
+    boolean rotateVertex(ArrayList<Point> vertexes, double angle){
+        /**
+         * PP NLJS 22/10/2017
+         * Calcula las nuevas coordenadas de los vertices
+         *
+         */
+
+        // PP NLJS 11/11/2017 Matriz de rotacion, eje Z
+        ArrayList<ArrayList<Double>> rotationZ = new ArrayList<ArrayList<Double>>(3);
+        ArrayList<Double> temporal = new ArrayList<Double>(3);
+        ArrayList<Double> temporal2 = new ArrayList<Double>(3);
+        ArrayList<Double> temporal3 = new ArrayList<Double>(3);
+
+        // PP NLJS 11/11/2017 Primer columna
+        temporal.add(0,Math.cos(angle));
+        temporal.add(1,Math.sin(angle));
+        temporal.add(2,0.0);
+        rotationZ.add(0,temporal);
+
+        // PP NLJS 11/11/2017 Segunda columna
+        temporal2.add(0,Math.sin(angle) * -1);
+        temporal2.add(1,Math.cos(angle));
+        temporal2.add(2,0.0);
+        rotationZ.add(1,temporal2);
+
+        // PP NLJS 11/11/2017 Tercer columna
+        temporal3.add(0,0.0);
+        temporal3.add(1,0.0);
+        temporal3.add(2,1.0);
+        rotationZ.add(2,temporal3);
+
+        Log.d(TAG, "PP. Función: rotateVertex. Matriz Z: " + rotationZ);
+
+        double tempx,tempy;
+        for(int i = 0; i < 4; i++) {
+            tempx = vertexes.get(i).x * rotationZ.get(0).get(0) + vertexes.get(i).y * rotationZ.get(1).get(0);
+            tempy = vertexes.get(i).x * rotationZ.get(0).get(1) + vertexes.get(i).y * rotationZ.get(1).get(1);
+
+            vertexes.get(i).x = tempx;
+            vertexes.get(i).y = tempy;
+
+        }
+        Log.d(TAG, "PP. Función: rotateVertex. New vertex: " + vertexes);
+
+        return true;
+    }
+
+    void contour(ArrayList<Point> vertices,int r, int g, int b){
+        /**
+         * PP NLJS 22/10/2017
+         * Une los vértices corregidos con líneas
+         *
+         */
+
+        Imgproc.line(dibujada,  vertices.get(0), vertices.get(2) ,new Scalar(r, g, b, 255), 1);
+        Imgproc.line(dibujada,  vertices.get(1), vertices.get(2) ,new Scalar(r, g, b, 255), 1);
+        Imgproc.line(dibujada,  vertices.get(1), vertices.get(3) ,new Scalar(r, g, b, 255), 1);
+        Imgproc.line(dibujada,  vertices.get(3), vertices.get(0) ,new Scalar(r, g, b, 255), 1);
+    }
+
+    void getRealDimensions(ArrayList<Point> vertR, ArrayList<Point> vertG){
+        /**
+         * PP NLJS 22/10/2017
+         * Obtiene las dimensiones una vez hecha la corrección de ángulo, se puede hacer un promedio entre
+         * esta medida y la medida obtenida sin la corrección del ángulo
+         *
+         */
+        // PP NLJS 11/11/2017 Busco los máximos y minimos de estos 4 vertices, una vez la correccion de angulo sea mas confiable no sera necesario
+        double maxx = vertG.get(0).x;
+        double minx = vertG.get(0).x;
+        double maxy = vertG.get(0).y;
+        double miny = vertG.get(0).y;
+
+        for (int i = 1; i < 4 ; i++){
+            Point temp = vertG.get(i);
+            if(temp.x < minx) minx = temp.x;
+            if(temp.x > maxx) maxx = temp.x;
+            if(temp.y < miny) miny = temp.y;
+            if(temp.y > maxy) maxy = temp.y;
+        }
+
+        double x_g_Pix = abs(maxy - miny);
+        double y_g_Pix = abs(maxx - minx);
+
+        //Log.d(TAG, "PP. Función: getRealDimensions. x: " + maxx + " " + minx);
+        //Log.d(TAG, "PP. Función: getRealDimensions. y: " + maxy + " " + miny);
+        //Log.d(TAG, "PP. Función: getRealDimensions. x_g_pix:" + x_g_Pix);
+        //Log.d(TAG, "PP. Función: getRealDimensions. y_g_pix:" + y_g_Pix);
+
+        maxx = vertR.get(0).x;
+        minx = vertR.get(0).x;
+        maxy = vertR.get(0).y;
+        miny = vertR.get(0).y;
+
+
+        for (int i = 1; i < 4 ; i++){
+            Point temp = vertR.get(i);
+            if(temp.x < minx) minx = temp.x;
+            if(temp.x > maxx) maxx = temp.x;
+            if(temp.y < miny) miny = temp.y;
+            if(temp.y > maxy) maxy = temp.y;
+        }
+
+        double x_r_Pix = abs(maxy - miny);
+        double y_r_Pix = abs(maxx - minx);
+
+        //Log.d(TAG, "PP. Función: getRealDimensions. x: " + maxx + " " + minx);
+        //Log.d(TAG, "PP. Función: getRealDimensions. y: " + maxy + " " + miny);
+        //Log.d(TAG, "PP. Función: getRealDimensions. x_r_pix:" + x_r_Pix);
+        //Log.d(TAG, "PP. Función: getRealDimensions. y_r_pix:" + y_r_Pix);
+
+        // PP NLJS 22/10/2017 Es necesario saber cual es la medida mayor en pixeles de la tarjeta (conocer x) para aplicar la formula correcta;
+        // PP NLJS 22/10/2017 Bandera para saber si la tarjeta estaba parada (y era mayor que x);
+        Boolean pp_flag = false;
+        if (y_r_Pix > x_r_Pix) {
+            pp_flag = true;
+        }
+
+        // PP NLJS 22/10/2017 Si la tarjeta estaba parada y_r_Pix debe ir en la primer formula,
+        // recuerden que x_r_cm y y_r_cm tienen valores constantes (x_r_cm siempre es el mayor por eso si importa saber como esta la tarjeta y no importa como esta el objeto);
+        if(pp_flag == true){
+            x_g_um = (x_g_Pix * x_r_cm) / y_r_Pix;
+            y_g_um = (y_g_Pix * y_r_cm) / x_r_Pix;
+        }else {
+            x_g_um = (x_g_Pix * x_r_cm) / x_r_Pix;
+            y_g_um = (y_g_Pix * y_r_cm) / y_r_Pix;
+        }
+
+        Log.d(TAG, "PP. Función: getRealDimensions. x_g_um:" + x_g_um);
+        Log.d(TAG, "PP. Función: getRealDimensions. y_g_um:" + y_g_um);
+
+        String sw = "PP. Función: getRealDimensions. Medidas Obtenidas: " + String.format("%.2f", x_g_um) + " * " + String.format("%.2f", y_g_um);
+        //Imgproc.putText(dibujada, sw, new Point(100, 100), 1, 2, new Scalar(0, 0, 0, 255), 6, LINE_8, false);
+        //Imgproc.putText(dibujada, sw, new Point(100, 100), 1, 2, new Scalar(255, 255, 255, 255), 4, LINE_8, false);
+
+
+        //Log.d(TAG, "PP. Función: getRealDimensions. Tarjeta   x: " + x_r_Pix + "     y: " + y_r_Pix);
+        //Log.d(TAG, "PP. Función: getRealDimensions. Objeto   x: " + x_g_Pix + "     y: " + y_g_Pix);
+        Log.d(TAG, "PP. Función: getRealDimensions. Tarjeta   x: " + x_r_cm + "     y: " + y_r_cm);
+        Log.d(TAG, "PP. Función: getRealDimensions. Objeto   x: " + x_g_um + "     y: " + y_g_um);
+
+
 
     }
 }
