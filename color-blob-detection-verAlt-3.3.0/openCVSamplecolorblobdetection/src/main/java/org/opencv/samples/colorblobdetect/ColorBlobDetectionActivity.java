@@ -69,7 +69,7 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
     private Mat mRgba_Buttons_backup;
     private boolean pp_espera = false;
     private boolean savim = false;
-    private String MEDIDA = "";
+    private String pp_medida ="";
     private boolean nath = false;
     ArrayList<List<MatOfPoint>> ListaContornosRojos = new ArrayList<List<MatOfPoint>>();
     ArrayList<List<MatOfPoint>> ListaContornosVerdes = new ArrayList<List<MatOfPoint>>();
@@ -142,8 +142,8 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         btntick = (Button) findViewById(R.id.boton_tick);
         btncross = (Button) findViewById(R.id.boton_cross);
         btnadd = (Button) findViewById(R.id.boton_add);
-        MEDIDA = getIntent().getStringExtra("MEDIDA");
-        mensaje("Has selecionado la siguiente unidad de medida : " + MEDIDA.toLowerCase());
+        pp_medida = getIntent().getStringExtra("MEDIDA");
+        mensaje("Has selecionado la siguiente unidad de medida : " + pp_medida.toLowerCase());
     }
 
     @Override
@@ -431,7 +431,6 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         intent.putExtra("PP_EXTRA_SCALAR3", CONTOUR_COLOR);
         // PP NLJS 22/10/2017 Mando pp_imgAdd3 para desplegar la img con los resultados gráficos
         intent.putExtra("PP_EXTRA_STRING", pp_imgAdd3);
-
         // PP NLJS 16/07/2017 Inicializo la actividad
         startActivity(intent);
     }
@@ -798,7 +797,19 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         Log.d(TAG, "resultado: x_g_um:" + x_g_um);
         Log.d(TAG, "resultado: y_g_um:" + y_g_um);
 
-        String sw = "Medidas Obtenidas: " + String.format("%.2f", x_g_um) + " * " + String.format("%.2f", y_g_um);
+        // RQB 12/11/2017 si se eligio pulgadas o pies se hace la conversión
+        String sw = "Medidas Obtenidas: (";
+        if ( pp_medida.equals("PULGADAS")){
+            x_g_um = 0.393701* x_g_um;
+            y_g_um = 0.393701* y_g_um;
+            sw +=  String.format("%.2f", x_g_um) + " * " + String.format("%.2f", y_g_um) + ") plg2";
+        } else if( pp_medida.equals("PIES")){
+            x_g_um = 0.0328084* x_g_um;
+            y_g_um = 0.0328084* y_g_um;
+            sw +=  String.format("%.2f", x_g_um) + " * " + String.format("%.2f", y_g_um) + ") ft2";
+        }else{
+            sw +=  String.format("%.2f", x_g_um) + " * " + String.format("%.2f", y_g_um) + ") cm2";
+        }
         Imgproc.putText(dibujada, sw, new Point(100, 100), 1, 2, new Scalar(0, 0, 0, 255), 6, LINE_8, false);
         Imgproc.putText(dibujada, sw, new Point(100, 100), 1, 2, new Scalar(255, 255, 255, 255), 4, LINE_8, false);
 
