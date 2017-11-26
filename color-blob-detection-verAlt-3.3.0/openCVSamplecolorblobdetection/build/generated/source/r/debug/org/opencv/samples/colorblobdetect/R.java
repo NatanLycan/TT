@@ -2182,7 +2182,8 @@ public final class R {
     public static final int icon=0x7f06003f;
     public static final int imgcamera=0x7f060040;
     public static final int notification_template_icon_bg=0x7f060041;
-    public static final int tick=0x7f060042;
+    public static final int old=0x7f060042;
+    public static final int tick=0x7f060043;
   }
   public static final class id {
     public static final int action0=0x7f070000;

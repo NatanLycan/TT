@@ -739,23 +739,34 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
 
         Log.d(TAG, "PP. Función: Resultado. Points:" + verticesObj);
 
-        // PP NLJS 11/11/2017 Calcular ángulo de rotación;
-        double angleTar = findAngle(verticesTar.get(2),verticesTar.get(3));
-        double angleObj = findAngle(verticesObj.get(2),verticesObj.get(3));
+        // PP NLJS 11/11/2017 Calcular ángulos de rotación;
+        /*double angleTarz = findAngle(verticesTar.get(2),verticesTar.get(3));
+        double angleObjz = findAngle(verticesObj.get(2),verticesObj.get(3));
+*/
+        double angleTarx = findAnglex(verticesTar.get(2),verticesTar.get(3));
+        double angleObjx = findAnglex(verticesObj.get(2),verticesObj.get(3));
+
+
+        double angleTary = findAngle(verticesTar.get(2),verticesTar.get(3));
+        double angleObjy = findAngle(verticesObj.get(2),verticesObj.get(3));
+
 
         // PP NLJS 11/11/2017 Corregir vértices;
         boolean flag = false;
-        flag = rotateVertex(verticesTar, angleTar);
+        flag = rotateVertex(verticesTar, angleTarx);
+        flag = rotateVertex(verticesTar, angleTary);
 
         // PP NLJS 11/11/2017 Contour es de apoyo para nosotros, cuando consideren que tiene buena precision comentar linea;
-        if(flag == true)    contour(verticesTar,0,255,255);
+        /*if(flag == true)    contour(verticesTar,0,255,255);
         else Log.d(TAG, "PP. Función: Resultado. Error al calcular los neuvos vertices de la tarjeta." );
-
+*/
         flag = false;
-        flag = rotateVertex(verticesObj, angleObj);
-        if(flag == true)    contour(verticesObj,0,255,255);
-        else Log.d(TAG, "PP. Función: Resultado. Error al calcular los neuvos vertices de la tarjeta." );
+        flag = rotateVertex(verticesObj, angleObjx);
+        flag = rotateVertex(verticesObj, angleObjy);
 
+/*        if(flag == true)    contour(verticesObj,0,255,255);
+        else Log.d(TAG, "PP. Función: Resultado. Error al calcular los neuvos vertices de la tarjeta." );
+*/
         // PP NLJS 12/11/2017 Calculo de dimension con la correccion de vértices;
         getRealDimensions(verticesTar,verticesObj);
 
@@ -796,7 +807,7 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
 
         Log.d(TAG, "resultado: x_g_um:" + x_g_um);
         Log.d(TAG, "resultado: y_g_um:" + y_g_um);
-
+        /* PP NLJS 25/11/2017 El código esta en getRealDimensions para que se muestre el resultado con la corrección, aun asi se calcula sin correccion y se imprime en consola
         // RQB 12/11/2017 si se eligio pulgadas o pies se hace la conversión
         String sw = "Medidas Obtenidas: (";
         if ( pp_medida.equals("PULGADAS")){
@@ -812,12 +823,12 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         }
         Imgproc.putText(dibujada, sw, new Point(100, 100), 1, 2, new Scalar(0, 0, 0, 255), 6, LINE_8, false);
         Imgproc.putText(dibujada, sw, new Point(100, 100), 1, 2, new Scalar(255, 255, 255, 255), 4, LINE_8, false);
-
+        */
 
         //Log.d(TAG, "resultado: Tarjeta   x: " + x_r_Pix + "     y: " + y_r_Pix);
         //Log.d(TAG, "resultado: Objeto   x: " + x_g_Pix + "     y: " + y_g_Pix);
-        Log.d(TAG, "resultado: Tarjeta   x: " + x_r_cm + "     y: " + y_r_cm);
-        Log.d(TAG, "resultado: Objeto   x: " + x_g_um + "     y: " + y_g_um);
+        Log.d(TAG, "PP. Función: resultado: Tarjeta   x: " + x_r_cm + "     y: " + y_r_cm);
+        Log.d(TAG, "PP. Función: resultado: Objeto   x: " + x_g_um + "     y: " + y_g_um);
 
 
     }
@@ -927,7 +938,7 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
             // PP NLJS 11/11/2017 Dibuja las diagonales y guarda los vertices en el arreglo
             vertices.add(0,new Point(num2,var2));
             vertices.add(1,new Point(num1,var1));
-            Imgproc.line(dibujada, vertices.get(0) , vertices.get(1),new Scalar(r, g, b, 255), 1);
+            Imgproc.line(dibujada, vertices.get(0) , vertices.get(1),new Scalar(r, g, b, 255), 2);
         }else {
             var1 = 0;
             var2 = mRgba.cols()-1;
@@ -978,7 +989,7 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
             // PP NLJS 11/11/2017 Dibuja las diagonales y guarda los vertices en el arreglo
             vertices.add(2,new Point(var1,num1));
             vertices.add(3,new Point(var2,num2));
-            Imgproc.line(dibujada, vertices.get(2) , vertices.get(3),new Scalar(r, g, b, 255), 1);
+            Imgproc.line(dibujada, vertices.get(2) , vertices.get(3),new Scalar(r, g, b, 255), 2);
 
         }
         Log.d(TAG, "PP. Función: findVertexes: var1:" + var1);
@@ -1036,7 +1047,58 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         return temporal;
     }
 
-    boolean rotateVertex(ArrayList<Point> vertexes, double angle){
+    double findAnglex(Point p1, Point p2){
+        /**
+         * PP NLJS 22/10/2017
+         * A partir de analisis vectorial obtiene el angulo entre el plano y una de las diagonales
+         *
+         */
+
+        Point o2 = new Point(0,mRgba.rows() - 1);
+        Point o1 = new Point(0,mRgba.cols() - 1);
+        // Imgproc.line(dibujada,  o1, o2 ,new Scalar(122, 100, 200, 255), 1);
+        // Imgproc.line(dibujada,  o1, p1 ,new Scalar(122, 100, 200, 255), 1);
+        // Imgproc.line(dibujada,  o1, p2 ,new Scalar(122, 100, 200, 255), 1);
+
+        // PP NLJS 11/11/2017 Creación de vectores
+        Point vector = new Point(p1.x - p2.x, p1.y - p2.y);
+        Point base = new Point(o1.x - o2.x, o1.y - o2.y);
+
+        Log.d(TAG, "PP. Función: findAngle. vector:" + vector + " base: " + base);
+
+        // PP NLJS 11/11/2017 Producto punto
+        double punto = vector.x * base.x + vector.y * base.y;
+
+        // PP NLJS 11/11/2017 Producto cruz
+        ArrayList<Double> determinante = new ArrayList<Double>(3);
+        int h = 0;
+        determinante.add(0, base.y * h - vector.y * h);
+        determinante.add(1, vector.x * h - base.x * h);
+        determinante.add(2, base.x * vector.y - base.y * vector.x);
+
+        Log.d(TAG, "PP. Función: findAngle. determinante:" + determinante);
+
+        // PP NLJS 11/11/2017 Normas
+        double no = Math.sqrt( Math.pow(base.x,2) + Math.pow(base.y,2));
+        double np = Math.sqrt( Math.pow(vector.x,2) + Math.pow(vector.y,2));
+        double nd = Math.sqrt( Math.pow(determinante.get(0),2) + Math.pow(determinante.get(1),2) + Math.pow(determinante.get(2),2));
+
+        Log.d(TAG, "PP. Función: findAngle. no: " + no + " np: " + np + " nd: " + nd);
+
+        // PP NLJS 11/11/2017 Obtengo el álgulo, se hacen ambos para evitar perdida al transformar
+        double sinangle = nd / (no * np);
+        double cosangle = punto / (no * np);
+
+        Log.d(TAG, "PP. Función: findAngle. asinangle: " + Math.asin(sinangle) + " acosangle: " + Math.acos(cosangle));
+        Log.d(TAG, "PP. Función: findAngle. sinangle: " + sinangle + " cosangle: " + cosangle);
+
+        double temporal = Math.acos(cosangle);
+        if(temporal > 1) return  temporal - 0.5;
+
+        return temporal;
+    }
+
+    boolean rotateVertex(ArrayList<Point> vertexes, double anglez){
         /**
          * PP NLJS 22/10/2017
          * Calcula las nuevas coordenadas de los vertices
@@ -1050,14 +1112,14 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         ArrayList<Double> temporal3 = new ArrayList<Double>(3);
 
         // PP NLJS 11/11/2017 Primer columna
-        temporal.add(0,Math.cos(angle));
-        temporal.add(1,Math.sin(angle));
+        temporal.add(0,Math.cos(anglez));
+        temporal.add(1,Math.sin(anglez));
         temporal.add(2,0.0);
         rotationZ.add(0,temporal);
 
         // PP NLJS 11/11/2017 Segunda columna
-        temporal2.add(0,Math.sin(angle) * -1);
-        temporal2.add(1,Math.cos(angle));
+        temporal2.add(0,Math.sin(anglez) * -1);
+        temporal2.add(1,Math.cos(anglez));
         temporal2.add(2,0.0);
         rotationZ.add(1,temporal2);
 
@@ -1067,8 +1129,60 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         temporal3.add(2,1.0);
         rotationZ.add(2,temporal3);
 
-        Log.d(TAG, "PP. Función: rotateVertex. Matriz Z: " + rotationZ);
+/*
+        // PP NLJS 21/11/2017 Matriz de rotacion, eje Y
+        ArrayList<ArrayList<Double>> rotationY = new ArrayList<ArrayList<Double>>(3);
+        ArrayList<Double> ytemporal = new ArrayList<Double>(3);
+        ArrayList<Double> ytemporal2 = new ArrayList<Double>(3);
+        ArrayList<Double> ytemporal3 = new ArrayList<Double>(3);
 
+        // PP NLJS 21/11/2017 Primer columna
+        ytemporal.add(0,Math.cos(angley));
+        ytemporal.add(1,0.0);
+        ytemporal.add(2,Math.sin(angley) * -1);
+        rotationY.add(0,ytemporal);
+
+        // PP NLJS 21/11/2017 Segunda columna
+        ytemporal2.add(0,0.0);
+        ytemporal2.add(1,1.0);
+        ytemporal2.add(2,0.0);
+        rotationY.add(1,ytemporal2);
+
+        // PP NLJS 21/11/2017 Tercer columna
+        ytemporal3.add(0,Math.sin(angley));
+        ytemporal3.add(1,0.0);
+        ytemporal3.add(2,Math.cos(angley));
+        rotationY.add(2,ytemporal3);
+
+
+        // PP NLJS 21/11/2017 Matriz de rotacion, eje X
+        ArrayList<ArrayList<Double>> rotationX = new ArrayList<ArrayList<Double>>(3);
+        ArrayList<Double> xtemporal = new ArrayList<Double>(3);
+        ArrayList<Double> xtemporal2 = new ArrayList<Double>(3);
+        ArrayList<Double> xtemporal3 = new ArrayList<Double>(3);
+
+        // PP NLJS 21/11/2017 Primer columna
+        xtemporal.add(0,1.0);
+        xtemporal.add(1,0.0);
+        xtemporal.add(2,0.0);
+        rotationX.add(0,xtemporal);
+
+        // PP NLJS 21/11/2017 Segunda columna
+        xtemporal2.add(0,0.0);
+        xtemporal2.add(1,Math.cos(anglex));
+        xtemporal2.add(2,Math.sin(anglex));
+        rotationX.add(1,xtemporal2);
+
+        // PP NLJS 21/11/2017 Tercer columna
+        xtemporal3.add(0,0.0);
+        xtemporal3.add(1,Math.sin(anglex) * -1);
+        xtemporal3.add(2,Math.cos(anglex));
+        rotationX.add(2,xtemporal3);
+*/
+        Log.d(TAG, "PP. Función: rotateVertex. Matriz Z: " + rotationZ);
+  /*      Log.d(TAG, "PP. Función: rotateVertex. Matriz Y: " + rotationY);
+        Log.d(TAG, "PP. Función: rotateVertex. Matriz X: " + rotationX);
+*/
         double tempx,tempy;
         for(int i = 0; i < 4; i++) {
             tempx = vertexes.get(i).x * rotationZ.get(0).get(0) + vertexes.get(i).y * rotationZ.get(1).get(0);
@@ -1078,6 +1192,28 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
             vertexes.get(i).y = tempy;
 
         }
+        Log.d(TAG, "PP. Función: rotateVertex. New vertex: " + vertexes);
+
+/*
+        for(int i = 0; i < 4; i++) {
+            tempx = vertexes.get(i).x * rotationY.get(0).get(0) + vertexes.get(i).y * rotationY.get(1).get(0);
+            tempy = vertexes.get(i).x * rotationY.get(0).get(1) + vertexes.get(i).y * rotationY.get(1).get(1);
+
+            vertexes.get(i).x = tempx;
+            vertexes.get(i).y = tempy;
+
+        }
+        Log.d(TAG, "PP. Función: rotateVertex. New vertex: " + vertexes);
+
+
+        for(int i = 0; i < 4; i++) {
+            tempx = vertexes.get(i).x * rotationX.get(0).get(0) + vertexes.get(i).y * rotationX.get(1).get(0);
+            tempy = vertexes.get(i).x * rotationX.get(0).get(1) + vertexes.get(i).y * rotationX.get(1).get(1);
+
+            vertexes.get(i).x = tempx;
+            vertexes.get(i).y = tempy;
+
+        }*/
         Log.d(TAG, "PP. Función: rotateVertex. New vertex: " + vertexes);
 
         return true;
@@ -1167,16 +1303,26 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         Log.d(TAG, "PP. Función: getRealDimensions. x_g_um:" + x_g_um);
         Log.d(TAG, "PP. Función: getRealDimensions. y_g_um:" + y_g_um);
 
-        String sw = "PP. Función: getRealDimensions. Medidas Obtenidas: " + String.format("%.2f", x_g_um) + " * " + String.format("%.2f", y_g_um);
-        //Imgproc.putText(dibujada, sw, new Point(100, 100), 1, 2, new Scalar(0, 0, 0, 255), 6, LINE_8, false);
-        //Imgproc.putText(dibujada, sw, new Point(100, 100), 1, 2, new Scalar(255, 255, 255, 255), 4, LINE_8, false);
-
-
         //Log.d(TAG, "PP. Función: getRealDimensions. Tarjeta   x: " + x_r_Pix + "     y: " + y_r_Pix);
         //Log.d(TAG, "PP. Función: getRealDimensions. Objeto   x: " + x_g_Pix + "     y: " + y_g_Pix);
         Log.d(TAG, "PP. Función: getRealDimensions. Tarjeta   x: " + x_r_cm + "     y: " + y_r_cm);
         Log.d(TAG, "PP. Función: getRealDimensions. Objeto   x: " + x_g_um + "     y: " + y_g_um);
 
+        // RQB 12/11/2017 si se eligio pulgadas o pies se hace la conversión
+        String sw = "Medidas Obtenidas: (";
+        if ( pp_medida.equals("PULGADAS")){
+            x_g_um = 0.393701* x_g_um;
+            y_g_um = 0.393701* y_g_um;
+            sw +=  String.format("%.2f", x_g_um) + " * " + String.format("%.2f", y_g_um) + ") plg";
+        } else if( pp_medida.equals("PIES")){
+            x_g_um = 0.0328084* x_g_um;
+            y_g_um = 0.0328084* y_g_um;
+            sw +=  String.format("%.2f", x_g_um) + " * " + String.format("%.2f", y_g_um) + ") ft";
+        }else{
+            sw +=  String.format("%.2f", x_g_um) + " * " + String.format("%.2f", y_g_um) + ") cm";
+        }
+        Imgproc.putText(dibujada, sw, new Point(100, 100), 1, 2, new Scalar(0, 0, 0, 255), 6, LINE_8, false);
+        Imgproc.putText(dibujada, sw, new Point(100, 100), 1, 2, new Scalar(255, 255, 255, 255), 4, LINE_8, false);
 
 
     }

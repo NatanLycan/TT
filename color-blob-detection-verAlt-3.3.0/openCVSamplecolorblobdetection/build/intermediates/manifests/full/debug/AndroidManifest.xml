@@ -54,6 +54,9 @@
             android:label="@string/app_name"
             android:screenOrientation="landscape" />
         <activity android:name="org.opencv.samples.colorblobdetect.P" />
+        <activity
+            android:name="org.opencv.samples.colorblobdetect.Galeria"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

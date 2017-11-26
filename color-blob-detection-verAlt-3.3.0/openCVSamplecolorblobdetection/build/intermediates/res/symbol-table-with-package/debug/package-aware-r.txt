@@ -468,7 +468,8 @@ int drawable geom720 0x7f06003e
 int drawable icon 0x7f06003f
 int drawable imgcamera 0x7f060040
 int drawable notification_template_icon_bg 0x7f060041
-int drawable tick 0x7f060042
+int drawable old 0x7f060042
+int drawable tick 0x7f060043
 int id action0 0x7f070000
 int id action_bar 0x7f070001
 int id action_bar_activity_content 0x7f070002

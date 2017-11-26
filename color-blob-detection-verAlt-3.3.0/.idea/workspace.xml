@@ -45,8 +45,8 @@
       <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/openCVSamplecolorblobdetection/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="30" column="48" lean-forward="false" selection-start-line="30" selection-start-column="48" selection-end-line="30" selection-end-column="48" />
+            <state relative-caret-position="544">
+              <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -88,9 +88,28 @@
       <file leaf-file-name="build.gradle" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="12" column="17" lean-forward="false" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
+            <state relative-caret-position="170">
+              <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ColorBlobDetectionActivity.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/openCVSamplecolorblobdetection/src/main/java/org/opencv/samples/colorblobdetect/ColorBlobDetectionActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="286">
+              <caret line="991" column="93" lean-forward="true" selection-start-line="991" selection-start-column="93" selection-end-line="991" selection-end-column="93" />
+              <folding>
+                <marker date="1511668388183" expanded="false" signature="46717:46736" ph="&lt;~&gt;" />
+                <marker date="1511668388183" expanded="false" signature="46792:46800" ph="&lt;~&gt;" />
+                <marker date="1511668388183" expanded="false" signature="46857:46865" ph="&lt;~&gt;" />
+                <marker date="1511668388183" expanded="false" signature="46922:46930" ph="&lt;~&gt;" />
+                <marker date="1511668388183" expanded="false" signature="47637:47656" ph="&lt;~&gt;" />
+                <marker date="1511668388183" expanded="false" signature="47712:47720" ph="&lt;~&gt;" />
+                <marker date="1511668388183" expanded="false" signature="47777:47785" ph="&lt;~&gt;" />
+                <marker date="1511668388183" expanded="false" signature="47842:47850" ph="&lt;~&gt;" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -98,29 +117,21 @@
       <file leaf-file-name="openCVSamplecolorblobdetection.iml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/openCVSamplecolorblobdetection/openCVSamplecolorblobdetection.iml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="217">
+            <state relative-caret-position="306">
               <caret line="18" column="37" lean-forward="false" selection-start-line="18" selection-start-column="37" selection-end-line="18" selection-end-column="37" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Principal.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Principal.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/openCVSamplecolorblobdetection/src/main/java/org/opencv/samples/colorblobdetect/Principal.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="28">
+            <state relative-caret-position="816">
               <caret line="58" column="40" lean-forward="false" selection-start-line="58" selection-start-column="40" selection-end-line="58" selection-end-column="40" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="settings.gradle" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/settings.gradle">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-              <folding />
+              <folding>
+                <element signature="imports" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -149,13 +160,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>pp_mat1</find>
-      <find>chargefile</find>
-      <find>.cols</find>
-      <find>PP_EXTRA_MAT</find>
-      <find>extra</find>
-      <find>pp_</find>
-      <find>mrgba</find>
       <find>Error al crear</find>
       <find>setima</find>
       <find>chargefi</find>
@@ -164,7 +168,6 @@
       <find>chargeFile2</find>
       <find>findcontours</find>
       <find>Thecontour</find>
-      <find>resultado</find>
       <find>x_r_pix</find>
       <find>x_r_cm</find>
       <find>BtnTickF</find>
@@ -179,6 +182,14 @@
       <find>dibujada</find>
       <find>Larissa</find>
       <find>larissa</find>
+      <find>FINDAN</find>
+      <find>rotate</find>
+      <find>findang</find>
+      <find>get</find>
+      <find>Resu</find>
+      <find>Resultado</find>
+      <find>resultado</find>
+      <find>resul</find>
     </findStrings>
     <replaceStrings>
       <replace>mRgba</replace>
@@ -187,7 +198,7 @@
   <component name="GradleLocalSettings">
     <option name="myGradleHomes">
       <map>
-        <entry key="$PROJECT_DIR$" value="C:\Users\Nathaniel\.gradle\wrapper\dists\gradle-4.1-milestone-1-all\9uoz4qrz3xxqtt8z3tsnbtd3e\gradle-4.1-milestone-1" />
+        <entry key="$PROJECT_DIR$" value="C:\Users\Larissa\.gradle\wrapper\dists\gradle-4.1-milestone-1-all\9uoz4qrz3xxqtt8z3tsnbtd3e\gradle-4.1-milestone-1" />
       </map>
     </option>
     <option name="myGradleVersions">
@@ -2765,10 +2776,10 @@
         <option value="$PROJECT_DIR$/openCVSamplecolorblobdetection/src/main/java/org/opencv/samples/colorblobdetect/P.java" />
         <option value="$PROJECT_DIR$/openCVSamplecolorblobdetection/src/main/java/org/opencv/samples/colorblobdetect/ColorBlobDetector.java" />
         <option value="$PROJECT_DIR$/openCVSamplecolorblobdetection/src/main/res/layout/color_blob_detection_surface_view.xml" />
-        <option value="$PROJECT_DIR$/openCVSamplecolorblobdetection/src/main/java/org/opencv/samples/colorblobdetect/ColorBlobDetectionActivity.java" />
         <option value="$PROJECT_DIR$/openCVSamplecolorblobdetection/build.gradle" />
         <option value="$PROJECT_DIR$/openCVSamplecolorblobdetection/src/main/java/org/opencv/samples/colorblobdetect/Galeria.java" />
         <option value="$PROJECT_DIR$/openCVSamplecolorblobdetection/src/main/java/org/opencv/samples/colorblobdetect/Principal.java" />
+        <option value="$PROJECT_DIR$/openCVSamplecolorblobdetection/src/main/java/org/opencv/samples/colorblobdetect/ColorBlobDetectionActivity.java" />
       </list>
     </option>
   </component>
@@ -2776,7 +2787,7 @@
     <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="1382" />
-    <option name="height" value="784" />
+    <option name="height" value="754" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -2793,7 +2804,89 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="color-blob-detection-verAlt-3.3.0" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="color-blob-detection-verAlt-3.3.0" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="color-blob-detection-verAlt-3.3.0" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="color-blob-detection-verAlt-3.3.0" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="openCVSamplecolorblobdetection" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="color-blob-detection-verAlt-3.3.0" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="color-blob-detection-verAlt-3.3.0" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="openCVSamplecolorblobdetection" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="color-blob-detection-verAlt-3.3.0" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="color-blob-detection-verAlt-3.3.0" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="openCVSamplecolorblobdetection" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="colorblobdetect" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -2876,88 +2969,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="color-blob-detection-verAlt-3.3.0" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="color-blob-detection-verAlt-3.3.0" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="color-blob-detection-verAlt-3.3.0" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="color-blob-detection-verAlt-3.3.0" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="openCVSamplecolorblobdetection" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="color-blob-detection-verAlt-3.3.0" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="color-blob-detection-verAlt-3.3.0" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="openCVSamplecolorblobdetection" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="color-blob-detection-verAlt-3.3.0" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="color-blob-detection-verAlt-3.3.0" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="openCVSamplecolorblobdetection" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="colorblobdetect" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -2966,7 +2977,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="device.picker.selection" value="ZY224888S6" />
+    <property name="device.picker.selection" value="NE1GAM6771230894" />
     <property name="android.project.structure.last.selected" value="openCVLibrary330" />
     <property name="android.project.structure.proportion" value="0.15" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -3137,27 +3148,6 @@
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
-      <method />
-    </configuration>
-    <configuration default="true" type="JUnit" factoryName="JUnit">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
       <method />
     </configuration>
     <configuration default="true" type="JarApplication" factoryName="JAR Application">
@@ -3336,27 +3326,26 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="754" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32885906" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38338658" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38255033" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980332" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32747602" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32885906" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22683705" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.110738255" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25718608" sideWeight="0.5" order="5" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25718608" sideWeight="0.5" order="5" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -3369,6 +3358,7 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32885906" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -3409,7 +3399,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="9" lean-forward="false" selection-start-line="0" selection-start-column="9" selection-end-line="0" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3418,19 +3407,14 @@
         <state relative-caret-position="1921">
           <caret line="157" column="0" lean-forward="false" selection-start-line="157" selection-start-column="0" selection-end-line="157" selection-end-column="0" />
           <folding>
-            <element signature="e#2605#2623#0" expanded="true" />
-            <element signature="e#2695#2713#0" expanded="true" />
-            <element signature="e#4349#4538#0" expanded="true" />
-            <element signature="e#4537#4538#0" expanded="true" />
-            <element signature="e#12239#12248#0" expanded="true" />
-            <element signature="e#12885#12897#0" expanded="true" />
-            <element signature="e#29404#29411#0" expanded="true" />
-            <element signature="e#29467#29474#0" expanded="true" />
-            <element signature="e#40794#40802#0" expanded="true" />
-            <element signature="e#42335#42354#0" expanded="true" />
-            <element signature="e#42409#42417#0" expanded="true" />
-            <element signature="e#42473#42481#0" expanded="true" />
-            <element signature="e#42537#42545#0" expanded="true" />
+            <marker date="1511668388183" expanded="false" signature="46717:46736" ph="&lt;~&gt;" />
+            <marker date="1511668388183" expanded="false" signature="46792:46800" ph="&lt;~&gt;" />
+            <marker date="1511668388183" expanded="false" signature="46857:46865" ph="&lt;~&gt;" />
+            <marker date="1511668388183" expanded="false" signature="46922:46930" ph="&lt;~&gt;" />
+            <marker date="1511668388183" expanded="false" signature="47637:47656" ph="&lt;~&gt;" />
+            <marker date="1511668388183" expanded="false" signature="47712:47720" ph="&lt;~&gt;" />
+            <marker date="1511668388183" expanded="false" signature="47777:47785" ph="&lt;~&gt;" />
+            <marker date="1511668388183" expanded="false" signature="47842:47850" ph="&lt;~&gt;" />
           </folding>
         </state>
       </provider>
@@ -3450,7 +3434,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="9" lean-forward="false" selection-start-line="0" selection-start-column="9" selection-end-line="0" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3469,7 +3452,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
           <caret line="14" column="41" lean-forward="false" selection-start-line="14" selection-start-column="41" selection-end-line="14" selection-end-column="41" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3478,19 +3460,14 @@
         <state relative-caret-position="901">
           <caret line="95" column="70" lean-forward="false" selection-start-line="95" selection-start-column="70" selection-end-line="95" selection-end-column="70" />
           <folding>
-            <element signature="e#2605#2623#0" expanded="true" />
-            <element signature="e#2695#2713#0" expanded="true" />
-            <element signature="e#4349#4538#0" expanded="true" />
-            <element signature="e#4537#4538#0" expanded="true" />
-            <element signature="e#12239#12248#0" expanded="true" />
-            <element signature="e#12885#12897#0" expanded="true" />
-            <element signature="e#29404#29411#0" expanded="true" />
-            <element signature="e#29467#29474#0" expanded="true" />
-            <element signature="e#40794#40802#0" expanded="true" />
-            <element signature="e#42335#42354#0" expanded="true" />
-            <element signature="e#42409#42417#0" expanded="true" />
-            <element signature="e#42473#42481#0" expanded="true" />
-            <element signature="e#42537#42545#0" expanded="true" />
+            <marker date="1511668388183" expanded="false" signature="46717:46736" ph="&lt;~&gt;" />
+            <marker date="1511668388183" expanded="false" signature="46792:46800" ph="&lt;~&gt;" />
+            <marker date="1511668388183" expanded="false" signature="46857:46865" ph="&lt;~&gt;" />
+            <marker date="1511668388183" expanded="false" signature="46922:46930" ph="&lt;~&gt;" />
+            <marker date="1511668388183" expanded="false" signature="47637:47656" ph="&lt;~&gt;" />
+            <marker date="1511668388183" expanded="false" signature="47712:47720" ph="&lt;~&gt;" />
+            <marker date="1511668388183" expanded="false" signature="47777:47785" ph="&lt;~&gt;" />
+            <marker date="1511668388183" expanded="false" signature="47842:47850" ph="&lt;~&gt;" />
           </folding>
         </state>
       </provider>
@@ -3502,7 +3479,6 @@
       <provider editor-type-id="text-editor">
         <state relative-caret-position="408">
           <caret line="24" column="31" lean-forward="false" selection-start-line="24" selection-start-column="31" selection-end-line="24" selection-end-column="31" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3527,19 +3503,14 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#2605#2623#0" expanded="true" />
-            <element signature="e#2695#2713#0" expanded="true" />
-            <element signature="e#4349#4538#0" expanded="true" />
-            <element signature="e#4537#4538#0" expanded="true" />
-            <element signature="e#12239#12248#0" expanded="true" />
-            <element signature="e#12885#12897#0" expanded="true" />
-            <element signature="e#29404#29411#0" expanded="true" />
-            <element signature="e#29467#29474#0" expanded="true" />
-            <element signature="e#40794#40802#0" expanded="true" />
-            <element signature="e#42335#42354#0" expanded="true" />
-            <element signature="e#42409#42417#0" expanded="true" />
-            <element signature="e#42473#42481#0" expanded="true" />
-            <element signature="e#42537#42545#0" expanded="true" />
+            <marker date="1511668388183" expanded="false" signature="46717:46736" ph="&lt;~&gt;" />
+            <marker date="1511668388183" expanded="false" signature="46792:46800" ph="&lt;~&gt;" />
+            <marker date="1511668388183" expanded="false" signature="46857:46865" ph="&lt;~&gt;" />
+            <marker date="1511668388183" expanded="false" signature="46922:46930" ph="&lt;~&gt;" />
+            <marker date="1511668388183" expanded="false" signature="47637:47656" ph="&lt;~&gt;" />
+            <marker date="1511668388183" expanded="false" signature="47712:47720" ph="&lt;~&gt;" />
+            <marker date="1511668388183" expanded="false" signature="47777:47785" ph="&lt;~&gt;" />
+            <marker date="1511668388183" expanded="false" signature="47842:47850" ph="&lt;~&gt;" />
           </folding>
         </state>
       </provider>
@@ -3551,7 +3522,6 @@
       <provider editor-type-id="text-editor">
         <state relative-caret-position="408">
           <caret line="24" column="31" lean-forward="false" selection-start-line="24" selection-start-column="31" selection-end-line="24" selection-end-column="31" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3568,19 +3538,14 @@
         <state relative-caret-position="476">
           <caret line="68" column="17" lean-forward="false" selection-start-line="68" selection-start-column="17" selection-end-line="68" selection-end-column="17" />
           <folding>
-            <element signature="e#2605#2623#0" expanded="true" />
-            <element signature="e#2695#2713#0" expanded="true" />
-            <element signature="e#4349#4538#0" expanded="true" />
-            <element signature="e#4537#4538#0" expanded="true" />
-            <element signature="e#12239#12248#0" expanded="true" />
-            <element signature="e#12885#12897#0" expanded="true" />
-            <element signature="e#29404#29411#0" expanded="true" />
-            <element signature="e#29467#29474#0" expanded="true" />
-            <element signature="e#40794#40802#0" expanded="true" />
-            <element signature="e#42335#42354#0" expanded="true" />
-            <element signature="e#42409#42417#0" expanded="true" />
-            <element signature="e#42473#42481#0" expanded="true" />
-            <element signature="e#42537#42545#0" expanded="true" />
+            <marker date="1511668388183" expanded="false" signature="46717:46736" ph="&lt;~&gt;" />
+            <marker date="1511668388183" expanded="false" signature="46792:46800" ph="&lt;~&gt;" />
+            <marker date="1511668388183" expanded="false" signature="46857:46865" ph="&lt;~&gt;" />
+            <marker date="1511668388183" expanded="false" signature="46922:46930" ph="&lt;~&gt;" />
+            <marker date="1511668388183" expanded="false" signature="47637:47656" ph="&lt;~&gt;" />
+            <marker date="1511668388183" expanded="false" signature="47712:47720" ph="&lt;~&gt;" />
+            <marker date="1511668388183" expanded="false" signature="47777:47785" ph="&lt;~&gt;" />
+            <marker date="1511668388183" expanded="false" signature="47842:47850" ph="&lt;~&gt;" />
           </folding>
         </state>
       </provider>
@@ -3592,7 +3557,6 @@
       <provider editor-type-id="text-editor">
         <state relative-caret-position="408">
           <caret line="24" column="31" lean-forward="false" selection-start-line="24" selection-start-column="31" selection-end-line="24" selection-end-column="31" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3609,19 +3573,14 @@
         <state relative-caret-position="476">
           <caret line="68" column="17" lean-forward="false" selection-start-line="68" selection-start-column="17" selection-end-line="68" selection-end-column="17" />
           <folding>
-            <element signature="e#2605#2623#0" expanded="true" />
-            <element signature="e#2695#2713#0" expanded="true" />
-            <element signature="e#4349#4538#0" expanded="true" />
-            <element signature="e#4537#4538#0" expanded="true" />
-            <element signature="e#12239#12248#0" expanded="true" />
-            <element signature="e#12885#12897#0" expanded="true" />
-            <element signature="e#29404#29411#0" expanded="true" />
-            <element signature="e#29467#29474#0" expanded="true" />
-            <element signature="e#40794#40802#0" expanded="true" />
-            <element signature="e#42335#42354#0" expanded="true" />
-            <element signature="e#42409#42417#0" expanded="true" />
-            <element signature="e#42473#42481#0" expanded="true" />
-            <element signature="e#42537#42545#0" expanded="true" />
+            <marker date="1511668388183" expanded="false" signature="46717:46736" ph="&lt;~&gt;" />
+            <marker date="1511668388183" expanded="false" signature="46792:46800" ph="&lt;~&gt;" />
+            <marker date="1511668388183" expanded="false" signature="46857:46865" ph="&lt;~&gt;" />
+            <marker date="1511668388183" expanded="false" signature="46922:46930" ph="&lt;~&gt;" />
+            <marker date="1511668388183" expanded="false" signature="47637:47656" ph="&lt;~&gt;" />
+            <marker date="1511668388183" expanded="false" signature="47712:47720" ph="&lt;~&gt;" />
+            <marker date="1511668388183" expanded="false" signature="47777:47785" ph="&lt;~&gt;" />
+            <marker date="1511668388183" expanded="false" signature="47842:47850" ph="&lt;~&gt;" />
           </folding>
         </state>
       </provider>
@@ -3633,7 +3592,6 @@
       <provider editor-type-id="text-editor">
         <state relative-caret-position="408">
           <caret line="24" column="31" lean-forward="false" selection-start-line="24" selection-start-column="31" selection-end-line="24" selection-end-column="31" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3701,7 +3659,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="30" column="11" lean-forward="false" selection-start-line="30" selection-start-column="11" selection-end-line="30" selection-end-column="11" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3728,7 +3685,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="561">
           <caret line="33" column="25" lean-forward="false" selection-start-line="33" selection-start-column="25" selection-end-line="33" selection-end-column="25" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3736,7 +3692,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="41123">
           <caret line="2436" column="23" lean-forward="false" selection-start-line="2436" selection-start-column="23" selection-end-line="2436" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3744,7 +3699,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1955">
           <caret line="134" column="0" lean-forward="false" selection-start-line="134" selection-start-column="0" selection-end-line="134" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3752,7 +3706,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68153">
           <caret line="4134" column="0" lean-forward="false" selection-start-line="4134" selection-start-column="0" selection-end-line="4134" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3760,7 +3713,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="7" column="11" lean-forward="false" selection-start-line="7" selection-start-column="11" selection-end-line="7" selection-end-column="11" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3768,10 +3720,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="18326">
           <caret line="1080" column="20" lean-forward="false" selection-start-line="1080" selection-start-column="20" selection-end-line="1080" selection-end-column="20" />
-          <folding>
-            <element signature="e#24607#24608#0" expanded="true" />
-            <element signature="e#24655#24656#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3779,40 +3727,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4794">
           <caret line="305" column="54" lean-forward="false" selection-start-line="305" selection-start-column="54" selection-end-line="305" selection-end-column="54" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/openCVSamplecolorblobdetection/src/main/java/org/opencv/samples/colorblobdetect/MyAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="29" column="4" lean-forward="false" selection-start-line="29" selection-start-column="4" selection-end-line="29" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/openCVSamplecolorblobdetection/src/main/java/org/opencv/samples/colorblobdetect/ColorBlobDetectionActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="1031" column="10" lean-forward="false" selection-start-line="1031" selection-start-column="10" selection-end-line="1031" selection-end-column="10" />
-          <folding>
-            <element signature="e#2605#2623#0" expanded="true" />
-            <element signature="e#2695#2713#0" expanded="true" />
-            <element signature="e#4349#4538#0" expanded="true" />
-            <element signature="e#4537#4538#0" expanded="true" />
-            <element signature="e#12239#12248#0" expanded="true" />
-            <element signature="e#12885#12897#0" expanded="true" />
-            <element signature="e#29404#29411#0" expanded="true" />
-            <element signature="e#29467#29474#0" expanded="true" />
-            <element signature="e#40794#40802#0" expanded="true" />
-            <element signature="e#42335#42354#0" expanded="true" />
-            <element signature="e#42409#42417#0" expanded="true" />
-            <element signature="e#42473#42481#0" expanded="true" />
-            <element signature="e#42537#42545#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/openCVSamplecolorblobdetection/src/main/java/org/opencv/samples/colorblobdetect/MyAdapter.java" />
     <entry file="file://$PROJECT_DIR$/openCVSamplecolorblobdetection/src/main/res/layout/activity_galeria.xml">
       <provider editor-type-id="android-designer2">
         <state />
@@ -3820,27 +3738,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-68">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/openCVSamplecolorblobdetection/src/main/java/org/opencv/samples/colorblobdetect/Galeria.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="20" lean-forward="false" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="20" />
-          <folding>
-            <element signature="e#530#538#0" expanded="true" />
-            <element signature="e#647#655#0" expanded="true" />
-            <element signature="e#2665#2671#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/openCVSamplecolorblobdetection/src/main/java/org/opencv/samples/colorblobdetect/Galeria.java" />
     <entry file="file://$PROJECT_DIR$/settings.gradle">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
           <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3860,26 +3765,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="17" lean-forward="false" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/openCVSamplecolorblobdetection/openCVSamplecolorblobdetection.iml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="18" column="37" lean-forward="false" selection-start-line="18" selection-start-column="37" selection-end-line="18" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/openCVSamplecolorblobdetection/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="30" column="48" lean-forward="false" selection-start-line="30" selection-start-column="48" selection-end-line="30" selection-end-column="48" />
+        <state relative-caret-position="544">
+          <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -3895,14 +3784,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/openCVLibrary330/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="5" lean-forward="false" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -3911,11 +3792,54 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/openCVLibrary330/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="5" lean-forward="false" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/openCVSamplecolorblobdetection/src/main/java/org/opencv/samples/colorblobdetect/Principal.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="28">
+        <state relative-caret-position="816">
           <caret line="58" column="40" lean-forward="false" selection-start-line="58" selection-start-column="40" selection-end-line="58" selection-end-column="40" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/openCVSamplecolorblobdetection/openCVSamplecolorblobdetection.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="37" lean-forward="false" selection-start-line="18" selection-start-column="37" selection-end-line="18" selection-end-column="37" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="13" lean-forward="false" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/openCVSamplecolorblobdetection/src/main/java/org/opencv/samples/colorblobdetect/ColorBlobDetectionActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="991" column="93" lean-forward="true" selection-start-line="991" selection-start-column="93" selection-end-line="991" selection-end-column="93" />
+          <folding>
+            <marker date="1511668388183" expanded="false" signature="46717:46736" ph="&lt;~&gt;" />
+            <marker date="1511668388183" expanded="false" signature="46792:46800" ph="&lt;~&gt;" />
+            <marker date="1511668388183" expanded="false" signature="46857:46865" ph="&lt;~&gt;" />
+            <marker date="1511668388183" expanded="false" signature="46922:46930" ph="&lt;~&gt;" />
+            <marker date="1511668388183" expanded="false" signature="47637:47656" ph="&lt;~&gt;" />
+            <marker date="1511668388183" expanded="false" signature="47712:47720" ph="&lt;~&gt;" />
+            <marker date="1511668388183" expanded="false" signature="47777:47785" ph="&lt;~&gt;" />
+            <marker date="1511668388183" expanded="false" signature="47842:47850" ph="&lt;~&gt;" />
+          </folding>
         </state>
       </provider>
     </entry>

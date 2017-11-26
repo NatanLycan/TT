@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "C:\\Users\\Nathaniel\\Documents\\GitHub\\TT\\color-blob-detection-verAlt-3.3.0\\openCVSamplecolorblobdetection\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-w500dp-v13\\values-w500dp-v13.xml",
+        "outputFile": "C:\\Users\\Larissa\\Documents\\GitHub\\TT\\color-blob-detection-verAlt-3.3.0\\openCVSamplecolorblobdetection\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-w500dp-v13\\values-w500dp-v13.xml",
         "map": [
             {
                 "to": {
@@ -11,7 +11,7 @@
                     "endOffset": 105
                 },
                 "from": {
-                    "file": "C:\\Users\\Nathaniel\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-22.2.1.aar\\18606abc327b55b63d6085e0fc82315f\\res\\values-w500dp\\values-w500dp.xml",
+                    "file": "C:\\Users\\Larissa\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-22.2.1.aar\\b5e20f66a9534fd37cf035eef10734d2\\res\\values-w500dp\\values-w500dp.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,
