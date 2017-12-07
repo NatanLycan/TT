@@ -807,23 +807,23 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
 
         Log.d(TAG, "resultado: x_g_um:" + x_g_um);
         Log.d(TAG, "resultado: y_g_um:" + y_g_um);
-        /* PP NLJS 25/11/2017 El código esta en getRealDimensions para que se muestre el resultado con la corrección, aun asi se calcula sin correccion y se imprime en consola
+        // PP NLJS 25/11/2017 El código esta en getRealDimensions para que se muestre el resultado con la corrección, aun asi se calcula sin correccion y se imprime en consola
         // RQB 12/11/2017 si se eligio pulgadas o pies se hace la conversión
-        String sw = "Medidas Obtenidas: (";
+        String sw = "Medidas Obtenidas: Toma Ideal(";
         if ( pp_medida.equals("PULGADAS")){
             x_g_um = 0.393701* x_g_um;
             y_g_um = 0.393701* y_g_um;
-            sw +=  String.format("%.2f", x_g_um) + " * " + String.format("%.2f", y_g_um) + ") plg2";
+            sw +=  String.format("%.2f", y_g_um) + " * " + String.format("%.2f", x_g_um) + ") plg2";
         } else if( pp_medida.equals("PIES")){
             x_g_um = 0.0328084* x_g_um;
             y_g_um = 0.0328084* y_g_um;
-            sw +=  String.format("%.2f", x_g_um) + " * " + String.format("%.2f", y_g_um) + ") ft2";
+            sw +=  String.format("%.2f", y_g_um) + " * " + String.format("%.2f", x_g_um) + ") ft2";
         }else{
-            sw +=  String.format("%.2f", x_g_um) + " * " + String.format("%.2f", y_g_um) + ") cm2";
+            sw +=  String.format("%.2f", y_g_um) + " * " + String.format("%.2f", x_g_um) + ") cm2";
         }
-        Imgproc.putText(dibujada, sw, new Point(100, 100), 1, 2, new Scalar(0, 0, 0, 255), 6, LINE_8, false);
-        Imgproc.putText(dibujada, sw, new Point(100, 100), 1, 2, new Scalar(255, 255, 255, 255), 4, LINE_8, false);
-        */
+        Imgproc.putText(dibujada, sw, new Point(100, 80), 1, 2, new Scalar(0, 0, 0, 255), 6, LINE_8, false);
+        Imgproc.putText(dibujada, sw, new Point(100, 80), 1, 2, new Scalar(255, 255, 255, 255), 4, LINE_8, false);
+
 
         //Log.d(TAG, "resultado: Tarjeta   x: " + x_r_Pix + "     y: " + y_r_Pix);
         //Log.d(TAG, "resultado: Objeto   x: " + x_g_Pix + "     y: " + y_g_Pix);
@@ -1309,7 +1309,7 @@ public class ColorBlobDetectionActivity extends Activity implements OnTouchListe
         Log.d(TAG, "PP. Función: getRealDimensions. Objeto   x: " + x_g_um + "     y: " + y_g_um);
 
         // RQB 12/11/2017 si se eligio pulgadas o pies se hace la conversión
-        String sw = "Medidas Obtenidas: (";
+        String sw = "Medidas Obtenidas: Correccion de Angulo(";
         if ( pp_medida.equals("PULGADAS")){
             x_g_um = 0.393701* x_g_um;
             y_g_um = 0.393701* y_g_um;
